@@ -51,8 +51,8 @@ type Itinerary struct {
 	Vehicle               string                 `json:"vehicle"`
 	Trip                  string                 `json:"trip"`
 	CreatedBy             string                 `json:"created_by"`
-	ItineraryDestinations []ItineraryDestination `gorm:"foreignKey:ItineraryID" json:"itinerary_destination"`
-	ItineraryBuddy        *ItineraryBuddy        `gorm:"foreignKey:ItineraryID" json:"itinerary_buddy"`
+	ItineraryDestinations []ItineraryDestination `gorm:"-:migration;foreignKey:ItineraryID" json:"itinerary_destination"`
+	ItineraryBuddy        *ItineraryBuddy        `gorm:"-:migration;foreignKey:ItineraryID" json:"itinerary_buddy"`
 }
 
 func (Itinerary) TableName() string {
@@ -64,7 +64,7 @@ type ItineraryDestination struct {
 	ItineraryID   string      `json:"itinerary"`
 	DestinationID string      `json:"destination_id"`
 	Time          string      `json:"time"`
-	Destination   Destination `gorm:"references:DestinationID" json:"destination"`
+	Destination   Destination `gorm:"-:migration;references:DestinationID" json:"destination"`
 }
 
 func (ItineraryDestination) TableName() string {
@@ -76,7 +76,7 @@ type ItineraryMarket struct {
 	ItineraryID          string             `json:"itinerary"`
 	DestinationProductID string             `json:"destination_product_id"`
 	Amount               int                `json:"amount"`
-	DestinationProduct   DestinationProduct `gorm:"references:DestinationProductID" json:"destination_product"`
+	DestinationProduct   DestinationProduct `gorm:"-:migration;references:DestinationProductID" json:"destination_product"`
 }
 
 func (ItineraryMarket) TableName() string {
@@ -91,8 +91,8 @@ type ItineraryBuddy struct {
 	Description string `json:"description"`
 	CreatedBy   string `json:"created_by"`
 	IsAccept    bool   `json:"is_accept"`
-	User        User   `gorm:"references:UserID" json:"user"`
-	CreateBy    User   `gorm:"CreatedBy" json:"create_by"`
+	User        User   `gorm:"-:migration;references:UserID" json:"user"`
+	CreateBy    User   `gorm:"-:migration;CreatedBy" json:"create_by"`
 }
 
 func (ItineraryBuddy) TableName() string {

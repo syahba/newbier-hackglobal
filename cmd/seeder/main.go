@@ -7,6 +7,7 @@ import (
 	"newbier-hackglobal/pkg/database"
 	"newbier-hackglobal/pkg/database/model"
 
+	"github.com/go-gormigrate/gormigrate/v2"
 	"gorm.io/gorm"
 )
 
@@ -22,29 +23,35 @@ func main() {
 		panic(fmt.Sprintf("Failed to load database: %v", err))
 	}
 
-	if err = seedUser(db); err != nil {
-		log.Print("Failed to seeding: seedUser")
-		return
+	m := gormigrate.New(db, gormigrate.DefaultOptions, seeds)
+
+	if err := m.Migrate(); err != nil {
+		panic(fmt.Sprintf("Could not apply migrations: %v", err))
 	}
 
-	log.Print("seeding: success")
+	log.Println("Seeding applied successfully")
 
 }
 
-// Seed User Data
-func seedUser(db *gorm.DB) error {
-	return db.Create([]*model.User{
-		{
-			Model:   gorm.Model{ID: 1},
-			Name:    "Natasha",
-			Country: "Indonesia",
-			Gender:  "female",
+var seeds = []*gormigrate.Migration{
+	{
+		ID: "1-seedUser",
+		Migrate: func(tx *gorm.DB) error {
+			return tx.Create([]*model.User{
+				{
+					Name:    "Natasha",
+					Country: "Indonesia",
+					Gender:  "female",
+				},
+				{
+					Name:    "Elok",
+					Country: "Indonesia",
+					Gender:  "female",
+				},
+			}).Error
 		},
-		{
-			Model:   gorm.Model{ID: 2},
-			Name:    "Elok",
-			Country: "Indonesia",
-			Gender:  "female",
+		Rollback: func(tx *gorm.DB) error {
+			return nil
 		},
-	}).Error
+	},
 }
