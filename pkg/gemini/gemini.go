@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"log"
-
 	"github.com/google/generative-ai-go/genai"
 	"google.golang.org/api/option"
 )
@@ -41,7 +40,7 @@ func getText(resp *genai.GenerateContentResponse) string {
 	return result
 }
 
-func (genAi *GenerativeAi)Chat(input string) (string,error){
+func (genAi *GenerativeAi) Generate(input string) (string,error){
 	ctx := context.Background()
 	resp,err := genAi.Model.GenerateContent(ctx,genai.Text(input))
 

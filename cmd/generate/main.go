@@ -14,7 +14,7 @@ func main(){
 
 	gemini := gemini.GetModel(cfg.GeminiKey)
 
-	result,_ := gemini.Chat("give me the recipes of pizza")
+	result,_ := gemini.Generate("give me the recipes of pizza")
 
 	fmt.Println(result)
 }
