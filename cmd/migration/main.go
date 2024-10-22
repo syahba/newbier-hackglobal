@@ -22,5 +22,11 @@ func main() {
 	db.AutoMigrate(
 		model.User{},
 		model.Destination{},
+		model.DestinationProduct{},
+		model.Itinerary{},
+		model.ItineraryDestination{},
+		model.ItineraryMarket{},
+		model.ItineraryBuddy{},
+		model.ChatRoom{},
 	)
 }

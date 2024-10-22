@@ -1,6 +1,10 @@
 package model
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type User struct {
 	gorm.Model
@@ -25,4 +29,82 @@ type Destination struct {
 
 func (Destination) TableName() string {
 	return "destinations"
+}
+
+type DestinationProduct struct {
+	gorm.Model
+	DestinationID string  `json:"destination_id"`
+	Name          string  `json:"name"`
+	Price         float64 `json:"price"`
+	Unit          string  `json:"unit"`
+}
+
+func (DestinationProduct) TableName() string {
+	return "destination_products"
+}
+
+type Itinerary struct {
+	gorm.Model
+	Destination           *string                `json:"destination"`
+	Activity              string                 `json:"activity"`
+	Date                  time.Time              `json:"date"`
+	Vehicle               string                 `json:"vehicle"`
+	Trip                  string                 `json:"trip"`
+	CreatedBy             string                 `json:"created_by"`
+	ItineraryDestinations []ItineraryDestination `gorm:"foreignKey:ItineraryID" json:"itinerary_destination"`
+	ItineraryBuddy        *ItineraryBuddy        `gorm:"foreignKey:ItineraryID" json:"itinerary_buddy"`
+}
+
+func (Itinerary) TableName() string {
+	return "itineraries"
+}
+
+type ItineraryDestination struct {
+	gorm.Model
+	ItineraryID   string      `json:"itinerary"`
+	DestinationID string      `json:"destination_id"`
+	Time          string      `json:"time"`
+	Destination   Destination `gorm:"references:DestinationID" json:"destination"`
+}
+
+func (ItineraryDestination) TableName() string {
+	return "itinerary_destinations"
+}
+
+type ItineraryMarket struct {
+	gorm.Model
+	ItineraryID          string             `json:"itinerary"`
+	DestinationProductID string             `json:"destination_product_id"`
+	Amount               int                `json:"amount"`
+	DestinationProduct   DestinationProduct `gorm:"references:DestinationProductID" json:"destination_product"`
+}
+
+func (ItineraryMarket) TableName() string {
+	return "itinerary_markets"
+}
+
+type ItineraryBuddy struct {
+	gorm.Model
+	ItineraryID string `json:"itinerary_id"`
+	UserID      string `json:"user_id"`
+	ChatRoomID  string `json:"chat_room_id"`
+	Description string `json:"description"`
+	CreatedBy   string `json:"created_by"`
+	IsAccept    bool   `json:"is_accept"`
+	User        User   `gorm:"references:UserID" json:"user"`
+	CreateBy    User   `gorm:"CreatedBy" json:"create_by"`
+}
+
+func (ItineraryBuddy) TableName() string {
+	return "itinerary_buddies"
+}
+
+type ChatRoom struct {
+	gorm.Model
+	CreatedBy string `json:"created_by"`
+	Message   string `json:"message"`
+}
+
+func (ChatRoom) TableName() string {
+	return "chat_rooms"
 }
