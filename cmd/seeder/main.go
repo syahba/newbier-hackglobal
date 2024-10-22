@@ -6,7 +6,6 @@ import (
 	"newbier-hackglobal/pkg/config"
 	"newbier-hackglobal/pkg/database"
 	"newbier-hackglobal/pkg/database/model"
-
 	"github.com/go-gormigrate/gormigrate/v2"
 	"gorm.io/gorm"
 )
@@ -30,7 +29,6 @@ func main() {
 	}
 
 	log.Println("Seeding applied successfully")
-
 }
 
 var seeds = []*gormigrate.Migration{

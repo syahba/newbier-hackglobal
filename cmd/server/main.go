@@ -5,7 +5,6 @@ import (
 	"newbier-hackglobal/internal/controller"
 	"newbier-hackglobal/pkg/config"
 	"newbier-hackglobal/pkg/database"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/jet/v2"
 )
@@ -21,6 +20,9 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("Failed to load database: %v", err))
 	}
+
+	// Gemini
+	
 
 	// Server
 	engine := jet.New("./views", ".jet")

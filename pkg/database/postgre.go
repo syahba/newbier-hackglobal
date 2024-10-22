@@ -19,5 +19,5 @@ func NewPostgresDB(dbUrl string) (*gorm.DB, error) {
 	}
 
 	return db, nil
-
 }
+

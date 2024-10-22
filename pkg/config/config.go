@@ -3,13 +3,13 @@ package config
 import (
 	"fmt"
 	"log"
-
 	"github.com/spf13/viper"
 )
 
 type Config struct {
 	Port        string `mapstructure:"PORT"`
 	DatabaseURL string `mapstructure:"DATABASE_URL"`
+	GeminiKey	string `mapstructure:"GEMINI_KEY"`
 }
 
 func LoadConfig() (*Config, error) {
@@ -19,6 +19,7 @@ func LoadConfig() (*Config, error) {
 	keys := []string{
 		"PORT",
 		"DATABASE_URL",
+		"GEMINI_KEY",
 	}
 
 	for _, key := range keys {

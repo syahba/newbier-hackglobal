@@ -13,6 +13,6 @@ func NewUsecase(db *gorm.DB) *Usecase {
 }
 
 func (u *Usecase) GetUsecase() string {
-
+	
 	return "Hello World"
 }
