@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
+	"newbier-hackglobal/pkg/chatGPT"
 	"newbier-hackglobal/pkg/config"
-	"newbier-hackglobal/pkg/gemini"
 )
 
 func main(){
@@ -12,9 +12,8 @@ func main(){
 		panic(fmt.Sprintf("Failed to load configuration: %v", err))
 	}
 
-	gemini := gemini.GetModel(cfg.GeminiKey)
-
-	result,_ := gemini.Generate("give me the recipes of pizza")
+	model := chatgpt.GetModel(cfg.GeminiKey)
+	result,_ := model.Generate("Hello gpt")
 
 	fmt.Println(result)
 }
