@@ -1,0 +1,132 @@
+[
+    {
+        "distance from lyf":290,
+        "name": "National Gallery",
+        "description": "A national museum holding the world’s largest public collection of Singaporean and Southeast Asian art, with a focus on Singapore’s culture and heritage in relation to other Asian cultures and the world.",
+        "address": "1 St Andrew’s Road, Singapore 178957",
+        "opening hours": "Sat–Thu: 10am–7pm; Friday: 10am–9pm",
+        "online": "https://www.nationalgallery.sg/",
+        "contact":"+65 6271 7000 / info@nationalgallery.sg",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":300,
+        "name": "The Substation",
+        "description": "Singapore’s first independent contemporary arts centre, known for its experimental programming, exhibitions, and initiatives that lead and support cultural conversation.",
+        "address": "45 Armenian Street, Singapore 179936",
+        "opening hours": "OFFICE HOURS Mon–Fri: 10am–7pm",
+        "online": "https://www.substation.org/",
+        "contact":"+65 6337 7535 / admin@substation.org",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":700,
+        "name": "Basheer Graphic Book",
+        "description": "A specialty bookstore where you can find design books and magazines about architecture, interior design, landscape design, graphic design, animation, fashion, typography, and photography.",
+        "address": "231 Bain Street, Bras Basah Complex #04-19,Singapore 180231",
+        "opening hours": "10am–8pm daily",
+        "online": "https://www.basheergraphic.com/",
+        "contact":"+65 6336 0810 / enquiry@basheergraphic.com",
+        "price": "$$$"
+    },
+    {
+        "distance from lyf":700,
+        "name": "Esplanade – Theatres on the Bay",
+        "description": "Singapore’s premier arts centre for local and international performing arts including dance, music, and theatre. Free performances and visual art exhibitions almost daily.",
+        "address": "1 Esplanade Drive, Singapore 038981",
+        "opening hours": "BOX OFFICE & INFORMATION COUNTER 12pm–8:30pm daily",
+        "online": "https://www.esplanade.com/",
+        "contact":"+65 6828 8377 (8:30am–6:00pm daily)",
+        "price": "$$$"
+    },
+    {
+        "distance from lyf":850,
+        "name": "Asian Film Archive",
+        "description": "A creative hub for the Asian film community, promoting the widespread critical appreciation of film as an art form. Hosts an array of screenings along with cultural and educational film-related programmes.",
+        "address": "Level 4, National Library Building, 100 Victoria Street, Singapore 188064",
+        "opening hours": "OFFICE HOURS Mon–Fri: 10am–6pm Closed on Saturday & Sunday",
+        "online": "https://asianfilmarchive.org/",
+        "contact":"+65 6777 3243 / info@asian-film-archive.local",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":1000,
+        "name": "The Moon",
+        "description": "A diverse cafe and bookstore specially curated to address historical gender imbalances in Anglophone publishing, with a focus on writers and artists of colour. Hosts wellness workshops, an LGBTQ+ book club, and pop-ups regularly.",
+        "address": "37 Mosque Street, Singapore 059515",
+        "opening hours": "Sun–Thu: 11am–9pm; Fri–Sat: 11am–12am",
+        "online": "https://www.themoon.com.sg/",
+        "contact":"meow@themoon.sg",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":1010,
+        "name": "STPI – Creative Workshop & Gallery",
+        "description": "A cutting-edge gallery showcasing artistic experimentation through the mediums of print and paper. Holds a variety of dialogues, screenings, workshops, and guided tours.",
+        "address": "41 Robertson Quay, Singapore 238236",
+        "opening hours": "Mon–Fri: 10am–7pm; Sat: 9am–6pm; Sun: 10am–5pm Closed on Public Holidays",
+        "online": "https://www.stpi.com.sg/",
+        "contact":"+65 6336 3663 / stpi@stpi.com.sg",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":1180,
+        "name": "DECK",
+        "description": "An independent photo exhibition space for photography enthusiasts, constructed within 19 shipping containers to save space in our small city.",
+        "address": "120A Prinsep Street, Singapore 187937",
+        "opening hours": "Tue–Sat: 12pm–7pm; Sun: 12pm–5pm Closed on Mondays",
+        "online": "https://deck.sg/",
+        "contact":"+65 6734 6578 / meet@deck.sg",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":1250,
+        "name": "ArtScience Museum",
+        "description": "A futuristic museum with an ever-changing line-up of international exhibitions that push the boundaries of science, art, and technology.",
+        "address": "6 Bayfront Avenue, Singapore 018974",
+        "opening hours": "10am–7pm daily",
+        "online": "https://marinabaysands.com/museum.html",
+        "contact":"+65 6688 8888 / museumenquiries@marinabaysands.com",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":1300,
+        "name": "Atlas Bar",
+        "description": "The go-to gin and champagne bar for a quintessential 1920s Art Deco experience—the paragon of Jazz age elegance, complete with glamorous interiors.",
+        "address": "600 North Bridge Road, Parkview Square, Singapore 188778",
+        "opening hours": "Mon–Thu: 10am–1am; Fri: 10am–2am; Sat: 3pm–2am Closed on Sundays",
+        "online": "https://atlasbar.sg/",
+        "contact":"+65 6396 4466 / info@atlasbar.sg",
+        "price": "$$$"
+    },
+    {
+        "distance from lyf":1300,
+        "name": "The Parkview Museum",
+        "description": "A stronghold for contemporary art that alternates between solo shows, thematic exhibitions, and special exhibitions from local and international contemporary artists.",
+        "address": "600 North Bridge Road, Parkview Square Level 3, Singapore 188778",
+        "opening hours": "Mon–Sat: 12pm–7pm Closed on Sundays",
+        "online": "https://www.parkviewmuseum.com/",
+        "contact":"+65 6799 6971 / info@parkviewmuseum.com",
+        "price": "0"
+    },
+    {
+        "distance from lyf":1400,
+        "name": "Huggs-Epigram Coffee Bookshop",
+        "description": "The only bookshop-cum-café offering locally-themed books that are about Singapore, written by Singaporeans, or published by Singaporean publishers. PS: get your fix of Singapore-style coffee here!",
+        "address": "45 Maxwell Road #01-01, Singapore 069118",
+        "opening hours": "HUGGS COFFEE Mon–Fri: 7am–5pm; Sat: 10am–2pm EPIGRAM BOOKSHOP Mon–Fri: 10am–7pm; Sat: 10am–2pm Closed on Sundays",
+        "online": "https://epigrambookshop.sg/pages/huggsepigram",
+        "contact":"",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":1920,
+        "name": "The Projector",
+        "description": "Singapore’s most renowned independent arthouse cinema screens a mix of local films, indie selections, and cult classics in an atmospheric theatre restored from the 70s.",
+        "address": "6001 Beach Road, Golden Mile Tower #05-00, Singapore 199589",
+        "opening hours": "BOX OFFICE Mon–Fri: 6pm–8:30pm; Sat–Sun: 1pm–8:30pm",
+        "online": "https://theprojector.sg/",
+        "contact":"info@theprojector.sg",
+        "price": "$$"
+    }
+]

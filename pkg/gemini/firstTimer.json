@@ -1,0 +1,132 @@
+[
+    {
+        "distance from lyf":60,
+        "name": "Fort Canning Park",
+        "description":"A historical hilltop landmark and nature reserve located in the heart of the Civic District. Serves as an important green lung for the city, and a popular venue for a myriad of outdoor events.",
+        "address": "Singapore 179618, Fort Canning Park is bounded by Hill Street, Canning Rise, Clemenceau Avenue, and River Valley Road",
+        "opening hours":"24 hours daily; Park lighting hours: 7pm-7am",
+        "online": "https://beta.nparks.gov.sg/visit/parks/park-detail/fort-canning-park",
+        "contact":"",
+        "price": "0"
+    },
+    {
+        "distance from lyf":290,
+        "name": "National Kitchen by Violet Oon Singapore",
+        "description": "Widely recognised as an authority on Peranakan cuisine, Violet Oon's prolific background as a chef, restaurateur, and food writer culminates in this distinctive luxurious dining hall—a modern celebration of authentic local flavours.",
+        "address": "1 St. Andrew's Road, #02-01 National Gallery Singapore (City Hall Wing), Singapore 178957",
+        "opening hours": "LUNCH 12pm-2:30pm daily TEA 3pm-5pm daily DINNER 6pm-10:30pm daily",
+        "online": "http://violetoon.com/national-kitchen-by-violet-oon-national-gallery-singapore/",
+        "contact":"+65 9834 9935 / eat@violetoon.com",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":370,
+        "name": "Timbre X @ The Arts House",
+        "description": "An intimate bar nestled in a gazetted national monument along the Singapore River—perfect for drinks, pizza, pasta, and tapas with a city-spangled view. Holds nightly musical performances.",
+        "address": "1 Old Parliament Lane #01-04, Singapore 179429",
+        "opening hours": "Sun-Mon: 6pm-12am; Tue-Thu: 6pm-1am;Fri: 5:30pm-2am; Sat: 6pm-2am",
+        "online": "https://timbregroup.asia/timbresg/timbrex-the-arts-house",
+        "contact":"+65 6336 3386 (AFTER 5PM) / info@timbregroup.asia",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":470,
+        "name": "Asian Civilisations Museum",
+        "description": "A heritage museum dedicated to studying the rich cultural diversity and historical connections within Asia, and between Asia and the world",
+        "address": "1 Empress Place, Singapore 179555",
+        "opening hours": "Sat-Thu: 10am-7pm; Fri: 10am-9pm",
+        "online": "https://www.nhb.gov.sg/acm/",
+        "contact":"+65 6332 7798 / nhb_acm_vs@nhb.gov.sg",
+        "price": "$"
+    },
+    {
+        "distance from lyf":660,
+        "name": "Long Bar (AT RAFFLES HOTEL) ",
+        "description": "The birthplace of the original Singapore Sling cocktail, housed within Singapore's oldest, most distinguished hotel.",
+        "address": "328 North Bridge Road, #02-01 Raffles Arcade,Singapore 188719",
+        "opening hours": "11:00am-11:00pm daily",
+        "online": "https://www.raffles.com/singapore/dining/long-bar",
+        "contact":"+65 6337 1886 / singapore@raffles.com ",
+        "price": "$$$"
+    },
+    {
+        "distance from lyf":760,
+        "name": "MINT Museum of Toys",
+        "description": "The first and only museum in the world dedicated to the showcase of vintage toys and childhood memorabilia from the mid-19th to mid-20th Century",
+        "address": "26 Seah Street, Singapore 188382",
+        "opening hours": "9:30am-6:30pm daily",
+        "online": "https://emint.com/",
+        "contact":"+65 6339 0660",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":1200,
+        "name": "Lau Pa Sat",
+        "description": "An iconic hawker centre ('Old Market') for all local cuisine cravings, known as one of the oldest Victorian design structures in Southeast Asia. A prime example of colonial architecture built in the 19th century",
+        "address": "",
+        "opening hours": "",
+        "online": "",
+        "contact":"",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":1200,
+        "name": "Satay Street (AT LAU PA SAT)",
+        "description": "An al fresco dining area that comes to life as Boon Tat Street closes every evening, serving up a spread of local satay (grilled meat on skewers served with peanut sauce). Reminiscent of Singapore's street food culture in the 1950s",
+        "address": "18 Raffles Quay, Singapore 048582",
+        "opening hours": "LAU PA SAT 24 hours daily SATAY STREET 7pm-late daily",
+        "online": "",
+        "contact":"",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":1210,
+        "name": "Chinatown Food Street",
+        "description": "An al fresco dining area in the heart of Chinatown serving up local favourites like char kway teow and oyster omelette, along with a diverse spread from other culturesin Singapore.",
+        "address": "Smith Street, Singapore 058938",
+        "opening hours": "11am-11pm daily",
+        "online": "https://marketing.sg/chinatown-food-street-singapore",
+        "contact":"",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":1450,
+        "name": "Haji Lane",
+        "description": "Singapore's original indie neighbourhood lined with independent fashion boutiques, Middle Eastern cafes, and clubs. Doubles as an Instagram haven, adorned with street art and vibrant colours",
+        "address": "Singapore 189212",
+        "opening hours": "",
+        "online": "",
+        "contact":"",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":1500,
+        "name": "Red Dot Design Museum",
+        "description": "A boutique museum featuring the world's largest exhibition of contemporary product and communication design. All exhibits are winners of the international Red Dot Design Award—one of the world's leading design competitions.",
+        "address": "11 Marina Boulevard, Singapore 018940",
+        "opening hours": "10am-8pm daily",
+        "online": "https://museum.red-dot.sg/",
+        "contact":"+65 6514 0111 / museum@red-dot.sg",
+        "price": "$"
+    },
+    {
+        "distance from lyf":1740,
+        "name": "Gardens by the Bay",
+        "description": "Singapore's premier horticultural attraction and icon, showcasing garden artistry through looming Supertrees of over 700 plant species, along with three public gardens ranging from temperate grasslands to tropical forests—sprawled over 250 acres of land",
+        "address": "18 Marina Gardens Drive, Singapore 018953",
+        "opening hours": "OCBC SKYWAY 9am-9pm daily OUTDOOR GARDENS 5am-2am daily COOLED CONSERVATORIES 9am-9pm daily ",
+        "online": "https://www.gardensbythebay.com.sg/",
+        "contact":"+65 6420 6848 / feedback@gardensbythebay.com.sg",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":1750,
+        "name": "Tea Bone Zen Mind",
+        "description": "A specialty tea house located within two 20th century shophouses, featuring a blend of Art Deco and Chinese Baroque architectural styles. Deals in fine quality Chinese, Japanese, and English teas—along with artisanal teaware.",
+        "address": "98 Emerald Hill Road, Singapore 229374",
+        "opening hours": "Mon-Sat: 11am-7pm Closed on Sundays & Public Holidays",
+        "online": "https://teabonezenmindshop.com/",
+        "contact":"+65 6334 4212 / info@teabonezenmind.com",
+        "price": "$$$"
+    }
+]

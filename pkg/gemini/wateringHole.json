@@ -1,0 +1,62 @@
+[
+    {
+        "distance from lyf":290,
+        "name": "Smoke & Mirrors",
+        "description": "Perched atop the National Gallery, this rooftop bar is known for its panoramic views of the downtown Singapore skyline, and creative cocktails with unconventional flavour combinations that will surprise and titillate your palate.",
+        "address": "1 St. Andrew's Road, #06-01 National Gallery Singapore, Singapore 178957",
+        "opening hours": "Mon-Thu: 3pm-1am; Fri: 3pm-2am; Sat, Public Holidays & Eve of Public Holidays: 12pm-2am; Sun: 12pm-1am",
+        "online": "https://www.smokeandmirrors.com.sg/",
+        "contact":"+65 9380 6313 / reserve@smokeandmirrors.com.sg",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":470,
+        "name": "Ah Sam Cold Drink Stall",
+        "description": "Nestled within a conserved shophouse along the Singapore River that was once home to dock workers, Ah Sam Cold Drink Stall features nostalgic decor that harks back to our migrant history. This bar specialises in locally inspired cocktails paired with street food staples",
+        "address": "60 Boat Quay, Singapore 049848",
+        "opening hours": "Mon-Thu: 6pm-12am; Fri-Sat: 6pm-2am Closed on Sundays",
+        "online": "https://www.ahsamcolddrinkstall.com/lander",
+        "contact":"+65 6535 0838",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":640,
+        "name": "Loof",
+        "description": "Named after the Singaporean mispronunciation of “roof”, Loof is a trendy rooftop bar that exemplifies local culture with cocktails reminiscent of Southeast Asian flavours, and a diverse food menu.",
+        "address": "331 North Bridge Road, #03-07 Odeon Towers Extension Rooftop, Singapore 188720",
+        "opening hours": "Sun-Thu: 5pm-1am; Fri-Sat: 5pm-2am",
+        "online": "https://www.loof.com.sg/",
+        "contact":"+65 6337 9416 / loof@loof.com.sg",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":830,
+        "name": "1-Altitude",
+        "description": "At 282 metres above sea level, the world's highest al fresco bar offers spectacular 360-degree views of the city. Revered for their line-up of exquisite cocktails, with live sets from top local bands and world-renowned DJs.",
+        "address": "1 Raffles Place, Singapore 048616",
+        "opening hours": "Sun-Tue: 6pm-2am; Thu: 6pm-3am; Wed, Fri, Sat & Eve of Public Holiday: 6pm-4am",
+        "online": "https://www.1-altitude.com/",
+        "contact":"+65 6438 0410 / info@1-altitude.com",
+        "price": "$$$"
+    },
+    {
+        "distance from lyf":1220,
+        "name": "Operation Dagger",
+        "description": "Ranked 6th on the Asia's 50 Best Bars list, this modern speakeasy specialises in culinary-inspired drinks. Head Bartender Luke Whearty elevates the experience with homemade tinctures, aromatic smoke, vinegars, and Southeast Asian spices.",
+        "address": "No. 7 Ann Siang Hill #B1-01, Singapore 069791",
+        "opening hours": "Mon-Sat: 6pm-12am Closed on Sundays",
+        "online": "https://operationdagger.com/lander",
+        "contact":"+65 6438 4057 / info@operationdagger.com",
+        "price": "$$"
+    },
+    {
+        "distance from lyf":1230,
+        "name": "Oxwell & Co",
+        "description": "An apothecary-inspired British bar and restaurant housed in a four-storey conservation shophouse at Chinatown, known for their draft cocktails. Features a scenic rooftop bar with an edible garden specially grown for their food and drinks.",
+        "address": "5 Ann Siang Road, Singapore 069688",
+        "opening hours": "12pm-12am daily",
+        "online": "http://oxwellandco.com/",
+        "contact":"+65 6438 7036 / info@oxwellandco.com",
+        "price": "$$"
+    }
+]
