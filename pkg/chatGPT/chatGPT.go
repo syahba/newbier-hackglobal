@@ -16,7 +16,7 @@ func GetModel(apiKey string) Model {
 	}
 }
 
-func (model *Model) Generate(body string)(string,error){
+func (model *Model) Generate(input string)(string,error){
 	client := model.Client
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
@@ -25,7 +25,7 @@ func (model *Model) Generate(body string)(string,error){
 			Messages: []openai.ChatCompletionMessage{
 				{
 					Role:    openai.ChatMessageRoleUser,
-					Content: "Hello!",
+					Content: input,
 				},
 			},
 		},
