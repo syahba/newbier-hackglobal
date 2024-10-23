@@ -7,11 +7,12 @@ import (
 	"gorm.io/gorm"
 )
 
+type Database struct {
+	DB *gorm.DB
+}
+
 func NewPostgresDB(dbUrl string) (*gorm.DB, error) {
-	gormConfig := &gorm.Config{
-		// TranslateError: true,
-		// Logger:         logger.Default.LogMode(logger.Info), // Set the desired log level
-	}
+	gormConfig := &gorm.Config{}
 
 	db, err := gorm.Open(postgres.Open(dbUrl), gormConfig)
 	if err != nil {
@@ -20,4 +21,3 @@ func NewPostgresDB(dbUrl string) (*gorm.DB, error) {
 
 	return db, nil
 }
-
