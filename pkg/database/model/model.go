@@ -21,7 +21,7 @@ type Destination struct {
 	gorm.Model
 	Name    string `json:"name"`
 	Type    string `json:"type"`
-	Star    string `json:"star"`
+	Star    float64 `json:"star"`
 	Address string `json:"address"`
 	GmapUrl string `json:"gmap_url"`
 	Image   string `json:"image"`

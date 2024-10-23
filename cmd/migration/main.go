@@ -5,7 +5,6 @@ import (
 	"log"
 	"newbier-hackglobal/pkg/config"
 	"newbier-hackglobal/pkg/database"
-
 	"github.com/go-gormigrate/gormigrate/v2"
 	"gorm.io/gorm"
 )
@@ -50,7 +49,7 @@ CREATE TABLE destinations (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     type VARCHAR(100),
-    star VARCHAR(10),
+    star NUMERIC(10,2),
     address TEXT,
     gmap_url TEXT,
     image TEXT,
