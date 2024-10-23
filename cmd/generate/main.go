@@ -12,7 +12,7 @@ func main(){
 		panic(fmt.Sprintf("Failed to load configuration: %v", err))
 	}
 
-	model := chatgpt.GetModel(cfg.GeminiKey)
+	model := chatgpt.GetModel(cfg.ChatGPTKey)
 	result,_ := model.Generate("Hello gpt")
 
 	fmt.Println(result)

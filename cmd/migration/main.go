@@ -49,7 +49,7 @@ CREATE TABLE destinations (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     type VARCHAR(100),
-    star NUMERIC(10,2),
+    star VARCHAR(50),
     address TEXT,
     gmap_url TEXT,
     image TEXT,

@@ -10,6 +10,7 @@ type Config struct {
 	Port        string `mapstructure:"PORT"`
 	DatabaseURL string `mapstructure:"DATABASE_URL"`
 	GeminiKey	string `mapstructure:"GEMINI_KEY"`
+	ChatGPTKey  string `mapstructure:"CHATGPT_KEY"`
 }
 
 func LoadConfig() (*Config, error) {
@@ -20,6 +21,7 @@ func LoadConfig() (*Config, error) {
 		"PORT",
 		"DATABASE_URL",
 		"GEMINI_KEY",
+		"CHATGPT_KEY",
 	}
 
 	for _, key := range keys {
