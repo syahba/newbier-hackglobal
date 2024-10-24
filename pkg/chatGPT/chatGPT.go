@@ -22,7 +22,7 @@ func (model *Model) Generate(messages []openai.ChatCompletionMessage) (string, e
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{
-			Model:       openai.GPT4o,
+			Model:       openai.GPT4oMini,
 			Temperature: 0.4,
 			Messages:    messages,
 		},

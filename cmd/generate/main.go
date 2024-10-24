@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
+	"newbier-hackglobal/cmd/generate/schema"
 	chatgpt "newbier-hackglobal/pkg/chatGPT"
 	"newbier-hackglobal/pkg/config"
-
-	"github.com/sashabaranov/go-openai"
 )
 
 func main() {
@@ -15,7 +14,7 @@ func main() {
 	}
 
 	model := chatgpt.GetModel(cfg.ChatGPTKey)
-	result, _ := model.Generate([]openai.ChatCompletionMessage{})
+	result, _ := model.Generate(schema.AdditionalDestination)
 
 	fmt.Println(result)
 }
