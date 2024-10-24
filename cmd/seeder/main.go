@@ -44,6 +44,11 @@ var seeds = []*gormigrate.Migration{
 			if err := seedDestinations(tx); err != nil {
 				return err
 			}
+			
+			// error destination_id string but json data is int
+			if err := seedDestinationProducts(tx); err != nil {
+				return err
+			}
 
 			return nil
 		},
@@ -79,7 +84,7 @@ func seedDestinations(tx *gorm.DB) error {
 	}
 
 	for _,list := range dataList{
-		file, err := os.Open(fmt.Sprintf("pkg/dataset/%s.json",list))
+		file, err := os.Open(fmt.Sprintf("pkg/dataset/destination/%s.json",list))
 		if err != nil {
 			return fmt.Errorf("failed to open destinations JSON file: %w", err)
 		}
@@ -91,6 +96,38 @@ func seedDestinations(tx *gorm.DB) error {
 		}
 
 		var destinations []model.Destination
+		err = json.Unmarshal(byteValue, &destinations)
+		if err != nil {
+			return fmt.Errorf("failed to unmarshal destinations data: %w", err)
+		}
+
+		if err := tx.Create(&destinations).Error; err != nil {
+			return fmt.Errorf("failed to seed destinations: %w", err)
+		}
+	}
+
+	return nil
+}
+
+func seedDestinationProducts(tx *gorm.DB) error {
+	dataList := []string{
+		"restaurant",
+		"ticket",
+	}
+
+	for _,list := range dataList{
+		file, err := os.Open(fmt.Sprintf("pkg/dataset/destination_product/%s.json",list))
+		if err != nil {
+			return fmt.Errorf("failed to open destinations JSON file: %w", err)
+		}
+		defer file.Close()
+
+		byteValue, err := io.ReadAll(file)
+		if err != nil {
+			return fmt.Errorf("failed to read destinations JSON file: %w", err)
+		}
+
+		var destinations []model.DestinationProduct
 		err = json.Unmarshal(byteValue, &destinations)
 		if err != nil {
 			return fmt.Errorf("failed to unmarshal destinations data: %w", err)

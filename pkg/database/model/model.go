@@ -33,7 +33,7 @@ func (Destination) TableName() string {
 
 type DestinationProduct struct {
 	gorm.Model
-	DestinationID string  `json:"destination_id"`
+	DestinationID string  `json:"destination_id"` // string ??
 	Name          string  `json:"name"`
 	Price         float64 `json:"price"`
 	Unit          string  `json:"unit"`
