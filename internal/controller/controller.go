@@ -20,10 +20,14 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 
 	// ROUTE: Client
 	app.Get("/", c.getUsecase)
-	app.Get("/destinations", c.getDestinations)
+
+	// ROUTE: API
+	api := app.Group("/api")
+	api.Get("/destinations", c.getDestinations)
 
 }
 
+// CLIENT
 func (cn *Controller) getUsecase(c *fiber.Ctx) error {
 
 	data := cn.usecase.GetUsecase()
@@ -33,6 +37,7 @@ func (cn *Controller) getUsecase(c *fiber.Ctx) error {
 	}, "layouts/main")
 }
 
+// API
 func (cn *Controller) getDestinations(c *fiber.Ctx) error {
 
 	destinationList, err := cn.usecase.GetDestinations()
