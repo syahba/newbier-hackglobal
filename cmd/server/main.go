@@ -31,6 +31,6 @@ func main() {
 	})
 	controller.NewController(app, &gorm.DB{}, &chatgpt.Model{})
 
-	app.Listen(":" + cfg.Port)
+	app.Listen("localhost:" + cfg.Port)
 
 }
