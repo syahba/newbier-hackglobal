@@ -14,7 +14,7 @@ func main() {
 	}
 
 	model := chatgpt.GetModel(cfg.ChatGPTKey)
-	result, _ := model.Generate(schema.AdditionalDestination)
+	result, _ := model.Generate(schema.AdditionalDestination("MINT Museum of Toys"))
 
 	fmt.Println(result)
 }
