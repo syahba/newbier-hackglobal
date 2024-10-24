@@ -1,16 +1,18 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
+	"io"
+	"log"
 	"newbier-hackglobal/pkg/config"
 	"newbier-hackglobal/pkg/database"
 	"newbier-hackglobal/pkg/database/model"
-	"github.com/go-gormigrate/gormigrate/v2"
-	"encoding/json"
-	"gorm.io/gorm"
-	"fmt"
-	"log"
-	"io"
 	"os"
+	"time"
+
+	"github.com/go-gormigrate/gormigrate/v2"
+	"gorm.io/gorm"
 )
 
 func main() {
@@ -45,8 +47,15 @@ var seeds = []*gormigrate.Migration{
 				return err
 			}
 			
-			// error destination_id string but json data is int
 			if err := seedDestinationProducts(tx); err != nil {
+				return err
+			}
+
+			if err := seedItinerary(tx); err != nil {
+				return err
+			}
+
+			if err := seedItineraryDestination(tx); err != nil {
 				return err
 			}
 
@@ -140,3 +149,108 @@ func seedDestinationProducts(tx *gorm.DB) error {
 
 	return nil
 }
+
+func seedItinerary(tx *gorm.DB) error {
+	return tx.Create([]*model.Itinerary{
+		{
+			Destination: ptr("Singapore"),
+			Activity:    "Museum Tour",
+			Date:        time.Date(2024, 11, 1, 10, 0, 0, 0, time.UTC),
+			Vehicle:     "Bus",
+			Trip:        "Cultural Exploration",
+			CreatedBy:   "user1",
+		},
+		{
+			Destination: ptr("Singapore"),
+			Activity:    "Heritage Walk",
+			Date:        time.Date(2024, 12, 5, 9, 0, 0, 0, time.UTC),
+			Vehicle:     "Walk",
+			Trip:        "Local Heritage",
+			CreatedBy:   "user2",
+		},
+		{
+			Destination: ptr("Singapore"),
+			Activity:    "Family Fun",
+			Date:        time.Date(2024, 12, 20, 15, 0, 0, 0, time.UTC),
+			Vehicle:     "Car",
+			Trip:        "Family Trip",
+			CreatedBy:   "user3",
+		},
+		{
+			Destination: ptr("Singapore"),
+			Activity:    "Beach & Relaxation",
+			Date:        time.Date(2025, 1, 15, 11, 0, 0, 0, time.UTC),
+			Vehicle:     "Bicycle",
+			Trip:        "Outdoor Escape",
+			CreatedBy:   "user4",
+		},
+		{
+			Destination: ptr("Singapore"),
+			Activity:    "Adventure Day",
+			Date:        time.Date(2025, 2, 10, 14, 0, 0, 0, time.UTC),
+			Vehicle:     "Scooter",
+			Trip:        "Urban Adventure",
+			CreatedBy:   "user5",
+		},
+	}).Error
+}
+
+func ptr(s string) *string {
+	return &s
+}
+
+func seedItineraryDestination(tx *gorm.DB) error {
+	return tx.Create([]*model.ItineraryDestination{
+		{
+			ItineraryID:   1,
+			DestinationID: 1, // ArtScience Museum
+			Time:          "10:00 AM",
+		},
+		{
+			ItineraryID:   1,
+			DestinationID: 2, // National Museum of Singapore
+			Time:          "02:00 PM",
+		},
+		{
+			ItineraryID:   2,
+			DestinationID: 3, // National Gallery Singapore
+			Time:          "11:00 AM",
+		},
+		{
+			ItineraryID:   2,
+			DestinationID: 4, // Peranakan Museum
+			Time:          "03:00 PM",
+		},
+		{
+			ItineraryID:   3,
+			DestinationID: 5, // Children Little Museum
+			Time:          "09:00 AM",
+		},
+		{
+			ItineraryID:   3,
+			DestinationID: 7, // Asian Civilisations Museum
+			Time:          "01:00 PM",
+		},
+		{
+			ItineraryID:   4,
+			DestinationID: 10, // Indian Heritage Centre
+			Time:          "08:00 AM",
+		},
+		{
+			ItineraryID:   4,
+			DestinationID: 12, // Fort Siloso
+			Time:          "04:00 PM",
+		},
+		{
+			ItineraryID:   5,
+			DestinationID: 20, // Singapore Air Force Museum
+			Time:          "07:00 AM",
+		},
+		{
+			ItineraryID:   5,
+			DestinationID: 25, // Friends of the Museums
+			Time:          "05:00 PM",
+		},
+	}).Error
+}
+
