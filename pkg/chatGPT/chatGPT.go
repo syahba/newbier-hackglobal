@@ -1,40 +1,37 @@
 package chatgpt
 
 import (
-	"github.com/sashabaranov/go-openai"
 	"context"
 	"fmt"
+
+	"github.com/sashabaranov/go-openai"
 )
 
-type Model struct{
-	Client *openai.Client
+type Model struct {
+	client *openai.Client
 }
 
-func GetModel(apiKey string) Model {
-	return Model{
-		Client : openai.NewClient(apiKey),
+func GetModel(apiKey string) *Model {
+	return &Model{
+		client: openai.NewClient(apiKey),
 	}
 }
 
-func (model *Model) Generate(input string)(string,error){
-	client := model.Client
+func (model *Model) Generate(messages []openai.ChatCompletionMessage) (string, error) {
+	client := model.client
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{
-			Model: openai.GPT4o,
-			Messages: []openai.ChatCompletionMessage{
-				{
-					Role:    openai.ChatMessageRoleUser,
-					Content: input,
-				},
-			},
+			Model:       openai.GPT4o,
+			Temperature: 0.4,
+			Messages:    messages,
 		},
 	)
 
 	if err != nil {
 		fmt.Printf("ChatCompletion error: %v\n", err)
-		return "",err
+		return "", err
 	}
 
-	return resp.Choices[0].Message.Content,nil
+	return resp.Choices[0].Message.Content, nil
 }

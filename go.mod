@@ -7,6 +7,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/gofiber/template/jet/v2 v2.1.10
 	github.com/google/generative-ai-go v0.18.0
+	github.com/sashabaranov/go-openai v1.32.3
 	github.com/spf13/viper v1.19.0
 	google.golang.org/api v0.201.0
 	gorm.io/driver/postgres v1.5.9
@@ -51,7 +52,6 @@ require (
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
-	github.com/sashabaranov/go-openai v1.32.3 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.11.0 // indirect
 	github.com/spf13/cast v1.6.0 // indirect
