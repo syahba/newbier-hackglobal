@@ -129,4 +129,5 @@ CREATE TABLE itinerary_buddies (
 			return nil
 		},
 	},
+    
 }

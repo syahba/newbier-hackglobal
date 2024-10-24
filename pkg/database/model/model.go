@@ -33,7 +33,7 @@ func (Destination) TableName() string {
 
 type DestinationProduct struct {
 	gorm.Model
-	DestinationID string  `json:"destination_id"` // string ??
+	DestinationID int     `json:"destination_id"`
 	Name          string  `json:"name"`
 	Price         float64 `json:"price"`
 	Unit          string  `json:"unit"`
@@ -61,11 +61,12 @@ func (Itinerary) TableName() string {
 
 type ItineraryDestination struct {
 	gorm.Model
-	ItineraryID   string      `json:"itinerary"`
-	DestinationID string      `json:"destination_id"`
+	ItineraryID   int         `json:"itinerary"`
+	DestinationID int         `json:"destination_id"`
 	Time          string      `json:"time"`
-	Destination   Destination `gorm:"-:migration;references:DestinationID" json:"destination"`
+	Destination   Destination `gorm:"foreignKey:DestinationID;references:ID" json:"destination"`
 }
+
 
 func (ItineraryDestination) TableName() string {
 	return "itinerary_destinations"
@@ -73,11 +74,12 @@ func (ItineraryDestination) TableName() string {
 
 type ItineraryMarket struct {
 	gorm.Model
-	ItineraryID          string             `json:"itinerary"`
-	DestinationProductID string             `json:"destination_product_id"`
+	ItineraryID          int                `json:"itinerary"`
+	DestinationProductID int                `json:"destination_product_id"`
 	Amount               int                `json:"amount"`
-	DestinationProduct   DestinationProduct `gorm:"-:migration;references:DestinationProductID" json:"destination_product"`
+	DestinationProduct   DestinationProduct `gorm:"foreignKey:DestinationProductID;references:ID" json:"destination_product"`
 }
+
 
 func (ItineraryMarket) TableName() string {
 	return "itinerary_markets"
@@ -85,15 +87,16 @@ func (ItineraryMarket) TableName() string {
 
 type ItineraryBuddy struct {
 	gorm.Model
-	ItineraryID string `json:"itinerary_id"`
-	UserID      string `json:"user_id"`
+	ItineraryID int    `json:"itinerary_id"`
+	UserID      int    `json:"user_id"`
 	ChatRoomID  string `json:"chat_room_id"`
 	Description string `json:"description"`
 	CreatedBy   string `json:"created_by"`
 	IsAccept    bool   `json:"is_accept"`
-	User        User   `gorm:"-:migration;references:UserID" json:"user"`
-	CreateBy    User   `gorm:"-:migration;CreatedBy" json:"create_by"`
+	User        User   `gorm:"foreignKey:UserID;references:ID" json:"user"`
+	CreateBy    User   `gorm:"foreignKey:CreatedBy;references:ID" json:"create_by"`
 }
+
 
 func (ItineraryBuddy) TableName() string {
 	return "itinerary_buddies"
