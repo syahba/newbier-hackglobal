@@ -89,14 +89,13 @@ type ItineraryBuddy struct {
 	gorm.Model
 	ItineraryID int    `json:"itinerary_id"`
 	UserID      int    `json:"user_id"`
-	ChatRoomID  string `json:"chat_room_id"`
+	ChatRoomID  int    `json:"chat_room_id"`
 	Description string `json:"description"`
 	CreatedBy   string `json:"created_by"`
 	IsAccept    bool   `json:"is_accept"`
 	User        User   `gorm:"foreignKey:UserID;references:ID" json:"user"`
 	CreateBy    User   `gorm:"foreignKey:CreatedBy;references:ID" json:"create_by"`
 }
-
 
 func (ItineraryBuddy) TableName() string {
 	return "itinerary_buddies"
