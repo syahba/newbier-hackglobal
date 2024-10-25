@@ -25,13 +25,15 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 
 	// ROUTE: API
 	api := app.Group("/api")
+	// api.Get("/generate-itinerary", c.)
+
 	api.Get("/destinations", c.getDestinations)
-	api.Get("/itternary/destinations",c.getItternaryDestination)
+	api.Get("/itinerary/destinations", c.getItineraryDestination)
 
-	api.Get("/chat",c.getChat)
-	api.Post("/chat",c.postChat)
+	api.Get("/chat", c.getChat)
+	api.Post("/chat", c.postChat)
 
-	api.Post("/itternary/buddy",c.postItternaryBuddy)
+	api.Post("/itinerary/buddy", c.postItineraryBuddy)
 }
 
 // CLIENT
@@ -59,17 +61,17 @@ func (cn *Controller) getDestinations(c *fiber.Ctx) error {
 
 }
 
-func (cn *Controller) getItternaryDestination(c *fiber.Ctx) error {
+func (cn *Controller) getItineraryDestination(c *fiber.Ctx) error {
 
-	itternaryDestinationList, err := cn.usecase.GetItternaryDestination()
+	itineraryDestinationList, err := cn.usecase.GetItineraryDestination()
 
-	if err != nil || len(itternaryDestinationList) == 0 {
+	if err != nil || len(itineraryDestinationList) == 0 {
 		return c.Status(404).JSON(fiber.Map{
-			"message": "No itternary destination Records",
+			"message": "No itinerary destination Records",
 		})
 	}
 
-	return c.Status(200).JSON(itternaryDestinationList)
+	return c.Status(200).JSON(itineraryDestinationList)
 
 }
 
@@ -89,7 +91,7 @@ func (cn *Controller) getChat(c *fiber.Ctx) error {
 func (cn *Controller) postChat(c *fiber.Ctx) error {
 	var newChat model.ChatRoom
 
-	if err := c.BodyParser(&newChat); err != nil{
+	if err := c.BodyParser(&newChat); err != nil {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "Can't parse the body",
 		})
@@ -110,58 +112,58 @@ func (cn *Controller) postChat(c *fiber.Ctx) error {
 	}
 
 	return c.Status(201).JSON(fiber.Map{
-		"message":"successfully created new chat",
+		"message": "successfully created new chat",
 	})
 }
 
-func (cn *Controller) postItternaryBuddy(c *fiber.Ctx) error {
-	var newItternaryBuddy model.ItineraryBuddy
+func (cn *Controller) postItineraryBuddy(c *fiber.Ctx) error {
+	var newItineraryBuddy model.ItineraryBuddy
 
-	if err := c.BodyParser(&newItternaryBuddy); err != nil{
+	if err := c.BodyParser(&newItineraryBuddy); err != nil {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "Can't parse the body",
 		})
 	}
 
-	isItternaryIdZero := newItternaryBuddy.ItineraryID == 0
-	isUserIdZero := newItternaryBuddy.UserID == 0
-	isChatRoomId := newItternaryBuddy.ChatRoomID == 0
-	isCreatedByEmpty := newItternaryBuddy.Description == "" || len(newItternaryBuddy.Description) == 0
-	isDescriptionEmpty := newItternaryBuddy.Description == "" || len(newItternaryBuddy.Description) == 0
+	isItineraryIdZero := newItineraryBuddy.ItineraryID == 0
+	isUserIdZero := newItineraryBuddy.UserID == 0
+	isChatRoomId := newItineraryBuddy.ChatRoomID == 0
+	isCreatedByEmpty := newItineraryBuddy.Description == "" || len(newItineraryBuddy.Description) == 0
+	isDescriptionEmpty := newItineraryBuddy.Description == "" || len(newItineraryBuddy.Description) == 0
 
-	if isUserIdZero || isChatRoomId || isCreatedByEmpty || isItternaryIdZero || isDescriptionEmpty {
+	if isUserIdZero || isChatRoomId || isCreatedByEmpty || isItineraryIdZero || isDescriptionEmpty {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "field itinerary_id, user_id, chat_room_id, created_by, or description is Zero or Empty",
 		})
 	}
 
-	if _,err := cn.usecase.GetItternaryById(newItternaryBuddy.ItineraryID); err != nil{
+	if _, err := cn.usecase.GetItineraryById(newItineraryBuddy.ItineraryID); err != nil {
 		return c.Status(404).JSON(fiber.Map{
-			"message": fmt.Sprintf("Itternary with id %v was not found",newItternaryBuddy.ItineraryID),
+			"message": fmt.Sprintf("Itinerary with id %v was not found", newItineraryBuddy.ItineraryID),
 		})
 	}
 
-	if _,err := cn.usecase.GetChatById(newItternaryBuddy.ChatRoomID); err != nil{
+	if _, err := cn.usecase.GetChatById(newItineraryBuddy.ChatRoomID); err != nil {
 		return c.Status(404).JSON(fiber.Map{
-			"message": fmt.Sprintf("Chat Room with id %v was not found",newItternaryBuddy.ChatRoomID),
+			"message": fmt.Sprintf("Chat Room with id %v was not found", newItineraryBuddy.ChatRoomID),
 		})
 	}
 
-	if _,err := cn.usecase.GetUserById(newItternaryBuddy.UserID); err != nil{
+	if _, err := cn.usecase.GetUserById(newItineraryBuddy.UserID); err != nil {
 		return c.Status(404).JSON(fiber.Map{
-			"message": fmt.Sprintf("User with id %v was not found",newItternaryBuddy.UserID),
+			"message": fmt.Sprintf("User with id %v was not found", newItineraryBuddy.UserID),
 		})
 	}
 
-	err := cn.usecase.CreateItternaryBuddy(newItternaryBuddy)
+	err := cn.usecase.CreateItineraryBuddy(newItineraryBuddy)
 
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{
-			"message": "Can't create itternary buddy",
+			"message": "Can't create itinerary buddy",
 		})
 	}
 
 	return c.Status(201).JSON(fiber.Map{
-		"message":"successfully created new itternary buddy",
+		"message": "successfully created new itinerary buddy",
 	})
 }
