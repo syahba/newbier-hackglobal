@@ -16,6 +16,9 @@
           },
           backgroundImage: {
             'home': "url('/public/image/home.png')",
+            'preference1': "url('/public/image/preference-1.png')",
+            'preference2': "url('/public/image/preference-2.png')",
+            'bridging': "url('/public/image/bridging.png')",
           }
         }
       }

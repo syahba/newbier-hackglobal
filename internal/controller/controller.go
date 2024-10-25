@@ -21,6 +21,8 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	// ROUTE: Client
 	app.Get("/", c.getUsecase)
 	app.Get("/home", c.getHome)
+	app.Get("/preferrence", c.getPreferrence)
+	app.Get("/bridging/1", c.getBridging)
 
 	// ROUTE: API
 	api := app.Group("/api")
@@ -43,6 +45,24 @@ func (cn *Controller) getHome(c *fiber.Ctx) error {
 	data := cn.usecase.GetUsecase()
 
 	return c.Render("home", fiber.Map{
+		"Title": data,
+	}, "layouts/main")
+}
+
+func (cn *Controller) getPreferrence(c *fiber.Ctx) error {
+
+	data := cn.usecase.GetUsecase()
+
+	return c.Render("preferrence2", fiber.Map{
+		"Title": data,
+	}, "layouts/main")
+}
+
+func (cn *Controller) getBridging(c *fiber.Ctx) error {
+
+	data := cn.usecase.GetUsecase()
+
+	return c.Render("bridging", fiber.Map{
 		"Title": data,
 	}, "layouts/main")
 }

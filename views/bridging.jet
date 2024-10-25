@@ -1,0 +1,12 @@
+<div class="bg-blue w-full h-full relative">
+
+  {{include "components/header/header-white"}}
+
+  <div class="mb-4 mt-16 px-6 text-center">
+    <h5 class="mb-2 text-sm text-white">Not sure about your destination?</h5>
+    <h1 class="text-xl font-bold text-white">Don’t worry!</h1>
+    <h1 class="text-xl font-bold text-white">We’ve got you covered!</h1>
+  </div>
+  <div class="bg-bridging absolute bottom-0 h-[68.5%] w-96 bg-contain bg-center bg-no-repeat"></div>
+  <div class="absolute bottom-5 right-5">Tap to continue</div>
+</div>
