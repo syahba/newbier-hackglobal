@@ -178,6 +178,18 @@ var seeds = []*gormigrate.Migration{
 			return nil
 		},
 	},
+	{
+		ID: "4-seed",
+		Migrate: func(tx *gorm.DB) error {
+			seedItinerary(tx)
+			seedItineraryDestination(tx)
+
+			return nil
+		},
+		Rollback: func(tx *gorm.DB) error {
+			return nil
+		},
+	},
 }
 
 func seedItinerary(tx *gorm.DB) error {

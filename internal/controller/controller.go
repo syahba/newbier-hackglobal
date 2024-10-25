@@ -25,7 +25,7 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 
 	// ROUTE: API
 	api := app.Group("/api")
-	// api.Get("/generate-itinerary", c.)
+	api.Get("/generate-itinerary", c.generateItinerary)
 
 	api.Get("/destinations", c.getDestinations)
 	api.Get("/itinerary/destinations", c.getItineraryDestination)
@@ -58,6 +58,14 @@ func (cn *Controller) getDestinations(c *fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON(destinationList)
+
+}
+
+func (cn *Controller) generateItinerary(c *fiber.Ctx) error {
+
+	data, _ := cn.usecase.GenerateItinerary()
+
+	return c.Status(200).JSON(data)
 
 }
 
