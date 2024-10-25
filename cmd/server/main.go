@@ -29,6 +29,7 @@ func main() {
 	app := fiber.New(fiber.Config{
 		Views: engine,
 	})
+	app.Static("/public", "./public")
 	controller.NewController(app, &gorm.DB{}, &chatgpt.Model{})
 
 	app.Listen("localhost:" + cfg.Port)

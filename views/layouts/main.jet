@@ -4,10 +4,27 @@
 <head>
   <title>Title</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            text: '#181818',
+            text2: '#636363',
+            blue: '#2A94F4',
+            yellow: '#FFBE55',
+          },
+          backgroundImage: {
+            'home': "url('/public/image/home.png')",
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
-<body class="w-full h-screen flex justify-center bg-cyan-700">
-  <section class="w-96 h-full bg-white">
+<body class="w-full h-screen flex justify-center bg-cyan-700 text-text">
+  <section class="w-96 h-full bg-white text-xs">
   {{ embed() }}
   </section>
 </body>

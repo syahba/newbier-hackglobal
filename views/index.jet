@@ -1,5 +1,11 @@
-{{include "components/header"}}
-
-<h1>{{ Title }}</h1>
-
-{{include "components/footer"}}
+<div class="flex h-screen w-full justify-center bg-cyan-700">
+  <section class="h-full w-96 bg-white">
+    <div class="flex h-full w-full flex-col items-center justify-center gap-3">
+      <div class="h-36 w-36">
+        <img src="/public/image/Logo.png" alt="logo">
+      </div>
+      <button class="rounded bg-blue text-white px-3 py-2 shadow-md">User 1</button>
+      <button class="rounded bg-blue text-white px-3 py-2 shadow-md">User 2</button>
+    </div>
+  </section>
+</div>
