@@ -296,8 +296,9 @@ func getTimeOfDay(timeStr string) string {
 
 
 func (cn *Controller) getDestinations(c *fiber.Ctx) error {
+	search := c.Query("search")
 
-	destinationList, err := cn.usecase.GetDestinations()
+	destinationList, err := cn.usecase.GetDestinations(search)
 
 	if err != nil || len(destinationList) == 0 {
 		return c.Status(404).JSON(fiber.Map{

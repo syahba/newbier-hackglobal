@@ -43,11 +43,16 @@ func (u *Usecase) GetItinerary() ( data []model.Itinerary,err error){
 	return
 }
 
-func (u *Usecase) GetDestinations() (data []model.Destination, err error) {
-
+func (u *Usecase) GetDestinations(name string) (data []model.Destination, err error) {
 	data = make([]model.Destination, 0)
 
-	err = u.db.Find(&data).Error
+	query := u.db
+
+	if name != "" {
+		query = query.Where("name ILIKE ?", "%"+name+"%")
+	}
+
+	err = query.Find(&data).Error
 	if err != nil {
 		return
 	}
