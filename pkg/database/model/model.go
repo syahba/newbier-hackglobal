@@ -19,16 +19,29 @@ func (User) TableName() string {
 
 type Destination struct {
 	gorm.Model
-	Name    string `json:"name"`
-	Type    string `json:"type"`
-	Star    string `json:"star"`
-	Address string `json:"address"`
-	GmapUrl string `json:"gmap_url"`
-	Image   string `json:"image"`
+	Name        string   `json:"name"`
+	Type        string   `json:"type"`
+	Star        string   `json:"star"`
+	Address     string   `json:"address"`
+	GmapUrl     string   `json:"gmap_url"`
+	Image       string   `json:"image"`
+	Description string   `json:"description"`
+	BestProduct []string `gorm:"serializer:json" json:"best_product"`
 }
 
 func (Destination) TableName() string {
 	return "destinations"
+}
+
+type DestinationParameter struct {
+	gorm.Model
+	DestinationID int    `json:"destination_id"`
+	Type          string `json:"type"`
+	Name          string `json:"name"`
+}
+
+func (DestinationParameter) TableName() string {
+	return "destination_parameters"
 }
 
 type DestinationProduct struct {
