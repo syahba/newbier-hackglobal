@@ -26,3 +26,8 @@ func ParseSchema(payload Schema) string {
 	bp, _ := json.Marshal(payload)
 	return fmt.Sprintf("Follow minified JSON schema.<JSONSchema>%s</JSONSchema>", string(bp))
 }
+
+type Response[T any] struct {
+	ID   int `json:"id"`
+	Data T   `json:"data"`
+}

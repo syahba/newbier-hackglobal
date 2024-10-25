@@ -5,6 +5,7 @@ import (
 	"log"
 	"newbier-hackglobal/pkg/config"
 	"newbier-hackglobal/pkg/database"
+
 	"github.com/go-gormigrate/gormigrate/v2"
 	"gorm.io/gorm"
 )
@@ -129,5 +130,38 @@ CREATE TABLE itinerary_buddies (
 			return nil
 		},
 	},
-    
+	{
+		ID: "2",
+		Migrate: func(tx *gorm.DB) error {
+			return tx.Exec(`
+CREATE TABLE destination_parameters (
+    id SERIAL PRIMARY KEY,
+    destination_id INT NOT NULL,
+    type VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP WITH TIME ZONE
+);
+            `).Error
+		},
+		Rollback: func(tx *gorm.DB) error {
+			return nil
+		},
+	},
+	{
+		ID: "3",
+		Migrate: func(tx *gorm.DB) error {
+			return tx.Exec(`
+ALTER TABLE destinations
+ADD COLUMN description TEXT;
+
+ALTER TABLE destinations
+ADD COLUMN best_product JSON DEFAULT '[]';
+            `).Error
+		},
+		Rollback: func(tx *gorm.DB) error {
+			return nil
+		},
+	},
 }

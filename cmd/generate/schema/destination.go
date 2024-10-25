@@ -18,7 +18,7 @@ func AdditionalDestination(destinationName string) []openai.ChatCompletionMessag
 		},
 		{
 			Role:    openai.ChatMessageRoleSystem,
-			Content: "Kamu juga akan membantu saya untuk menentukan destinasti yang saya kasih ini memiliki produk atau jasa apa saja",
+			Content: "Kamu juga akan membantu saya untuk menentukan destinasti yang saya kasih ini memiliki produk berupa barang atau jasa (seperti peminjaman barang atau yang lainnya) apa saja",
 		},
 		{
 			Role:    openai.ChatMessageRoleSystem,
@@ -26,7 +26,15 @@ func AdditionalDestination(destinationName string) []openai.ChatCompletionMessag
 		},
 		{
 			Role:    openai.ChatMessageRoleSystem,
-			Content: `Berikut adalah tipe trip nya ["relaxation", "budget", "luxury", "family_friendly", "adventure",]`,
+			Content: `Berikut adalah tipe trip nya ["relaxation", "budget", "luxury", "family_friendly", "adventure"]`,
+		},
+		{
+			Role:    openai.ChatMessageRoleSystem,
+			Content: `Untuk produk dia akan memiliki data nama, harga dalam dolar singapura dan unit yang akan berisi item jika dia barang dan hour jika dia jasa`,
+		},
+		{
+			Role:    openai.ChatMessageRoleSystem,
+			Content: `Tidak semua harus destinasti ada produk nya`,
 		},
 		{
 			Role:    openai.ChatMessageRoleSystem,
@@ -36,11 +44,27 @@ func AdditionalDestination(destinationName string) []openai.ChatCompletionMessag
 			Role:    openai.ChatMessageRoleUser,
 			Content: fmt.Sprintf("bisa cari tahu tentang destinasti %s termasuk tipe aktifitas apa?", destinationName),
 		},
+		// {
+		// 	Role:    openai.ChatMessageRoleSystem,
+		// 	Content: "Harus berikan jawaban dengan bahasa inggris",
+		// },
 		{
 			Role:    openai.ChatMessageRoleSystem,
 			Content: ParseSchema(schemaAdditionalDestination),
 		},
 	}
+}
+
+type DestinationAdditional struct {
+	Activity []string  `json:"activity"`
+	Trip     []string  `json:"trip"`
+	Product  []Product `json:"product"`
+}
+
+type Product struct {
+	Name  string  `json:"name"`
+	Price float64 `json:"price"`
+	Unit  string  `json:"unit"`
 }
 
 var schemaAdditionalDestination = Schema{

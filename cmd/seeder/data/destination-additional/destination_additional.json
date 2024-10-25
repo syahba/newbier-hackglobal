@@ -1,0 +1,85 @@
+[
+  {
+    "id": 527,
+    "data": {
+      "activity": [
+        "cultural_experiences",
+        "sightseeing"
+      ],
+      "trip": [
+        "family_friendly",
+        "budget",
+        "luxury"
+      ],
+      "product": []
+    }
+  },
+  {
+    "id": 528,
+    "data": {
+      "activity": [
+        "cultural_experiences",
+        "sightseeing"
+      ],
+      "trip": [
+        "family_friendly",
+        "budget"
+      ],
+      "product": []
+    }
+  },
+  {
+    "id": 529,
+    "data": {
+      "activity": [
+        "cultural_experiences",
+        "sightseeing"
+      ],
+      "trip": [
+        "family_friendly"
+      ],
+      "product": []
+    }
+  },
+  {
+    "id": 530,
+    "data": {
+      "activity": [
+        "cultural_experiences",
+        "sightseeing"
+      ],
+      "trip": [
+        "family_friendly",
+        "budget",
+        "luxury"
+      ],
+      "product": []
+    }
+  },
+  {
+    "id": 531,
+    "data": {
+      "activity": [
+        "cultural_experiences",
+        "sightseeing",
+        "outdoor_activities"
+      ],
+      "trip": [
+        "family_friendly",
+        "budget"
+      ],
+      "product": [
+        {
+          "name": "Science Centre Singapore Admission Ticket",
+          "price": 30,
+          "unit": "item"
+        },
+        {
+          "name": "Experiential Workshops",
+          "price": 50,
+          "unit": "hour"
+        }
+      ]
+    }
+  }
+]
