@@ -87,7 +87,7 @@ func (ItineraryDestination) TableName() string {
 
 type ItineraryMarket struct {
 	gorm.Model
-	ItineraryID          int                `json:"itinerary"`
+	ItineraryID          int                `json:"itinerary_id"`
 	DestinationProductID int                `json:"destination_product_id"`
 	Amount               int                `json:"amount"`
 	DestinationProduct   DestinationProduct `gorm:"foreignKey:DestinationProductID;references:ID" json:"destination_product"`
