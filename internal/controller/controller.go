@@ -1,14 +1,17 @@
 package controller
 
 import (
-	"github.com/gofiber/fiber/v2/middleware/logger"
+	"fmt"
+	internal_model "newbier-hackglobal/internal/model"
 	"newbier-hackglobal/internal/usecase"
 	chatgpt "newbier-hackglobal/pkg/chatGPT"
 	"newbier-hackglobal/pkg/database/model"
-	"github.com/gofiber/fiber/v2"
-	"gorm.io/gorm"
 	"strconv"
-	"fmt"
+	"strings"
+
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"gorm.io/gorm"
 )
 
 type Controller struct {
@@ -31,7 +34,7 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api := app.Group("/api")
 	api.Get("/chat", c.getChat)
 	api.Post("/chat", c.postChat)
-
+	api.Get("/itinerary", c.getItinerary)
 	api.Get("/generate-itinerary", c.generateItinerary)
 	api.Get("/destinations", c.getDestinations)
 	api.Get("/itinerary/destinations", c.getItineraryDestination)
@@ -59,6 +62,73 @@ func (cn *Controller) getUsecase(c *fiber.Ctx) error {
 }
 
 // API
+
+func (cn *Controller) getItinerary(c *fiber.Ctx) error {
+	
+
+	itineraryList, err := cn.usecase.GetItinerary()
+	if err != nil || len(itineraryList) == 0 {
+		return c.Status(404).JSON(fiber.Map{
+			"message": "No Itinerary Records",
+		})
+	}
+	var itineraryResponseList []internal_model.ItineraryResponse
+
+	for _, itinerary := range itineraryList {
+		itineraryResponse := internal_model.ItineraryResponse{
+			ItineraryID:   int(itinerary.ID),
+			ItineraryTime: groupDestinationsByTime(itinerary.ItineraryDestinations),
+		}
+		itineraryResponseList = append(itineraryResponseList, itineraryResponse)
+	}
+
+	return c.Status(200).JSON(itineraryResponseList)
+}
+
+func groupDestinationsByTime(destinations []model.ItineraryDestination) []internal_model.ItineraryTime {
+	timeGroups := map[string][]model.Destination{
+		"morning":   {},
+		"afternoon": {},
+		"night":     {},
+	}
+
+	for _, dest := range destinations {
+		timeOfDay := getTimeOfDay(dest.Time)
+		timeGroups[timeOfDay] = append(timeGroups[timeOfDay], dest.Destination)
+	}
+
+	var itineraryTimes []internal_model.ItineraryTime
+	for time, dests := range timeGroups {
+		if len(dests) > 0 {
+			itineraryTimes = append(itineraryTimes, internal_model.ItineraryTime{
+				Time:         time,
+				Destinations: dests,
+			})
+		}
+	}
+
+	return itineraryTimes
+}
+
+func getTimeOfDay(timeStr string) string {
+
+	if strings.Contains(timeStr, "AM") {
+		hour := strings.Split(timeStr, ":")[0]
+		if hour == "07" || hour == "08" || hour == "09" || hour == "10" {
+			return "morning"
+		}
+		return "night"
+	} else if strings.Contains(timeStr, "PM") {
+		hour := strings.Split(timeStr, ":")[0]
+		if hour == "12" || hour == "01" || hour == "02" {
+			return "afternoon"
+		}
+		return "night"
+	}
+	return "night"
+}
+
+
 func (cn *Controller) getDestinations(c *fiber.Ctx) error {
 
 	destinationList, err := cn.usecase.GetDestinations()
