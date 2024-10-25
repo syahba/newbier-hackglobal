@@ -32,10 +32,10 @@ func AdditionalDestination(destinationName string) []openai.ChatCompletionMessag
 			Role:    openai.ChatMessageRoleSystem,
 			Content: `Untuk produk dia akan memiliki data nama, harga dalam dolar singapura dan unit yang akan berisi item jika dia barang dan hour jika dia jasa`,
 		},
-		{
-			Role:    openai.ChatMessageRoleSystem,
-			Content: `Tidak semua harus destinasti ada produk nya`,
-		},
+		// {
+		// 	Role:    openai.ChatMessageRoleSystem,
+		// 	Content: `Tidak semua harus destinasti ada produk nya`,
+		// },
 		{
 			Role:    openai.ChatMessageRoleSystem,
 			Content: "destinasti yang saya berikan ini hanya destinasti dari negara singapura",

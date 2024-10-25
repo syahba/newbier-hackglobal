@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"newbier-hackglobal/cmd/generate/schema"
 	"newbier-hackglobal/pkg/config"
 	"newbier-hackglobal/pkg/database"
 	"newbier-hackglobal/pkg/database/model"
@@ -109,38 +110,74 @@ var seeds = []*gormigrate.Migration{
 			return nil
 		},
 	},
-}
+	{
+		ID: "3-seed",
+		Migrate: func(tx *gorm.DB) error {
+			dataList := []string{
+				"destination_additional",
+			}
 
-func seedDestinationProducts(tx *gorm.DB) error {
-	dataList := []string{
-		"restaurant",
-		"ticket",
-	}
+			for _, list := range dataList {
+				file, err := os.Open(fmt.Sprintf("cmd/seeder/data/destination-additional/%s.json", list))
+				if err != nil {
+					return fmt.Errorf("failed to open destinations JSON file: %w", err)
+				}
+				defer file.Close()
 
-	for _, list := range dataList {
-		file, err := os.Open(fmt.Sprintf("pkg/dataset/destination_product/%s.json", list))
-		if err != nil {
-			return fmt.Errorf("failed to open destinations JSON file: %w", err)
-		}
-		defer file.Close()
+				byteValue, err := io.ReadAll(file)
+				if err != nil {
+					return fmt.Errorf("failed to read destinations JSON file: %w", err)
+				}
 
-		byteValue, err := io.ReadAll(file)
-		if err != nil {
-			return fmt.Errorf("failed to read destinations JSON file: %w", err)
-		}
+				var destinations = []schema.Response[schema.DestinationAdditional]{}
+				err = json.Unmarshal(byteValue, &destinations)
+				if err != nil {
+					return fmt.Errorf("failed to unmarshal destinations data: %w", err)
+				}
 
-		var destinations []model.DestinationProduct
-		err = json.Unmarshal(byteValue, &destinations)
-		if err != nil {
-			return fmt.Errorf("failed to unmarshal destinations data: %w", err)
-		}
+				var destinationParam = []*model.DestinationParameter{}
+				var DestinationProduct = []*model.DestinationProduct{}
+				for _, elm := range destinations {
+					for _, el := range elm.Data.Activity {
+						destinationParam = append(destinationParam, &model.DestinationParameter{
+							DestinationID: elm.ID,
+							Type:          "activity",
+							Name:          el,
+						})
+					}
 
-		if err := tx.Create(&destinations).Error; err != nil {
-			return fmt.Errorf("failed to seed destinations: %w", err)
-		}
-	}
+					for _, el := range elm.Data.Trip {
+						destinationParam = append(destinationParam, &model.DestinationParameter{
+							DestinationID: elm.ID,
+							Type:          "trip",
+							Name:          el,
+						})
+					}
 
-	return nil
+					for _, el := range elm.Data.Product {
+						DestinationProduct = append(DestinationProduct, &model.DestinationProduct{
+							DestinationID: elm.ID,
+							Name:          el.Name,
+							Unit:          el.Unit,
+							Price:         el.Price,
+						})
+					}
+				}
+
+				if err := tx.Create(&destinationParam).Error; err != nil {
+					return fmt.Errorf("failed to seed destination_parameter: %w", err)
+				}
+				if err := tx.Create(&DestinationProduct).Error; err != nil {
+					return fmt.Errorf("failed to seed destination_products: %w", err)
+				}
+			}
+
+			return nil
+		},
+		Rollback: func(tx *gorm.DB) error {
+			return nil
+		},
+	},
 }
 
 func seedItinerary(tx *gorm.DB) error {

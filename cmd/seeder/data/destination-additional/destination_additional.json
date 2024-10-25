@@ -1,85 +1,119 @@
 [
   {
-    "id": 527,
+    "id": 1,
     "data": {
       "activity": [
-        "cultural_experiences",
-        "sightseeing"
-      ],
-      "trip": [
-        "family_friendly",
-        "budget",
-        "luxury"
-      ],
-      "product": []
-    }
-  },
-  {
-    "id": 528,
-    "data": {
-      "activity": [
-        "cultural_experiences",
-        "sightseeing"
-      ],
-      "trip": [
-        "family_friendly",
-        "budget"
-      ],
-      "product": []
-    }
-  },
-  {
-    "id": 529,
-    "data": {
-      "activity": [
-        "cultural_experiences",
-        "sightseeing"
-      ],
-      "trip": [
-        "family_friendly"
-      ],
-      "product": []
-    }
-  },
-  {
-    "id": 530,
-    "data": {
-      "activity": [
-        "cultural_experiences",
-        "sightseeing"
-      ],
-      "trip": [
-        "family_friendly",
-        "budget",
-        "luxury"
-      ],
-      "product": []
-    }
-  },
-  {
-    "id": 531,
-    "data": {
-      "activity": [
-        "cultural_experiences",
         "sightseeing",
-        "outdoor_activities"
+        "cultural_experiences"
       ],
       "trip": [
         "family_friendly",
+        "luxury"
+      ],
+      "product": [
+        {
+          "name": "ArtScience Museum Admission Ticket",
+          "price": 19,
+          "unit": "item"
+        },
+        {
+          "name": "Guided Tour Service",
+          "price": 25,
+          "unit": "hour"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "data": {
+      "activity": [
+        "sightseeing",
+        "cultural_experiences"
+      ],
+      "trip": [
+        "family_friendly",
+        "budget",
+        "luxury"
+      ],
+      "product": [
+        {
+          "name": "Admission Ticket",
+          "price": 15,
+          "unit": "unit"
+        },
+        {
+          "name": "Guided Tour",
+          "price": 30,
+          "unit": "hour"
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "data": {
+      "activity": [
+        "cultural_experiences",
+        "sightseeing"
+      ],
+      "trip": [
+        "family_friendly",
+        "luxury",
         "budget"
       ],
       "product": [
         {
-          "name": "Science Centre Singapore Admission Ticket",
-          "price": 30,
-          "unit": "item"
+          "name": "Gallery Admission Ticket",
+          "price": 20,
+          "unit": "unit"
         },
         {
-          "name": "Experiential Workshops",
+          "name": "Guided Tour",
           "price": 50,
           "unit": "hour"
         }
       ]
+    }
+  },
+  {
+    "id": 4,
+    "data": {
+      "activity": [
+        "cultural_experiences",
+        "sightseeing"
+      ],
+      "trip": [
+        "family_friendly",
+        "budget",
+        "luxury"
+      ],
+      "product": [
+        {
+          "name": "Entrance Fee",
+          "price": 15,
+          "unit": "item"
+        },
+        {
+          "name": "Guided Tour",
+          "price": 30,
+          "unit": "hour"
+        }
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "data": {
+      "activity": [
+        "cultural_experiences",
+        "sightseeing"
+      ],
+      "trip": [
+        "family_friendly",
+        "budget"
+      ],
+      "product": []
     }
   }
 ]
