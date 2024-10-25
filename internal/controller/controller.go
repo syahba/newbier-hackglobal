@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"newbier-hackglobal/internal/usecase"
 	chatgpt "newbier-hackglobal/pkg/chatGPT"
 	"newbier-hackglobal/pkg/database/model"
@@ -19,6 +20,9 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	c := &Controller{
 		usecase: *usecase.NewUsecase(db, ai),
 	}
+
+	// logger
+	app.Use(logger.New())
 
 	// ROUTE: Client
 	app.Get("/", c.getUsecase)
@@ -51,6 +55,13 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Put("/itinerary/buddy", c.putItineraryBuddy)
 	api.Post("/itinerary/market", c.postItternaryMarket)
 	api.Get("/itinerary/market/:id", c.getItternaryMarketByItternaryId)
+
+	// 404 not found
+	app.Use(func (c *fiber.Ctx)error{
+		return c.Status(404).JSON(fiber.Map{
+			"Message":"404 Not Found",
+		})
+	})
 }
 
 // CLIENT
