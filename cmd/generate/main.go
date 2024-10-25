@@ -30,7 +30,7 @@ func main() {
 	ai := chatgpt.GetModel(cfg.ChatGPTKey)
 
 	generateJsonSeeder[schema.DestinationDetail](ai, db, schema.DetailDestination, "destination-additional/destination_detail")
-	generateJsonSeeder[schema.DestinationAdditional](ai, db, schema.AdditionalDestination, "destination-additional/destination_additional")
+	// generateJsonSeeder[schema.DestinationAdditional](ai, db, schema.AdditionalDestination, "destination-additional/destination_additional2")
 }
 
 type FuncMessage func(destinationName string) []openai.ChatCompletionMessage
@@ -53,10 +53,14 @@ func generateJsonSeeder[T any](ai *chatgpt.Model, db *gorm.DB, message FuncMessa
 	}()
 
 	var destinations = make([]*model.Destination, 0)
-	db.Limit(5).Find(&destinations)
+	db.Order("id ASC").Find(&destinations)
 
 	for idx, elm := range destinations {
 		result, _ := ai.Generate(message(elm.Name))
+		// if err != nil {
+		// 	time.Sleep(10 * time.Minute)
+		// }
+
 		cleanedInput := strings.Trim(result, "```json")
 		cleanedInput = strings.Trim(cleanedInput, "```")
 
