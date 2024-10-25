@@ -1,1 +1,67 @@
-[{"id":527,"data":{"description":"The Peranakan Museum in Singapore showcases the rich culture and heritage of the Peranakan community, which is a blend of Chinese and Malay influences. The museum features various artifacts, traditional clothing, and interactive displays that tell the story of Peranakan life and culture.","product":["Guided tours highlighting Peranakan history","Exhibitions on Peranakan art and artifacts","Traditional Peranakan cuisine tasting events","Workshops on Peranakan crafts like beadwork","Souvenirs such as Peranakan-style porcelain and textiles"]}},{"id":528,"data":{"description":"The Children's Little Museum in Singapore is a charming and interactive space designed to engage young children and their families. It showcases a collection of vintage toys, games, and memorabilia that evoke nostalgia and encourage imaginative play.","product":["Interactive exhibits for children","Craft workshops and activities","Vintage toy displays","Storytelling sessions","Educational programs related to childhood history"]}}]
+[
+  {
+    "id": 1,
+    "data": {
+      "description": "The ArtScience Museum is a renowned cultural institution located at Marina Bay Sands in Singapore. Its unique lotus-inspired architecture houses various exhibitions that blend art and science, showcasing innovative works from both local and international artists.",
+      "product": [
+        "Visit interactive exhibitions that explore themes of art, technology, and nature.",
+        "Attend workshops and educational programs related to art and science.",
+        "Enjoy the digital art installations that use cutting-edge technology.",
+        "Explore the museum's shop for unique art-related merchandise and souvenirs.",
+        "Dine at the museum café for light refreshments and beverages."
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "data": {
+      "description": "The National Museum of Singapore is the oldest museum in Singapore, showcasing the nation's history and culture through innovative exhibits and immersive experiences.",
+      "product": [
+        "Explore interactive exhibits on Singapore's history.",
+        "Visit the museum's impressive architecture.",
+        "Attend special events and exhibitions.",
+        "Try local snacks at the museum's cafes.",
+        "Purchase unique souvenirs from the museum shop."
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "data": {
+      "description": "National Gallery Singapore is a prominent art museum located in the heart of Singapore, showcasing Southeast Asian art from the 19th century to the present. Housed in the former Supreme Court and City Hall buildings, it features a stunning blend of historic architecture and modern design.",
+      "product": [
+        "Art exhibitions",
+        "Guided tours",
+        "Workshops and art programs",
+        "Café with local delicacies",
+        "Museum shop featuring art-inspired merchandise"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "data": {
+      "description": "The Peranakan Museum in Singapore showcases the rich cultural heritage of the Peranakan community, a unique blend of Chinese and Malay influences. The museum features beautifully curated exhibits that highlight traditional attire, artifacts, and the daily life of the Peranakan people.",
+      "product": [
+        "Explore traditional Peranakan clothing and jewelry",
+        "Attend workshops on Peranakan crafts and cuisine",
+        "Taste Peranakan dishes like Laksa and Kueh",
+        "Purchase handmade Peranakan textiles and souvenirs",
+        "Visit the museum's cafe for Peranakan-inspired snacks"
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "data": {
+      "description": "Children's Little Museum is a charming and interactive space in Singapore that focuses on the imagination and creativity of children. It showcases a collection of toys, books, and artifacts that evoke nostalgia and encourage play and learning.",
+      "product": [
+        "Interactive exhibits for children",
+        "Workshops and art activities",
+        "Storytelling sessions",
+        "Toy and book displays",
+        "Unique souvenirs like handmade crafts"
+      ]
+    }
+  }
+]

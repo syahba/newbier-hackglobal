@@ -29,7 +29,7 @@ func main() {
 	}
 	ai := chatgpt.GetModel(cfg.ChatGPTKey)
 
-	// generateJsonSeeder[schema.DestinationDetail](ai, db, schema.DetailDestination, "destination-additional/destination_detail")
+	generateJsonSeeder[schema.DestinationDetail](ai, db, schema.DetailDestination, "destination-additional/destination_detail")
 	generateJsonSeeder[schema.DestinationAdditional](ai, db, schema.AdditionalDestination, "destination-additional/destination_additional")
 }
 
