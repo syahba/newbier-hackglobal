@@ -61,11 +61,7 @@ var seeds = []*gormigrate.Migration{
 		ID: "2-seed",
 		Migrate: func(tx *gorm.DB) error {
 			dataList := []string{
-				"scrap museum",
-				"scrap park",
-				"scrap restaurant",
-				"scrap shop",
-				"scrap tourist places",
+				"destinations",
 			}
 
 			var ID int
