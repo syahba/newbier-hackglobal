@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"fmt"
 	chatgpt "newbier-hackglobal/pkg/chatGPT"
 	"newbier-hackglobal/pkg/database/model"
 
@@ -19,6 +20,14 @@ func NewUsecase(db *gorm.DB, ai *chatgpt.Model) *Usecase {
 func (u *Usecase) GetUsecase() string {
 
 	return "Hello World"
+}
+
+func (u *Usecase) GenerateItinerary() (data []model.Destination, err error) {
+
+	var ha, _ = u.ai.Generate(generateItineraryMessage())
+	fmt.Println(ha)
+
+	return
 }
 
 func (u *Usecase) GetDestinations() (data []model.Destination, err error) {
