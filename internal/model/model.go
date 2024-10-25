@@ -2,9 +2,9 @@ package internal_model
 
 import "newbier-hackglobal/pkg/database/model"
 
-type Itinerary struct {
-	ItineraryID   string
-	ItineraryTime []Itinerary
+type ItineraryResponse struct {
+	ItineraryID   int             `json:"itinerary_id"`
+	ItineraryTime []ItineraryTime `json:"itinerary_time"`
 }
 
 type ItineraryTime struct {

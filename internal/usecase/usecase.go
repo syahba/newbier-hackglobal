@@ -30,6 +30,19 @@ func (u *Usecase) GenerateItinerary() (data []model.Destination, err error) {
 	return
 }
 
+func (u *Usecase) GetItinerary() ( data []model.Itinerary,err error){
+	data = make([]model.Itinerary, 0)
+
+	err = u.db.
+		Preload("ItineraryDestinations.Destination").
+		Find(&data).Error
+	if err != nil {
+		return
+	}
+
+	return
+}
+
 func (u *Usecase) GetDestinations() (data []model.Destination, err error) {
 
 	data = make([]model.Destination, 0)
