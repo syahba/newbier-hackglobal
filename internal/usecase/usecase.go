@@ -112,3 +112,52 @@ func (u *Usecase) GetChatById(id int) (data model.ChatRoom, err error) {
 
 	return
 }
+
+func (u *Usecase) GetDestinationProductById(id int) (data model.DestinationProduct, err error) {
+	err = u.db.Where("id = ?", id).Find(&data).Error
+	if err != nil {
+		return
+	}
+
+	return
+}
+
+func (u *Usecase) CreateItternaryMarkets(data model.ItineraryMarket) (err error) {
+	err = u.db.Create(&data).Error
+	if err != nil {
+		return
+	}
+
+	return
+}
+
+func (u *Usecase) GetItternaryMarketByItternaryId(id int)(data []model.ItineraryMarket, err error){
+	data = make([]model.ItineraryMarket, 0)
+
+	err = u.db.Preload("DestinationProduct").Where("itinerary_id = ?",id).Find(&data).Error
+	if err != nil {
+		return
+	}
+
+	return
+}
+
+func (u *Usecase) JoinItineraryBuddy(userId, itineraryId int) (err error) {
+    var ItineraryBuddy model.ItineraryBuddy
+    err = u.db.Where("itinerary_id = ? AND user_id = ?", itineraryId, userId).First(&ItineraryBuddy).Error
+    if err != nil {
+        if err == gorm.ErrRecordNotFound {
+            return fmt.Errorf("itinerary buddy not found")
+        }
+        return err
+    }
+
+    ItineraryBuddy.IsAccept = true
+
+    err = u.db.Save(&ItineraryBuddy).Error
+    if err != nil {
+        return err
+    }
+
+    return nil
+}
