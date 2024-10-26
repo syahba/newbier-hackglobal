@@ -1,8 +1,7 @@
-package usecase
+package schema
 
 import (
 	"fmt"
-	"newbier-hackglobal/cmd/generate/schema"
 
 	"github.com/sashabaranov/go-openai"
 )
@@ -54,21 +53,16 @@ func GenerateItinerary(destinations []map[string]any, activity string, trip stri
 		},
 		{
 			Role:    openai.ChatMessageRoleSystem,
-			Content: schema.ParseSchema(schemaGenerateItinerary),
+			Content: ParseSchema(schemaGenerateItinerary),
 		},
 	}
 }
 
-type GenerateItinerarySchema struct {
-	Time           string `json:"time"`
-	DestinationIDs []int  `json:"destination_ids"`
-}
-
-var schemaGenerateItinerary = schema.Schema{
+var schemaGenerateItinerary = Schema{
 	Type: "array",
-	Items: &schema.Schema{
+	Items: &Schema{
 		Type: "object",
-		Properties: map[string]schema.Schema{
+		Properties: map[string]Schema{
 			"time": {
 				Type:        "string",
 				Description: `hanya berisi waktu ["morning", "afternoon", "evening", "night"]`,
@@ -76,7 +70,7 @@ var schemaGenerateItinerary = schema.Schema{
 			"destination_ids": {
 				Type:        "array",
 				Description: "Jangan sampai ada destinasti id yang sama",
-				Items: &schema.Schema{
+				Items: &Schema{
 					Type:        "number",
 					Description: "hanya berisi destinasti id yang telah diberikan",
 				},

@@ -33,6 +33,10 @@ func (Destination) TableName() string {
 	return "destinations"
 }
 
+func (Destination) ColumnName(column string) string {
+	return "destinations." + column
+}
+
 type DestinationParameter struct {
 	gorm.Model
 	DestinationID int    `json:"destination_id"`
@@ -80,7 +84,6 @@ type ItineraryDestination struct {
 	Destination   Destination `gorm:"foreignKey:DestinationID;references:ID" json:"destination"`
 }
 
-
 func (ItineraryDestination) TableName() string {
 	return "itinerary_destinations"
 }
@@ -92,7 +95,6 @@ type ItineraryMarket struct {
 	Amount               int                `json:"amount"`
 	DestinationProduct   DestinationProduct `gorm:"foreignKey:DestinationProductID;references:ID" json:"destination_product"`
 }
-
 
 func (ItineraryMarket) TableName() string {
 	return "itinerary_markets"
