@@ -1,0 +1,31 @@
+{{include "components/header/header"}}
+
+<div class="mb-4 mt-2 flex flex-col gap-4 px-6">
+  <div>
+    <div class="flex items-center gap-4">
+      <h1 class="mb-2 text-2xl font-bold">Mr. Stork</h1>
+      <div class="mb-2 flex items-center gap-2 text-sm">
+        <div class="h-5 w-5 bg-yellow"></div>
+        <p>4.5</p>
+      </div>
+    </div>
+    <p class="mb-4 text-sm">A unique rooftop bar and restaurant in Singapore's heart. Offering stunning panoramic city skyline views, Mr Stork is the perfect spot for a relaxing evening</p>
+    <div class="flex items-center gap-3 text-sm">
+      <div class="h-5 w-5 bg-blue"></div>
+      <p>5 Fraser St, Level 39, Andaz 189354</p>
+    </div>
+  </div>
+  <div class="text-sm">
+    <h5 class="mb-2 font-bold">Popular</h5>
+    <ul class="flex flex-col gap-2">
+      <li class="flex items-center gap-3 rounded p-2.5 shadow-md">
+        <div class="flex h-5 w-5 items-center justify-center rounded-full border border-blue">1</div>
+        <p class="flex-1">Truffle Fries with Mustard</p>
+      </li>
+      <li class="flex items-center gap-3 rounded p-2.5 shadow-md">
+        <div class="flex h-5 w-5 items-center justify-center rounded-full border border-blue">2</div>
+        <p class="flex-1">Truffle Fries with Mustard Truffle Fries with Mustard Truffle Fries with Mustard Truffle Fries with Mustard</p>
+      </li>
+    </ul>
+  </div>
+</div>

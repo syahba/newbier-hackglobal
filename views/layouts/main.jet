@@ -13,6 +13,7 @@
             text2: '#636363',
             blue: '#2A94F4',
             yellow: '#FFBE55',
+            gray: '#F2F2F2',
           },
           backgroundImage: {
             'home': "url('/public/image/home.png')",
