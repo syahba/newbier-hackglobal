@@ -1,0 +1,17 @@
+{{include "components/header/header-chat"}}
+
+<div class="mb-4 mt-2 flex flex-col gap-4 px-6 pt-4">
+  <div class="w-fit max-w-80 self-end rounded bg-blue px-3 py-2 text-white">
+    <p>Hello~ ^^</p>
+  </div>
+  <div class="w-fit max-w-80 self-start rounded bg-gray px-3 py-2">
+    <p>Hi! I saw you wanted to go to Universal Studio tomorrow. to go to Universal Studio tomorrow. to go to Universal Studio tomorrow.</p>
+  </div>
+</div>
+
+<div class="absolute bottom-0 h-auto w-96 rounded bg-white px-6 pb-6 text-sm">
+  <div class="flex h-auto w-full items-center justify-between shadow-md">
+    <input type="text" placeholder="Enter your message here" class="flex-grow p-3" />
+    <button class="h-fit w-auto rounded px-4 py-2 text-sm">Send</button>
+  </div>
+</div>
