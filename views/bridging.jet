@@ -1,4 +1,4 @@
-<div class="bg-blue w-full h-full relative">
+<div class="bg-blue w-full h-screen relative">
 
   {{include "components/header/header-white"}}
 
