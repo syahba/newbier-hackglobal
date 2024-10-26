@@ -25,6 +25,8 @@
             'bridging': "url('/public/image/bridging.png')",
             'bridging2': "url('/public/image/bridging-2.png')",
             'bridging3': "url('/public/image/bridging-3.png')",
+            'buddy': "url('/public/image/buddy.png')",
+            'buddy2': "url('/public/image/buddy-2.png')",
           },
           fontFamily: {
             'sans': ['"Poppins"']

@@ -5,7 +5,7 @@
   <div class="flex justify-around">
     <div class="inline-flex items-center">
       <label class="relative flex cursor-pointer items-center" for="yes">
-        <input name="option" type="radio" class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-gray transition-all checked:border-blue" id="yes" checked="" />
+        <input name="option" type="radio" class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-gray transition-all checked:border-blue" id="yes" value="yes" />
         <span class="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-blue opacity-0 transition-opacity duration-200 peer-checked:opacity-100"> </span>
       </label>
       <label class="ml-2 cursor-pointer text-sm" for="yes">Yes</label>
@@ -13,7 +13,7 @@
 
     <div class="inline-flex items-center">
       <label class="relative flex cursor-pointer items-center" for="no">
-        <input name="option" type="radio" class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-gray transition-all checked:border-blue" id="no" checked="" />
+        <input name="option" type="radio" class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-gray transition-all checked:border-blue" id="no" value="no" />
         <span class="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-blue opacity-0 transition-opacity duration-200 peer-checked:opacity-100"> </span>
       </label>
       <label class="ml-2 cursor-pointer text-sm" for="no">No</label>

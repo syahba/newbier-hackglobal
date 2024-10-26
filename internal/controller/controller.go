@@ -35,6 +35,7 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	app.Get("/chat", c.getChat)
 	app.Get("/match", c.getMatch)
 	app.Get("/buddy", c.getBuddy)
+	app.Get("/buddy/profile", c.getBuddyProfile)
 
 	// ROUTE: API
 	api := app.Group("/api")
@@ -188,8 +189,17 @@ func (cn *Controller) getBuddy(c *fiber.Ctx) error {
 	data := cn.usecase.GetUsecase()
 
 	return c.Render("buddy", fiber.Map{
+		"Title": data,
+	}, "layouts/main")
+}
+
+func (cn *Controller) getBuddyProfile(c *fiber.Ctx) error {
+
+	data := cn.usecase.GetUsecase()
+
+	return c.Render("buddy-profile", fiber.Map{
 		"Title":  data,
-		"Action": "Create",
+		"Action": "Confirm",
 	}, "layouts/main")
 }
 
