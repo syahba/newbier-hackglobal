@@ -41,7 +41,7 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api := app.Group("/api")
 	api.Get("/chat", c.getChat)
 	api.Post("/chat", c.postChat)
-	api.Get("/itinerary", c.getItinerary)
+	api.Get("/itinerary", c.getItineraries)
 	api.Get("/generate-itinerary", c.generateItinerary)
 	api.Get("/destinations", c.getDestinations)
 	api.Get("/itinerary/destinations", c.getItineraryDestination)
@@ -51,9 +51,9 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Get("/itinerary/market/:id", c.getItternaryMarketByItternaryId)
 
 	// 404 not found
-	app.Use(func (c *fiber.Ctx)error{
+	app.Use(func(c *fiber.Ctx) error {
 		return c.Status(404).JSON(fiber.Map{
-			"Message":"404 Not Found",
+			"Message": "404 Not Found",
 		})
 	})
 }
@@ -133,8 +133,7 @@ func (cn *Controller) getTransaction(c *fiber.Ctx) error {
 
 // API
 
-func (cn *Controller) getItinerary(c *fiber.Ctx) error {
-	
+func (cn *Controller) getItineraries(c *fiber.Ctx) error {
 
 	itineraryList, err := cn.usecase.GetItinerary()
 	if err != nil || len(itineraryList) == 0 {
@@ -197,7 +196,6 @@ func getTimeOfDay(timeStr string) string {
 	}
 	return "night"
 }
-
 
 func (cn *Controller) getDestinations(c *fiber.Ctx) error {
 	search := c.Query("search")
@@ -298,19 +296,19 @@ func (cn *Controller) postItineraryBuddy(c *fiber.Ctx) error {
 		})
 	}
 
-	if result, err := cn.usecase.GetItineraryById(newItineraryBuddy.ItineraryID); err != nil || result.ID == 0{
+	if result, err := cn.usecase.GetItineraryById(newItineraryBuddy.ItineraryID); err != nil || result.ID == 0 {
 		return c.Status(404).JSON(fiber.Map{
 			"message": fmt.Sprintf("Itinerary with id %v was not found", newItineraryBuddy.ItineraryID),
 		})
 	}
 
-	if result, err := cn.usecase.GetChatById(newItineraryBuddy.ChatRoomID); err != nil || result.ID == 0{
+	if result, err := cn.usecase.GetChatById(newItineraryBuddy.ChatRoomID); err != nil || result.ID == 0 {
 		return c.Status(404).JSON(fiber.Map{
 			"message": fmt.Sprintf("Chat Room with id %v was not found", newItineraryBuddy.ChatRoomID),
 		})
 	}
 
-	if result, err := cn.usecase.GetUserById(newItineraryBuddy.UserID); err != nil || result.ID == 0{
+	if result, err := cn.usecase.GetUserById(newItineraryBuddy.UserID); err != nil || result.ID == 0 {
 		return c.Status(404).JSON(fiber.Map{
 			"message": fmt.Sprintf("User with id %v was not found", newItineraryBuddy.UserID),
 		})
@@ -329,27 +327,27 @@ func (cn *Controller) postItineraryBuddy(c *fiber.Ctx) error {
 	})
 }
 
-func (cn *Controller) putItineraryBuddy(c *fiber.Ctx) error{
-	type customRequest struct{
+func (cn *Controller) putItineraryBuddy(c *fiber.Ctx) error {
+	type customRequest struct {
 		ItineraryId int `json:"itinerary_id"`
-		UserId int 		`json:"user_id"`
+		UserId      int `json:"user_id"`
 	}
 
 	var request customRequest
 
-	if err := c.BodyParser(&request); err != nil{
+	if err := c.BodyParser(&request); err != nil {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "Can't parse the body",
 		})
 	}
 
-	if request.ItineraryId <= 0 || request.UserId <= 0{
+	if request.ItineraryId <= 0 || request.UserId <= 0 {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "field itinerary_id or user_id can't zero or negative",
 		})
 	}
 
-	if err := cn.usecase.JoinItineraryBuddy(request.UserId,request.ItineraryId); err != nil{
+	if err := cn.usecase.JoinItineraryBuddy(request.UserId, request.ItineraryId); err != nil {
 		return c.Status(500).JSON(fiber.Map{
 			"message": "can't join the itinerary buddy",
 		})
@@ -363,7 +361,7 @@ func (cn *Controller) putItineraryBuddy(c *fiber.Ctx) error{
 func (cn *Controller) postItternaryMarket(c *fiber.Ctx) error {
 	var newItternaryMarket model.ItineraryMarket
 
-	if err := c.BodyParser(&newItternaryMarket); err != nil{
+	if err := c.BodyParser(&newItternaryMarket); err != nil {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "Can't parse the body",
 		})
@@ -375,19 +373,19 @@ func (cn *Controller) postItternaryMarket(c *fiber.Ctx) error {
 		})
 	}
 
-	if result,err := cn.usecase.GetItineraryById(newItternaryMarket.ItineraryID);err != nil || result.ID == 0{
+	if result, err := cn.usecase.GetItineraryById(newItternaryMarket.ItineraryID); err != nil || result.ID == 0 {
 		return c.Status(404).JSON(fiber.Map{
 			"message": fmt.Sprintf("Itinerary with id %v was not found", newItternaryMarket.ItineraryID),
 		})
 	}
 
-	if result,err := cn.usecase.GetDestinationProductById(newItternaryMarket.DestinationProductID);err != nil || result.ID == 0{
+	if result, err := cn.usecase.GetDestinationProductById(newItternaryMarket.DestinationProductID); err != nil || result.ID == 0 {
 		return c.Status(404).JSON(fiber.Map{
 			"message": fmt.Sprintf("Destination Product with id %v was not found", newItternaryMarket.DestinationProductID),
 		})
 	}
 
-	if err := cn.usecase.CreateItternaryMarkets(newItternaryMarket); err != nil{
+	if err := cn.usecase.CreateItternaryMarkets(newItternaryMarket); err != nil {
 		return c.Status(500).JSON(fiber.Map{
 			"message": "Can't create Itternary Market",
 		})
@@ -399,15 +397,15 @@ func (cn *Controller) postItternaryMarket(c *fiber.Ctx) error {
 }
 
 func (cn *Controller) getItternaryMarketByItternaryId(c *fiber.Ctx) error {
-	id,err := strconv.Atoi(c.Params("id"))
+	id, err := strconv.Atoi(c.Params("id"))
 
-	if err != nil{
+	if err != nil {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "path variable 'id' is invalid, make sure it is a INT",
 		})
 	}
 
-	if id <= 0{
+	if id <= 0 {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "path variable 'id' can't zero or negative",
 		})
