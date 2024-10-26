@@ -5,10 +5,10 @@ import (
 	"newbier-hackglobal/internal/controller"
 	chatgpt "newbier-hackglobal/pkg/chatGPT"
 	"newbier-hackglobal/pkg/config"
-	"newbier-hackglobal/pkg/database"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/jet/v2"
+	"gorm.io/gorm"
 )
 
 func main() {
@@ -18,19 +18,20 @@ func main() {
 	}
 
 	// Package
-	db, err := database.NewPostgresDB(cfg.DatabaseURL)
-	if err != nil {
-		panic(fmt.Sprintf("Failed to load database: %v", err))
-	}
-	ai := chatgpt.GetModel(cfg.ChatGPTKey)
+	// db, err := database.NewPostgresDB(cfg.DatabaseURL)
+	// if err != nil {
+	// 	panic(fmt.Sprintf("Failed to load database: %v", err))
+	// }
+	// ai := chatgpt.GetModel(cfg.ChatGPTKey)
 
 	// Server
 	engine := jet.New("./views", ".jet")
 	app := fiber.New(fiber.Config{
 		Views: engine,
 	})
-	controller.NewController(app, db, ai)
+	app.Static("/public", "./public")
+	controller.NewController(app, &gorm.DB{}, &chatgpt.Model{})
 
-	app.Listen(":" + cfg.Port)
+	app.Listen("localhost:" + cfg.Port)
 
 }

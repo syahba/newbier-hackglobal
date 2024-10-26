@@ -76,9 +76,9 @@ func validateConfig(cfg Config) error {
 	if cfg.Port == "" {
 		missingEnvVars = append(missingEnvVars, "KEYCLOAK_CLIENT_SECRET")
 	}
-	if cfg.DatabaseURL == "" {
-		missingEnvVars = append(missingEnvVars, "DATABASE_URL")
-	}
+	// if cfg.DatabaseURL == "" {
+	// 	missingEnvVars = append(missingEnvVars, "DATABASE_URL")
+	// }
 	// Add more validation checks as necessary
 
 	if len(missingEnvVars) > 0 {

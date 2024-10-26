@@ -1,0 +1,16 @@
+<div class="h-screen">
+  {{include "components/header/header"}}
+
+  <div class="px-6 mt-12 mb-4">
+    <h1 class="text-2xl font-bold">Hi, <span class="text-blue">User</span>!</h1>
+    <h5 class="mb-4 text-sm font-bold">Where would you like to go today?</h5>
+    <input type="text" class="mb-4 h-8 w-full px-3 shadow-md" placeholder="Enter a destination" />
+    <div class="flex w-full gap-4">
+      <button class="rounded border border-blue px-5 py-2 shadow-md">I’m not sure</button>
+      <button class="rounded border flex-auto border-yellow px-5 py-2 shadow-md">I’d like to travel with a buddy</button>
+    </div>
+  </div>
+  <div class="absolute bottom-0 w-96 h-[449px]">
+    <div class="bg-home h-full w-96 bg-contain bg-center bg-no-repeat"></div>
+  </div>
+</div>

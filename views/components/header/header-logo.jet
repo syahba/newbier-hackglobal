@@ -1,0 +1,7 @@
+<div class="w-full flex justify-between pt-4 px-6">
+  <div class="h-12 w-12">
+    <img src="/public/image/Logo.png" alt="logo">
+  </div>
+  <div class="h-8 w-8">
+  </div>
+</div>
