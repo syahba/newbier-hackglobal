@@ -23,6 +23,7 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	app.Get("/home", c.getHome)
 	app.Get("/preference/1", c.getPreference)
 	app.Get("/preference/2", c.getPreference2)
+	app.Get("/preference/3", c.getPreference3)
 	app.Get("/bridging/1", c.getBridging)
 	app.Get("/bridging/2", c.getBridging2)
 	app.Get("/bridging/3", c.getBridging3)
@@ -32,6 +33,7 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	app.Get("/transaction", c.getTransaction)
 	app.Get("/destination", c.getDestination)
 	app.Get("/chat", c.getChat)
+	app.Get("/match", c.getMatch)
 
 	// ROUTE: API
 	api := app.Group("/api")
@@ -76,6 +78,16 @@ func (cn *Controller) getPreference2(c *fiber.Ctx) error {
 		"Title":  data,
 		"Action": "Confirm",
 	}, "layouts/main")
+}
+
+func (cn *Controller) getPreference3(c *fiber.Ctx) error {
+
+	data := cn.usecase.GetUsecase()
+
+	return c.Render("preference-3", fiber.Map{
+		"Title":  data,
+		"Action": "Confirm",
+	}, "layouts/scroll")
 }
 
 func (cn *Controller) getBridging(c *fiber.Ctx) error {
@@ -159,6 +171,15 @@ func (cn *Controller) getChat(c *fiber.Ctx) error {
 	return c.Render("chat-room", fiber.Map{
 		"Title": data,
 	}, "layouts/main")
+}
+
+func (cn *Controller) getMatch(c *fiber.Ctx) error {
+
+	data := cn.usecase.GetUsecase()
+
+	return c.Render("match", fiber.Map{
+		"Title": data,
+	}, "layouts/scroll")
 }
 
 // API

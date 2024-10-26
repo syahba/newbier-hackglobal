@@ -1,0 +1,18 @@
+<div class="flex h-auto w-80 flex-col gap-3 rounded-lg bg-white p-4 text-sm shadow-lg mb-10 mt-5">
+  <h5 class="font-bold">Come join my trip to Universal Studio!</h5>
+  <div class="flex gap-12">
+    <div class="flex gap-2 items-center">
+      <div class="w-5 h-5 bg-black"></div>
+      <p>User</p>
+    </div>
+    <div class="flex gap-2 items-center">
+      <div class="w-5 h-5 bg-black"></div>
+      <p>Indonesia</p>
+    </div>
+    <div class="flex gap-2 items-center">
+      <div class="w-5 h-5 bg-black"></div>
+      <p>22</p>
+    </div>
+  </div>
+  <p>I enjoy extreme rides and horror house! I’m planning to try every single rides at USS and be spooked at the legendary horror house~</p>
+</div>

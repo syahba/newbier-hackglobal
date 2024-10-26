@@ -1,6 +1,6 @@
 <div class="flex items-center gap-3 pl-2">
   <div class="absolute -left-1.5 h-2.5 w-2.5 rounded-full bg-blue"></div>
-  <div class="flex flex-grow gap-3 rounded-lg shadow-md">
+  <div class="flex flex-grow gap-3 rounded-lg shadow-lg">
     <div class="my-3 ml-3 h-16 w-16 rounded-lg bg-blue"></div>
     <div class="my-3 flex flex-grow flex-col justify-between">
       <h5 class="text-sm font-bold">Lyf Funan</h5>
@@ -15,7 +15,7 @@
     </div>
     <div class="flex h-auto w-10 flex-col rounded-e border border-blue text-blue">
       <button class="flex hidden flex-1 items-center justify-center border-b border-blue">Edit</button>
-      <button class="flex flex-1 items-center justify-center">Del.</button>
+      <button class="flex flex-1 items-center justify-center hover:bg-blue hover:text-white">Del.</button>
     </div>
   </div>
 </div>

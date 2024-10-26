@@ -1,0 +1,19 @@
+<div class="flex h-96 w-full flex-col items-center bg-blue">
+  {{include "components/header/header-white"}}
+
+  {{include "components/form/profile"}}
+
+  <div class="relative flex h-fit w-96 flex-col gap-8 rounded-t-3xl bg-white px-6 pt-5 text-sm shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
+    <div class="flex gap-4 absolute -top-6 right-8">
+      {{include "components/btn-full"}}
+      
+      {{include "components/btn-line"}}
+    </div>
+
+    <div class="my-4">
+      <h1 class="mb-2 text-2xl font-bold">Itinerary</h1>
+
+      {{include "components/itinerary/itinerary"}}
+    </div>
+  </div>
+</div>
