@@ -9,4 +9,6 @@
     <button class="rounded border flex-auto border-yellow px-5 py-2 shadow-md">I’d like to travel with a buddy</button>
   </div>
 </div>
-<div class="absolute bottom-0 h-3/5 w-96 bg-home bg-contain bg-center bg-no-repeat"></div>
+<div class="absolute bottom-0 w-96 h-[449px]">
+  <div class="bg-home h-full w-96 bg-contain bg-center bg-no-repeat"></div>
+</div>

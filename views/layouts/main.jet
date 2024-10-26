@@ -19,6 +19,7 @@
             'preference1': "url('/public/image/preference-1.png')",
             'preference2': "url('/public/image/preference-2.png')",
             'bridging': "url('/public/image/bridging.png')",
+            'bridging3': "url('/public/image/bridging-3.png')",
           }
         }
       }
@@ -26,8 +27,8 @@
   </script>
 </head>
 
-<body class="w-full h-screen flex justify-center bg-cyan-700 text-text">
-  <section class="w-96 h-full bg-white text-xs">
+<body class="w-full h-auto flex justify-center bg-cyan-700 text-text">
+  <section class="w-96 h-auto bg-white text-xs">
   {{ embed() }}
   </section>
 </body>

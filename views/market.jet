@@ -1,0 +1,94 @@
+{{include "components/header/header-logo"}}
+
+<div class="mb-4 mt-6 px-6">
+  <div class="mb-4 flex items-center justify-between">
+    <h1 class="text-2xl font-bold">Itinerary</h1>
+  </div>
+  <div class="mb-4 flex justify-between rounded bg-blue p-3 text-white">
+    <label for="transport-destination" class="flex flex-grow flex-col gap-0.5">
+      <h5 class="text-sm font-bold">Transport to first destination</h5>
+      <p>5$ per Km from lyf hotel</p>
+      <p class="text-[0.6rem]">*) Cost will be split if you travel with a buddy</p>
+    </label>
+    <input type="checkbox" name="destination-transport" id="transport-destination" class="h-5 w-5 self-center" />
+  </div>
+  <div class="flex flex-col gap-2">
+    <h5 class="text-sm font-bold">In Destination</h5>
+    <div class="rounded shadow-md">
+      <div class="flex flex-grow gap-3 p-3">
+        <div class="h-16 w-16 rounded bg-blue"></div>
+        <div class="flex flex-grow flex-col gap-1">
+          <h5 class="text-sm font-bold">Lyf Funan</h5>
+          <div class="flex gap-2">
+            <div class="inline-block h-4 w-4 bg-yellow"></div>
+            4.5
+          </div>
+          <div class="flex gap-2">
+            <div class="inline-block h-4 w-4 bg-yellow"></div>
+            Singapore
+          </div>
+        </div>
+        <div class="self-center">
+          <svg class="ms-3 h-2.5 w-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+          </svg>
+        </div>
+      </div>
+      <div id="dropdown" class="p-3 flex flex-col gap-2">
+        <div class="flex gap-2 text-sm items-center">
+          <p class="flex-grow">Premium Ticket</p>
+          <p>10$/item</p>
+          <input type="text" class="w-7 rounded border border-blue px-1 py-0 text-center" placeholder="0" />
+        </div>
+        <div class="flex gap-2 text-sm items-center">
+          <p class="flex-grow">Premium Ticket</p>
+          <p>10$/item</p>
+          <input type="text" class="w-7 rounded border border-blue px-1 py-0 text-center" placeholder="0" />
+        </div>
+      </div>
+    </div>
+    <div class="rounded shadow-md">
+      <div class="flex flex-grow gap-3 p-3">
+        <div class="h-16 w-16 rounded bg-blue"></div>
+        <div class="flex flex-grow flex-col gap-1">
+          <h5 class="text-sm font-bold">Lyf Funan</h5>
+          <div class="flex gap-2">
+            <div class="inline-block h-4 w-4 bg-yellow"></div>
+            4.5
+          </div>
+          <div class="flex gap-2">
+            <div class="inline-block h-4 w-4 bg-yellow"></div>
+            Singapore
+          </div>
+        </div>
+        <div class="self-center">
+          <svg class="ms-3 h-2.5 w-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+          </svg>
+        </div>
+      </div>
+      <div class="p-3 flex flex-col gap-2 hidden">
+        <div class="flex gap-2 text-sm items-center">
+          <p class="flex-grow">Premium Ticket</p>
+          <p>10$/item</p>
+          <input type="text" class="w-7 rounded border border-blue px-1 py-0 text-center" placeholder="0" />
+        </div>
+        <div class="flex gap-2 text-sm items-center">
+          <p class="flex-grow">Premium Ticket</p>
+          <p>10$/item</p>
+          <input type="text" class="w-7 rounded border border-blue px-1 py-0 text-center" placeholder="0" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="absolute bottom-0 h-auto w-96 border-t bg-white">
+  <div class="flex h-full w-full items-center justify-between py-4 px-6">
+    <div>
+      <h1 class="font-bold text-xl">15$</h1>
+      <p class="text-[0.6rem]">*) Transportation is excluded</p>
+    </div>
+    <button class="h-fit w-auto rounded shadow-md bg-yellow px-4 py-2 text-sm">Next</button>
+  </div>
+</div>
