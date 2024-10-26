@@ -111,6 +111,7 @@ var seeds = []*gormigrate.Migration{
 		Migrate: func(tx *gorm.DB) error {
 			dataList := []string{
 				"destination_additional",
+				"destination_additional2",
 			}
 
 			for _, list := range dataList {
@@ -177,8 +178,42 @@ var seeds = []*gormigrate.Migration{
 	{
 		ID: "4-seed",
 		Migrate: func(tx *gorm.DB) error {
-			seedItinerary(tx)
-			seedItineraryDestination(tx)
+			dataList := []string{
+				"destination_detail",
+				"destination_detail2",
+			}
+
+			for _, list := range dataList {
+				file, err := os.Open(fmt.Sprintf("cmd/seeder/data/destination-additional/%s.json", list))
+				if err != nil {
+					return fmt.Errorf("failed to open destinations JSON file: %w", err)
+				}
+				defer file.Close()
+
+				byteValue, err := io.ReadAll(file)
+				if err != nil {
+					return fmt.Errorf("failed to read destinations JSON file: %w", err)
+				}
+
+				var destinations = []schema.Response[schema.DestinationDetail]{}
+				err = json.Unmarshal(byteValue, &destinations)
+				if err != nil {
+					return fmt.Errorf("failed to unmarshal destinations data: %w", err)
+				}
+
+				for _, elm := range destinations {
+					if err := tx.Updates(model.Destination{
+						Model: gorm.Model{
+							ID: uint(elm.ID),
+						},
+						Description: elm.Data.Description,
+						BestProduct: elm.Data.Product,
+					}).Error; err != nil {
+						return err
+					}
+				}
+
+			}
 
 			return nil
 		},
@@ -291,4 +326,3 @@ func seedItineraryDestination(tx *gorm.DB) error {
 		},
 	}).Error
 }
-
