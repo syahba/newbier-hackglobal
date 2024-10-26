@@ -86,7 +86,7 @@ func (cn *Controller) getItinerary(c *fiber.Ctx) error {
 
 	return c.Render("home-itinerary", fiber.Map{
 		"Title": data,
-	}, "layouts/main")
+	}, "layouts/scroll")
 }
 
 func (cn *Controller) getMarket(c *fiber.Ctx) error {
