@@ -1,0 +1,25 @@
+<div>
+  <h5 class="mb-4 text-sm font-bold">Finally, what kind of trip would you like?</h5>
+  <div class="mb-4 flex flex-wrap gap-2">
+    <div>
+      <input type="radio" name="trip" id="trip-relaxation" class="peer hidden" />
+      <label for="trip-relaxation" class="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white">Relaxation</label>
+    </div>
+    <div>
+      <input type="radio" name="trip" id="trip-budget" class="peer hidden" />
+      <label for="trip-budget" class="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white">Budget</label>
+    </div>
+    <div>
+      <input type="radio" name="trip" id="trip-luxury" class="peer hidden" />
+      <label for="trip-luxury" class="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white">Luxury</label>
+    </div>
+    <div>
+      <input type="radio" name="trip" id="trip-family-friendly" class="peer hidden" />
+      <label for="trip-family-friendly" class="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white">Family Friendly</label>
+    </div>
+    <div>
+      <input type="radio" name="trip" id="trip-adventure" class="peer hidden" />
+      <label for="trip-adventure" class="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white">Adventure</label>
+    </div>
+  </div>
+</div>

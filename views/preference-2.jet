@@ -1,0 +1,15 @@
+<div class=" w-full h-2/5 bg-preference2 bg-contain bg-center bg-no-repeat">
+  {{include "components/header/header-logo"}}
+</div>
+
+<div>
+  <div class="absolute bottom-0 flex h-3/4 w-96 flex-col gap-8 rounded-t-3xl bg-white px-6 pt-5 text-sm shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
+    {{include "components/form/activity"}}
+    
+    {{include "components/form/date"}}
+
+    {{include "components/form/style"}}
+
+    {{include "components/button"}}
+  </div>
+</div>

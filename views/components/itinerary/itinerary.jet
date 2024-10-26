@@ -1,0 +1,11 @@
+<div>
+  <div>
+    <h5 class="text-sm font-bold">Morning</h5>
+    {{include "section"}}
+  </div>
+
+  <div>
+    <h5 class="text-sm font-bold">Afternoon</h5>
+    {{include "section"}}
+  </div>
+</div>

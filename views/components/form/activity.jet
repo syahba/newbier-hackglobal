@@ -1,0 +1,29 @@
+<div>
+  <h5 class="mb-4 text-sm font-bold">Let’s start with your preferred activities!</h5>
+  <div class="flex flex-wrap gap-2">
+    <div>
+      <input type="radio" name="activity" id="activity-sightseeing" class="peer hidden" />
+      <label for="activity-sightseeing" class="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white">Sightseeing</label>
+    </div>
+    <div>
+      <input type="radio" name="activity" id="activity-culinary-experiences" class="peer hidden" />
+      <label for="activity-culinary-experiences" class="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white">Culinary Experiences</label>
+    </div>
+    <div>
+      <input type="radio" name="activity" id="activity-outdoor-activities" class="peer hidden" />
+      <label for="activity-outdoor-activities" class="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white">Outdoor Activities</label>
+    </div>
+    <div>
+      <input type="radio" name="activity" id="activity-adventure" class="peer hidden" />
+      <label for="activity-adventure" class="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white">Adventure</label>
+    </div>
+    <div>
+      <input type="radio" name="activity" id="activity-cultural-experiences" class="peer hidden" />
+      <label for="activity-cultural-experiences" class="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white">Cultural Experiences</label>
+    </div>
+    <div>
+      <input type="radio" name="activity" id="activity-shopping" class="peer hidden" />
+      <label for="activity-shopping" class="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white">Shopping</label>
+    </div>
+  </div>
+</div>

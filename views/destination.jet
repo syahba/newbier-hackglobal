@@ -24,7 +24,7 @@
       </li>
       <li class="flex items-center gap-3 rounded p-2.5 shadow-md">
         <div class="flex h-5 w-5 items-center justify-center rounded-full border border-blue">2</div>
-        <p class="flex-1">Truffle Fries with Mustard Truffle Fries with Mustard Truffle Fries with Mustard Truffle Fries with Mustard</p>
+        <p class="flex-1">Truffle Fries with Mustard</p>
       </li>
     </ul>
   </div>

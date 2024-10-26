@@ -21,11 +21,13 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	// ROUTE: Client
 	app.Get("/", c.getUsecase)
 	app.Get("/home", c.getHome)
-	app.Get("/preferrence", c.getPreferrence)
+	app.Get("/preference/1", c.getPreference)
+	app.Get("/preference/2", c.getPreference2)
 	app.Get("/bridging/1", c.getBridging)
 	app.Get("/bridging/2", c.getBridging2)
 	app.Get("/bridging/3", c.getBridging3)
-	app.Get("/itinerary", c.getItinerary)
+	app.Get("/itinerary/1", c.getItinerary)
+	app.Get("/itinerary/2", c.getItinerary2)
 	app.Get("/market", c.getMarket)
 	app.Get("/transaction", c.getTransaction)
 	app.Get("/destination", c.getDestination)
@@ -56,12 +58,23 @@ func (cn *Controller) getHome(c *fiber.Ctx) error {
 	}, "layouts/main")
 }
 
-func (cn *Controller) getPreferrence(c *fiber.Ctx) error {
+func (cn *Controller) getPreference(c *fiber.Ctx) error {
 
 	data := cn.usecase.GetUsecase()
 
-	return c.Render("preferrence2", fiber.Map{
-		"Title": data,
+	return c.Render("preference", fiber.Map{
+		"Title":  data,
+		"Action": "Confirm",
+	}, "layouts/main")
+}
+
+func (cn *Controller) getPreference2(c *fiber.Ctx) error {
+
+	data := cn.usecase.GetUsecase()
+
+	return c.Render("preference-2", fiber.Map{
+		"Title":  data,
+		"Action": "Confirm",
 	}, "layouts/main")
 }
 
@@ -96,8 +109,19 @@ func (cn *Controller) getItinerary(c *fiber.Ctx) error {
 
 	data := cn.usecase.GetUsecase()
 
+	return c.Render("itinerary", fiber.Map{
+		"Title":  data,
+		"Action": "Next",
+	}, "layouts/scroll")
+}
+
+func (cn *Controller) getItinerary2(c *fiber.Ctx) error {
+
+	data := cn.usecase.GetUsecase()
+
 	return c.Render("home-itinerary", fiber.Map{
-		"Title": data,
+		"Title":  data,
+		"Action": "Completed",
 	}, "layouts/scroll")
 }
 

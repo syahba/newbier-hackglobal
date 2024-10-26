@@ -1,0 +1,10 @@
+<div class="ml-2 border-l-2 border-blue">
+  <div class="relative pl-2">
+    {{include "card"}}
+    <p class="my-3 text-center">300 meters - 20 minutes</p>
+  </div>
+  <div class="relative pl-2">
+    {{include "card-action"}}
+    <p class="my-3 text-center">300 meters - 20 minutes</p>
+  </div>
+</div>

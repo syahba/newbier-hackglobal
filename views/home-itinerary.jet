@@ -45,9 +45,13 @@
     </a>
   </div>
   
-  {{include "components/itinerary"}}
+  <div>
+    <h1 class="mb-2 text-2xl font-bold">Itinerary</h1>
+
+    {{include "components/itinerary/itinerary"}}
+  </div>
 
   <div class="flex h-full w-full items-center justify-center py-4">
-    <button class="h-fit w-auto rounded bg-yellow px-4 py-2 text-sm">Completed</button>
+    {{include "components/button"}}
   </div>
 </div>
