@@ -18,7 +18,7 @@ services:
 
   # Main Service
   main_service:
-    image: wisnup001binus/hackglobal-newbier:1.0
+    image: wisnup001binus/hackglobal-newbier:2.0
     container_name: main_service_container
     environment:
       PORT: 8000
@@ -28,6 +28,6 @@ services:
     networks:
       - main_network
     ports:
-      - "8000:80"
+      - "8000:8000"
     depends_on:
       - main_db
