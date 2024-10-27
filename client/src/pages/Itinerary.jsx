@@ -14,7 +14,7 @@ function ItineraryPage() {
   const navigate = useNavigate()
 
   const { state } = useLocation();
-  const { data } = state
+  const { data, activity, trip, destination } = state
 
   const handleSearch = async (e) => {
     const searchTerm = e.target.value;
@@ -53,6 +53,9 @@ function ItineraryPage() {
   const nextButton = () => {
     navigate("/buddy", {state: {
       itinerary: data,
+      destination: destination || "",
+      activity: activity || "",
+      trip,
     }})
   }
 

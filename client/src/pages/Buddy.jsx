@@ -12,7 +12,7 @@ function Buddy() {
   const navigate = useNavigate()
 
   const { state } = useLocation();
-  const { itinerary } = state
+  const { itinerary, destination, activity, trip } = state
 
   const wrapperSetActivity = useCallback(val => {
     setIsBuddy(val);
@@ -26,6 +26,9 @@ function Buddy() {
       itinerary: itinerary,
       isBuddy: isBuddy,
       description: description,
+      destination,
+      activity,
+      trip
     }})
   }
 

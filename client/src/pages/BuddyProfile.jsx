@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 
 function BuddyProfile() {
   const { state } = useLocation();
-  const { itinerary, isBuddy, description } = state
+  const { itinerary, isBuddy, description, destination, activity, trip } = state
   const navigate = useNavigate()
 
   

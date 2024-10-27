@@ -44,7 +44,9 @@ function Preference() {
         const data = await response.json();
         console.log(data)
         navigate("/itinerary",{state: {
-          data: data
+          data: data,
+          destination: name,
+          trip: trip,
         }})
       } catch(err) {
         console.log(err)
