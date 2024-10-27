@@ -330,7 +330,7 @@ func (cn *Controller) getItineraryDestination(c *fiber.Ctx) error {
 
 }
 
-func (cn *Controller) getChat(c *fiber.Ctx) error {
+func (cn *Controller) getChats(c *fiber.Ctx) error {
 
 	chatList, err := cn.usecase.GetChat()
 
