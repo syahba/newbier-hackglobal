@@ -1,1 +1,3 @@
-# newbier-hackglobal
+# HackGlobal Project: Lyf Guide
+
+## Overview
