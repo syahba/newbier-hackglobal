@@ -1,7 +1,11 @@
+import { useState } from "react";
+
 function FieldBuddy({setState, disabled, value}) {
+  const [option, setOption] = useState()
   
   const action = (event) => {
     setState(event.target.value === "yes")
+    setOption(event.target.value)
   }
 
   return (
@@ -28,7 +32,7 @@ function FieldBuddy({setState, disabled, value}) {
               id="yes"
               value="yes"
               onChange={action}
-              checked={"yes" === value}
+              checked={"yes" === value || option === "yes"}
               disabled={disabled}
             />
             <span className="absolute w-3 h-3 transition-opacity duration-200 transform -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0 left-1/2 top-1/2 bg-blue peer-checked:opacity-100">
@@ -52,7 +56,7 @@ function FieldBuddy({setState, disabled, value}) {
               id="no"
               value="no"
               onChange={action}
-              checked={"no" === value}
+              checked={"no" === value || option === "no"}
               disabled={disabled}
             />
             <span className="absolute w-3 h-3 transition-opacity duration-200 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0 left-1/2 top-1/2 transhtmlForm bg-blue peer-checked:opacity-100">

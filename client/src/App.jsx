@@ -15,6 +15,7 @@ import Market from './pages/Market';
 import Transaction from './pages/Transaction';
 import Buddy from './pages/Buddy';
 import BuddyProfile from './pages/BuddyProfile';
+import ChatRoom from './pages/Chat';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/transaction" element={<Transaction />} />
         <Route path="/buddy" element={<Buddy />} />
         <Route path="/buddy/profile" element={<BuddyProfile />} />
+        <Route path="/chat-room" element={<ChatRoom />} />
         {/* Route 404 untuk halaman yang tidak ditemukan */}
         <Route path="*" element={<NotFound />} />
       </Routes>

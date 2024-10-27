@@ -4,13 +4,14 @@ import HeaderLogo from "../components/headers/HeaderLogo"
 import Itinerary from "../components/itineraries/Itinerary"
 import Scroll from "../layouts/Scroll"
 import { FaPlus } from "react-icons/fa";
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 function ItineraryPage() {
   const [modal, setModal] = useState(false)
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate()
 
   const { state } = useLocation();
   const { data } = state
@@ -49,6 +50,12 @@ function ItineraryPage() {
     // setShowDropdown(false);
   };
 
+  const nextButton = () => {
+    navigate("/buddy", {state: {
+      itinerary: data,
+    }})
+  }
+
   return (
     <Scroll>
       <HeaderLogo />
@@ -64,7 +71,7 @@ function ItineraryPage() {
         <Itinerary data={data} />
 
         <div className="flex items-center justify-center w-full h-full pt-4 pb-8">
-          <ButtonAction text="Next" />
+          <ButtonAction text="Next" onClick={nextButton} />
         </div>
       </div>
 

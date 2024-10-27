@@ -3,13 +3,13 @@ import { IoMdMale } from "react-icons/io";
 import { BiWorld } from "react-icons/bi";
 import { FaUser } from "react-icons/fa6";
 
-function CardProfile() {
+function CardProfile({description}) {
   // dummy, akan dimasukan jadi props variablenya
   const user = {
     name: "syahba",
     country: "indonesia",
     gender: "female",
-    description: 'I enjoy extreme rides and horror house! I’m planning to try every single rides at USS and be spooked at the legendary horror house~'
+    description: description
   };
 
   return (
