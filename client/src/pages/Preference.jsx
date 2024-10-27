@@ -9,14 +9,16 @@ import { useParams } from 'react-router-dom';
 function Preference() {
   const { id } = useParams();
   const [result, setResult] = useState({});
+  const [name, setName] = useState("")
 
   useEffect(() => {
     try {
       const fetchData = async () => {
         try {
-            const response = await fetch(`https://localhost:8000/api/destination/${id}`);
+            const response = await fetch(`http://localhost:8000/api/destinations/${id}`);
             const data = await response.json();
             setResult(data)
+            setName(data.name)
         } catch (error) {
             console.log(error)
         }
@@ -32,11 +34,11 @@ function Preference() {
   return (
     <Main>
       
-    <div className="bg-preference1 h-3/4 w-full bg-contain bg-center bg-no-repeat">
+    <div className="w-full bg-center bg-no-repeat bg-contain bg-preference1 h-3/4">
       <HeaderLogo />
-      <div className="mb-4 mt-12 px-6">
+      <div className="px-6 mt-12 mb-4">
         <h5 className="mb-4 text-sm font-bold">Hi, <span className="text-blue">User</span>! Where do you want to go today?</h5>
-        <input type="text" className="mb-4 h-8 w-full px-3 shadow-md rounded-lg" value={result.name} placeholder="Enter a destination" />
+        <input type="text" className="w-full h-8 px-3 mb-4 rounded-lg shadow-md" value={name} onChange={e => setName(e.target.value)} placeholder="Enter a destination" />
       </div>
     </div>
 
