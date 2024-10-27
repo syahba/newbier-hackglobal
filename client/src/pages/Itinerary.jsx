@@ -4,6 +4,7 @@ import HeaderLogo from "../components/headers/HeaderLogo"
 import Itinerary from "../components/itineraries/Itinerary"
 import Scroll from "../layouts/Scroll"
 import { FaPlus } from "react-icons/fa";
+import { useLocation } from "react-router-dom"
 
 function ItineraryPage() {
   const [modal, setModal] = useState(false)
@@ -11,6 +12,8 @@ function ItineraryPage() {
   const [results, setResults] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
 
+  const { state } = useLocation();
+  const { data } = state
 
   const handleSearch = async (e) => {
     const searchTerm = e.target.value;
@@ -58,7 +61,7 @@ function ItineraryPage() {
           </button>
         </div>
         
-        <Itinerary />
+        <Itinerary data={data} />
 
         <div className="flex items-center justify-center w-full h-full pt-4 pb-8">
           <ButtonAction text="Next" />
@@ -66,7 +69,7 @@ function ItineraryPage() {
       </div>
 
       {modal && (
-        <div className="absolute top-0 z-10 h-screen w-96 bg-text/45">
+        <div className="absolute top-0 z-10 h-full w-96 bg-text/45">
           <div className="flex items-center justify-center w-full h-full">
             <div className="flex h-auto w-5/6 flex-col rounded bg-white p-3 gap-2.5">
               <button className="self-end text-sm" onClick={() => setModal(false)}>x</button>

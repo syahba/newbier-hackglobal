@@ -13,6 +13,8 @@ import Bridging2 from './pages/Bridging2';
 import ItineraryPage from './pages/Itinerary';
 import Market from './pages/Market';
 import Transaction from './pages/Transaction';
+import Buddy from './pages/Buddy';
+import BuddyProfile from './pages/BuddyProfile';
 
 function App() {
 
@@ -31,6 +33,8 @@ function App() {
         <Route path="/itinerary" element={<ItineraryPage />} />
         <Route path="/market" element={<Market />} />
         <Route path="/transaction" element={<Transaction />} />
+        <Route path="/buddy" element={<Buddy />} />
+        <Route path="/buddy/profile" element={<BuddyProfile />} />
         {/* Route 404 untuk halaman yang tidak ditemukan */}
         <Route path="*" element={<NotFound />} />
       </Routes>

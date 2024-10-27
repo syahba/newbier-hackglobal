@@ -1,16 +1,14 @@
-<div class="w-full h-screen relative">
+<div class="relative w-full h-screen">
   {{include "components/header/header-logo"}}
 
-  <div class="flex flex-col gap-8 px-6 py-4 z-50 absolute">
+  <div class="absolute z-50 flex flex-col gap-8 px-6 py-4">
     {{include "components/form/buddy"}}
 
     <div id="form-buddy" class="">
       {{include "components/form/description"}}
-      <button class="mt-2 rounded-lg w-fit self-center bg-yellow px-5 py-3 shadow-lg text-sm hover:bg-blue">Create</button>
+      <button class="self-center px-5 py-3 mt-2 text-sm rounded-lg shadow-lg w-fit bg-yellow hover:bg-blue">Create</button>
     </div>
   </div>
 
   <div class="bg-buddy2 h-[460px] w-96 bg-contain bg-center bg-no-repeat absolute bottom-0"></div>
 </div>
-
-<script src="../public/script.js"></script>
