@@ -5,11 +5,11 @@ function CardProfile(user) {
       <div className="flex gap-12">
         <div className="flex gap-2 items-center">
           <div className="w-5 h-5 bg-black"></div>
-          <p>{user.username}</p>
+          <p>{user.name}</p>
         </div>
         <div className="flex gap-2 items-center">
           <div className="w-5 h-5 bg-black"></div>
-          <p>Indonesia</p>
+          <p>{user.country}</p>
         </div>
         <div className="flex gap-2 items-center">
           <div className="w-5 h-5 bg-black"></div>

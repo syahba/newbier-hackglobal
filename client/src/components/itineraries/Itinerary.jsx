@@ -1,14 +1,16 @@
+import Destination from "./Destination";
+
 function Itinerary() {
   return (
     <div>
       <div>
         <h5 className="text-sm font-bold">Morning</h5>
-        {/* {{include "section"}} */}
+        <Destination></Destination>
       </div>
 
       <div>
         <h5 className="text-sm font-bold">Afternoon</h5>
-        {/* {{include "section"}} */}
+        <Destination></Destination>
       </div>
     </div>
   );
