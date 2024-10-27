@@ -1,11 +1,32 @@
+import { useState, useEffect } from "react"
 import ButtonAction from "../components/buttons/ButtonAction"
 import FieldDate from "../components/forms/FieldDate"
 import FieldStyle from "../components/forms/FieldStyle"
 import HeaderLogo from "../components/headers/HeaderLogo"
 import Main from "../layouts/Main"
+import { useParams } from 'react-router-dom';
 
 function Preference() {
+  const { id } = useParams();
+  const [result, setResult] = useState({});
 
+  useEffect(() => {
+    try {
+      const fetchData = async () => {
+        try {
+            const response = await fetch(`https://localhost:8000/api/destination/${id}`);
+            const data = await response.json();
+            setResult(data)
+        } catch (error) {
+            console.log(error)
+        }
+      }
+
+      fetchData()
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }, []);
 
   
   return (
@@ -15,7 +36,7 @@ function Preference() {
       <HeaderLogo />
       <div className="mb-4 mt-12 px-6">
         <h5 className="mb-4 text-sm font-bold">Hi, <span className="text-blue">User</span>! Where do you want to go today?</h5>
-        <input type="text" className="mb-4 h-8 w-full px-3 shadow-md rounded-lg" placeholder="Enter a destination" />
+        <input type="text" className="mb-4 h-8 w-full px-3 shadow-md rounded-lg" value={result.name} placeholder="Enter a destination" />
       </div>
     </div>
 
