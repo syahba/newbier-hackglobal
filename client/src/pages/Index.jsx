@@ -3,7 +3,7 @@ import Logo from '/image/Logo.png'
 
 function Index() {
   return (
-    <Main>
+    // <Main>
       <div className="flex h-screen w-full justify-center bg-cyan-700">
         <section className="h-full w-96 bg-white">
           <div className="flex h-full w-full flex-col items-center justify-center gap-3">
@@ -15,7 +15,7 @@ function Index() {
           </div>
         </section>
       </div>
-    </Main>
+    // </Main>
   )
 }
 
