@@ -16,6 +16,8 @@ import Transaction from './pages/Transaction';
 import Buddy from './pages/Buddy';
 import BuddyProfile from './pages/BuddyProfile';
 import ChatRoom from './pages/Chat';
+import HomeItinerary from './pages/HomeItinerary';
+import Match from './pages/Match';
 
 function App() {
 
@@ -25,6 +27,7 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/test" element={<CardProfile />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/home-itinerary" element={<HomeItinerary />} />
         <Route path="/preference/:id" element={<Preference />} />
         <Route path="/preference" element={<Preference2 />} />
         <Route path="/preference-buddy" element={<Preference3 />} />
@@ -37,6 +40,7 @@ function App() {
         <Route path="/buddy" element={<Buddy />} />
         <Route path="/buddy/profile" element={<BuddyProfile />} />
         <Route path="/chat-room" element={<ChatRoom />} />
+        <Route path="/match" element={<Match />} />
         {/* Route 404 untuk halaman yang tidak ditemukan */}
         <Route path="*" element={<NotFound />} />
       </Routes>
