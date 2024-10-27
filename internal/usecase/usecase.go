@@ -83,6 +83,14 @@ func (u *Usecase) GetDestinations(name string) (data []model.Destination, err er
 	return
 }
 
+func (u *Usecase) GetDestinationById(id int) (data model.Destination,err error){
+	err = u.db.Where("id = ?",id).Find(&data).Error
+	if err != nil{
+		return 
+	}
+	return
+}
+
 func (u *Usecase) GetItineraryDestination() (data []model.ItineraryDestination, err error) {
 
 	data = make([]model.ItineraryDestination, 0)

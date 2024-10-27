@@ -53,6 +53,7 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Get("/itinerary", c.getItineraries)
 	api.Get("/generate-itinerary", c.generateItinerary)
 	api.Get("/destinations", c.getDestinations)
+	api.Get("/destinations/:id", c.getDestinationById)
 	api.Get("/itinerary/destinations", c.getItineraryDestination)
 	api.Post("/itinerary/buddy", c.postItineraryBuddy)
 	api.Put("/itinerary/buddy", c.putItineraryBuddy)
@@ -301,6 +302,26 @@ func (cn *Controller) getDestinations(c *fiber.Ctx) error {
 	return c.Status(200).JSON(destinationList)
 
 }
+
+func (cn *Controller) getDestinationById(c *fiber.Ctx) error {
+	id,err := strconv.Atoi(c.Params("id"))
+	if err != nil {
+		return c.Status(400).JSON(fiber.Map{
+			"message":"params id must number",
+		})
+	}
+
+	data,err := cn.usecase.GetDestinationById(id)
+
+	if err != nil || data.ID == 0{
+		return c.Status(404).JSON(fiber.Map{
+			"message":fmt.Sprintf("Destination with id %v was not found",id),
+		})
+	}
+	
+	return c.Status(200).JSON(data)
+}
+
 
 func (cn *Controller) generateItinerary(c *fiber.Ctx) error {
 
