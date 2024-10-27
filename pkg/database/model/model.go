@@ -37,7 +37,7 @@ func (Destination) ColumnName(column string) string {
 	return "destinations." + column
 }
 
-type DestinationParameter struct {
+ type DestinationParameter struct {
 	gorm.Model
 	DestinationID int    `json:"destination_id"`
 	Type          string `json:"type"`

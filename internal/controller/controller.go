@@ -296,13 +296,7 @@ func getTimeOfDay(timeStr string) string {
 func (cn *Controller) getDestinations(c *fiber.Ctx) error {
 	search := c.Query("search")
 
-	destinationList, err := cn.usecase.GetDestinations(search)
-
-	if err != nil || len(destinationList) == 0 {
-		return c.Status(404).JSON(fiber.Map{
-			"message": "No destination Records",
-		})
-	}
+	destinationList, _ := cn.usecase.GetDestinations(search)
 
 	return c.Status(200).JSON(destinationList)
 
@@ -330,7 +324,7 @@ func (cn *Controller) getItineraryDestination(c *fiber.Ctx) error {
 
 }
 
-func (cn *Controller) getChat(c *fiber.Ctx) error {
+func (cn *Controller) getChats(c *fiber.Ctx) error {
 
 	chatList, err := cn.usecase.GetChat()
 

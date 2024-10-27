@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Main from "../layouts/Main"
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate()
 
   const handleSearch = async (e) => {
     const searchTerm = e.target.value;
@@ -13,8 +15,9 @@ function Home() {
 
     if (searchTerm.length > 2) { 
       try {
-        const response = await fetch(`https://api.example.com/search?query=${searchTerm}`);
+        const response = await fetch(`http://localhost:8000/api/destinations?search=${searchTerm}`);
         const data = await response.json();
+        console.log(data)
         setResults(data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -25,8 +28,9 @@ function Home() {
   };
 
   const handleSelect = (item) => {
-    setQuery(item); 
-    setShowDropdown(false);
+    // setQuery(item); 
+    navigate("/")
+    // setShowDropdown(false);
   };
 
   return (
@@ -41,7 +45,7 @@ function Home() {
             <div className="absolute top-10 bg-white p-2 rounded border w-full ">
               {
                 results.map(item => (
-                  <input type="button" value={item} key={item} className="py-2 px-1 cursor-pointer w-full text-left" onClick={() => handleSelect(item)} />
+                  <input type="button" value={item.name} key={item.ID} className="py-2 px-1 cursor-pointer w-full text-left" onClick={() => handleSelect(item.name)} />
                 ))
               }
             </div>
