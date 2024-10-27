@@ -56,6 +56,35 @@ func (u *Usecase) GenerateItinerary(activity,trip string) (data []GenerateItiner
 	return
 }
 
+func (u *Usecase) GenerateItineraryWithDestination(destination,trip string) (data []GenerateItinerarySchema, err error) {
+	table := model.Destination{}
+	destinations := []map[string]any{}
+	u.db.Select(table.ColumnName("id"), table.ColumnName("name"), table.ColumnName("type")).
+		Model(table).
+		Joins(`JOIN "destination_parameters" dp1 ON `+table.ColumnName("id")+` = dp1.destination_id AND dp1."name" = ?`, destination).
+		Joins(`JOIN "destination_parameters" dp2 ON `+table.ColumnName("id")+` = dp2.destination_id AND dp2."name" = ?`, trip).
+		Find(&destinations)
+
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	r.Shuffle(len(destinations), func(i, j int) { destinations[i], destinations[j] = destinations[j], destinations[i] })
+
+	var result, _ = u.ai.GenerateCustom(0.5, 700, GenerateItinerary(destinations, destination, trip))
+	cleanedInput := strings.Trim(result, "```json")
+	cleanedInput = strings.Trim(cleanedInput, "```")
+
+	data = make([]GenerateItinerarySchema,0)
+	json.Unmarshal([]byte(cleanedInput), &data)
+
+	// using index looping to modify the actual value
+	for index1:=0;index1<len(data);index1++{
+		for index2:=0;index2<len(data[index1].DestinationIDs);index2++{
+			destination1,_ := u.GetDestinationById(data[index1].DestinationIDs[index2])
+			data[index1].Destinations = append(data[index1].Destinations, destination1)
+		}
+	}
+	return
+}
+
 func (u *Usecase) GetItinerary() (data []model.Itinerary, err error) {
 	data = make([]model.Itinerary, 0)
 

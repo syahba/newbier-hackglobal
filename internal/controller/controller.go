@@ -52,6 +52,7 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Post("/chat", c.postChat)
 	api.Get("/itinerary", c.getItineraries)
 	api.Get("/generate-itinerary", c.generateItinerary)
+	api.Get("/generate-itinerary/destination", c.generateItineraryWithDestination)
 	api.Get("/destinations", c.getDestinations)
 	api.Get("/destinations/:id", c.getDestinationById)
 	api.Get("/itinerary/destinations", c.getItineraryDestination)
@@ -334,6 +335,21 @@ func (cn *Controller) generateItinerary(c *fiber.Ctx) error {
 	}
 
 	data, _ := cn.usecase.GenerateItinerary(activity,trip)
+
+	return c.Status(200).JSON(data)
+}
+
+func (cn *Controller) generateItineraryWithDestination(c *fiber.Ctx) error {
+	destination := c.Query("destination")
+	trip := c.Query("trip")
+
+	if destination == "_" || len(destination) == 0 || trip == "_" || len(trip) == 0{
+		return c.Status(400).JSON(fiber.Map{
+			"message":"query with field 'destination' and 'trip' can't empty",
+		})
+	}
+
+	data, _ := cn.usecase.GenerateItineraryWithDestination(destination,trip)
 
 	return c.Status(200).JSON(data)
 }
