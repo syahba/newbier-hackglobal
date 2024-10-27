@@ -6,6 +6,8 @@ import HeaderLogo from "../components/headers/HeaderLogo"
 import Main from "../layouts/Main"
 
 function Preference2() {
+  
+
   return (
     <Main>
       <div class=" w-full h-2/5 bg-preference2 bg-contain bg-center bg-no-repeat">

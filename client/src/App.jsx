@@ -11,6 +11,8 @@ import Bridging1 from './pages/Bridging1';
 import Bridging3 from './pages/Bridging3';
 import Bridging2 from './pages/Bridging2';
 import ItineraryPage from './pages/Itinerary';
+import Market from './pages/Market';
+import Transaction from './pages/Transaction';
 
 function App() {
 
@@ -27,6 +29,8 @@ function App() {
         <Route path="/bridging/2" element={<Bridging2 />} />
         <Route path="/bridging/3" element={<Bridging3 />} />
         <Route path="/itinerary" element={<ItineraryPage />} />
+        <Route path="/market" element={<Market />} />
+        <Route path="/transaction" element={<Transaction />} />
         {/* Route 404 untuk halaman yang tidak ditemukan */}
         <Route path="*" element={<NotFound />} />
       </Routes>
