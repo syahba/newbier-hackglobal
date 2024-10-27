@@ -34,6 +34,6 @@ func main() {
 	app.Static("/public", "./public")
 	controller.NewController(app, db, ai)
 
-	app.Listen("localhost:" + cfg.Port)
+	app.Listen("0.0.0.0:" + cfg.Port)
 
 }

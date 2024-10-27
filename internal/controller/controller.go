@@ -324,11 +324,18 @@ func (cn *Controller) getDestinationById(c *fiber.Ctx) error {
 
 
 func (cn *Controller) generateItinerary(c *fiber.Ctx) error {
+	activity := c.Query("activity")
+	trip := c.Query("trip")
 
-	data, _ := cn.usecase.GenerateItinerary()
+	if activity == "_" || len(activity) == 0 || trip == "_" || len(trip) == 0{
+		return c.Status(400).JSON(fiber.Map{
+			"message":"query with field 'activity' and 'trip' can't empty",
+		})
+	}
+
+	data, _ := cn.usecase.GenerateItinerary(activity,trip)
 
 	return c.Status(200).JSON(data)
-
 }
 
 func (cn *Controller) getItineraryDestination(c *fiber.Ctx) error {

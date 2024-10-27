@@ -27,10 +27,7 @@ func (u *Usecase) GetUsecase() string {
 	return "Hello World"
 }
 
-func (u *Usecase) GenerateItinerary() (data []model.Destination, err error) {
-	activity := "sightseeing"
-	trip := "budget"
-
+func (u *Usecase) GenerateItinerary(activity,trip string) (data []GenerateItinerarySchema, err error) {
 	table := model.Destination{}
 	destinations := []map[string]any{}
 	u.db.Select(table.ColumnName("id"), table.ColumnName("name"), table.ColumnName("type")).
@@ -46,10 +43,16 @@ func (u *Usecase) GenerateItinerary() (data []model.Destination, err error) {
 	cleanedInput := strings.Trim(result, "```json")
 	cleanedInput = strings.Trim(cleanedInput, "```")
 
-	var dataItinerary []GenerateItinerarySchema
-	json.Unmarshal([]byte(cleanedInput), &dataItinerary)
+	data = make([]GenerateItinerarySchema,0)
+	json.Unmarshal([]byte(cleanedInput), &data)
 
-	fmt.Println(dataItinerary)
+	// using index looping to modify the actual value
+	for index1:=0;index1<len(data);index1++{
+		for index2:=0;index2<len(data[index1].DestinationIDs);index2++{
+			destination,_ := u.GetDestinationById(data[index1].DestinationIDs[index2])
+			data[index1].Destinations = append(data[index1].Destinations, destination)
+		}
+	}
 	return
 }
 
