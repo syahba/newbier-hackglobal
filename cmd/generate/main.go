@@ -29,27 +29,26 @@ func main() {
 	}
 	ai := chatgpt.GetModel(cfg.ChatGPTKey)
 
-	// var (
-	// 	activity = "sightseeing"
-	// 	trip     = "budget"
-	// )
+	var destinations = make([]model.Destination, 0)
+	db.Limit(100).Find(&destinations)
 
-	// table := model.Destination{}
-	// destinations := []map[string]any{}
-	// db.Select(table.ColumnName("id"), table.ColumnName("name"), table.ColumnName("type")).
-	// 	Model(table).
-	// 	Joins(`JOIN "destination_parameters" dp1 ON `+table.ColumnName("id")+` = dp1.destination_id AND dp1."name" = ?`, activity).
-	// 	Joins(`JOIN "destination_parameters" dp2 ON `+table.ColumnName("id")+` = dp2.destination_id AND dp2."name" = ?`, trip).
-	// 	Find(&destinations)
+	var tempDestination = []map[string]any{}
+	for _, elm := range destinations {
+		tempDestination = append(tempDestination, map[string]any{
+			"id":      elm.ID,
+			"name":    elm.Name,
+			"address": elm.Address,
+		})
+	}
 
-	// r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	// r.Shuffle(len(destinations), func(i, j int) { destinations[i], destinations[j] = destinations[j], destinations[i] })
+	bd, _ := json.Marshal(tempDestination)
 
-	// result, _ := ai.GenerateCustom(0.5, 700, schema.GenerateItinerary(destinations, activity, trip))
-	// fmt.Println(result)
+	result, _ := ai.Generate(schema.GenerateItineraryMessage(string(bd)))
 
-	generateJsonSeeder[schema.DestinationDetail](ai, db, schema.DetailDestination, "destination-additional/destination_detail2")
-	// generateJsonSeeder[schema.DestinationAdditional](ai, db, schema.AdditionalDestination, "destination-additional/destination_additional2")
+	fmt.Println(result)
+
+	// generateJsonSeeder[schema.DestinationDetail](ai, db, schema.DetailDestination, "destination-additional/destination_detail")
+	// generateJsonSeeder[schema.DestinationAdditional](ai, db, schema.AdditionalDestination, "destination-additional/destination_additional")
 }
 
 type FuncMessage func(destinationName string) []openai.ChatCompletionMessage
