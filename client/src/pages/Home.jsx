@@ -1,6 +1,8 @@
+import Main from "../layouts/Main"
+
 function Home() {
   return (
-    <>
+    <Main>
     <div className="px-6 mt-12 mb-4">
       <h1 className="text-2xl font-bold">Hi, <span className="text-blue">User</span>!</h1>
       <h5 className="mb-4 text-sm font-bold">Where would you like to go today?</h5>
@@ -13,7 +15,7 @@ function Home() {
     <div className="absolute bottom-0 w-96 h-[449px]">
       <div className="bg-home h-full w-96 bg-contain bg-center bg-no-repeat"></div>
     </div>
-  </>
+    </Main>
   )
 }
 

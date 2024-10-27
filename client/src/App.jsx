@@ -12,8 +12,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Index />} />
-        <Route path="/home" element={<Main><Home /></Main>} />
-        <Route path="/test" element={<CardProfile></CardProfile>} />
+        <Route path="/test" element={<CardProfile />} />
+        <Route path="/home" element={<Home />} />
         {/* Route 404 untuk halaman yang tidak ditemukan */}
         <Route path="*" element={<NotFound />} />
       </Routes>
