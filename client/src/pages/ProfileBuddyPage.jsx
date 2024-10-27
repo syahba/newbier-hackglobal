@@ -1,6 +1,7 @@
 import FieldBuddy from "../components/forms/FieldBuddy";
 import FieldDescription from "../components/forms/FieldDescription";
 import HeaderLogo from "../components/headers/HeaderLogo";
+import ButtonAction from "../components/buttons/ButtonAction";
 
 function ProfileBuddyPage() {
   return (
@@ -12,7 +13,7 @@ function ProfileBuddyPage() {
 
         <FieldDescription></FieldDescription>
 
-    {/* {{include "components/button"}} */}
+        <ButtonAction text={"Confirm"}></ButtonAction>
       </div>
 
       <div class="bg-buddy2 h-[460px] w-96 bg-contain bg-center bg-no-repeat absolute bottom-0"></div>

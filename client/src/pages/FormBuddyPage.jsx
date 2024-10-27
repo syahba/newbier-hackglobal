@@ -1,3 +1,4 @@
+import ButtonAction from "../components/buttons/ButtonAction";
 import FieldBuddy from "../components/forms/FieldBuddy";
 import FieldDescription from "../components/forms/FieldDescription";
 import HeaderLogo from "../components/headers/HeaderLogo";
@@ -13,10 +14,7 @@ function FormBuddyPage() {
         <div id="form-buddy" class="">
           <FieldDescription></FieldDescription>
 
-          {/* perlu panggil component */}
-          <button class="mt-2 rounded-lg w-fit self-center bg-yellow px-5 py-3 shadow-lg text-sm hover:bg-blue">
-            Create
-          </button>
+          <ButtonAction text={"Create"}></ButtonAction>
         </div>
       </div>
 
