@@ -35,3 +35,23 @@ func (model *Model) Generate(messages []openai.ChatCompletionMessage) (string, e
 
 	return resp.Choices[0].Message.Content, nil
 }
+
+func (model *Model) GenerateCustom(temperature float32, token int, messages []openai.ChatCompletionMessage) (string, error) {
+	client := model.client
+	resp, err := client.CreateChatCompletion(
+		context.Background(),
+		openai.ChatCompletionRequest{
+			Model:       openai.GPT4oMini,
+			Temperature: temperature,
+			Messages:    messages,
+			MaxTokens:   token,
+		},
+	)
+
+	if err != nil {
+		fmt.Printf("ChatCompletion error: %v\n", err)
+		return "", err
+	}
+
+	return resp.Choices[0].Message.Content, nil
+}
