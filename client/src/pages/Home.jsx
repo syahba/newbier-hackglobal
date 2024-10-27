@@ -1,12 +1,54 @@
+import { useState } from "react";
 import Main from "../layouts/Main"
 
 function Home() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const handleSearch = async (e) => {
+    const searchTerm = e.target.value;
+    setQuery(searchTerm);
+    setShowDropdown(true);
+
+    if (searchTerm.length > 2) { 
+      try {
+        const response = await fetch(`https://api.example.com/search?query=${searchTerm}`);
+        const data = await response.json();
+        setResults(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    } else {
+      setResults([]);
+    }
+  };
+
+  const handleSelect = (item) => {
+    setQuery(item); 
+    setShowDropdown(false);
+  };
+
   return (
     <Main>
     <div className="px-6 mt-12 mb-4">
       <h1 className="text-2xl font-bold">Hi, <span className="text-blue">User</span>!</h1>
       <h5 className="mb-4 text-sm font-bold">Where would you like to go today?</h5>
-      <input type="text" className="mb-4 h-8 w-full px-3 shadow-md" placeholder="Enter a destination" />
+      <div className="relative ">
+        <input type="text"  className="mb-4 h-8 w-full px-3 shadow-md" value={query} onChange={handleSearch} placeholder="Enter a destination" />
+        {
+          showDropdown && results.length > 0 && (
+            <div className="absolute top-10 bg-white p-2 rounded border w-full ">
+              {
+                results.map(item => (
+                  <input type="button" value={item} key={item} className="py-2 px-1 cursor-pointer w-full text-left" onClick={() => handleSelect(item)} />
+                ))
+              }
+            </div>
+          )
+        }
+      </div>
+
       <div className="flex w-full gap-4">
         <button className="rounded border border-blue px-5 py-2 shadow-md">I’m not sure</button>
         <button className="rounded border flex-auto border-yellow px-5 py-2 shadow-md">I’d like to travel with a buddy</button>
