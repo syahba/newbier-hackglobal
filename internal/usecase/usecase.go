@@ -68,7 +68,7 @@ func (u *Usecase) GenerateItineraryWithDestination(destination,trip string) (dat
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	r.Shuffle(len(destinations), func(i, j int) { destinations[i], destinations[j] = destinations[j], destinations[i] })
 
-	var result, _ = u.ai.GenerateCustom(0.5, 700, GenerateItinerary(destinations, destination, trip))
+	var result, _ = u.ai.GenerateCustom(0.5, 700, GenerateItineraryWithDestination(destinations, destination, trip))
 	cleanedInput := strings.Trim(result, "```json")
 	cleanedInput = strings.Trim(cleanedInput, "```")
 

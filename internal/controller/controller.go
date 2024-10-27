@@ -51,8 +51,8 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Get("/chat", c.getChat)
 	api.Post("/chat", c.postChat)
 	api.Get("/itinerary", c.getItineraries)
-	api.Get("/generate-itinerary", c.generateItinerary)
 	api.Get("/generate-itinerary/destination", c.generateItineraryWithDestination)
+	api.Get("/generate-itinerary", c.generateItinerary)
 	api.Get("/destinations", c.getDestinations)
 	api.Get("/destinations/:id", c.getDestinationById)
 	api.Get("/itinerary/destinations", c.getItineraryDestination)
@@ -305,36 +305,35 @@ func (cn *Controller) getDestinations(c *fiber.Ctx) error {
 }
 
 func (cn *Controller) getDestinationById(c *fiber.Ctx) error {
-	id,err := strconv.Atoi(c.Params("id"))
+	id, err := strconv.Atoi(c.Params("id"))
 	if err != nil {
 		return c.Status(400).JSON(fiber.Map{
-			"message":"params id must number",
+			"message": "params id must number",
 		})
 	}
 
-	data,err := cn.usecase.GetDestinationById(id)
+	data, err := cn.usecase.GetDestinationById(id)
 
-	if err != nil || data.ID == 0{
+	if err != nil || data.ID == 0 {
 		return c.Status(404).JSON(fiber.Map{
-			"message":fmt.Sprintf("Destination with id %v was not found",id),
+			"message": fmt.Sprintf("Destination with id %v was not found", id),
 		})
 	}
-	
+
 	return c.Status(200).JSON(data)
 }
-
 
 func (cn *Controller) generateItinerary(c *fiber.Ctx) error {
 	activity := c.Query("activity")
 	trip := c.Query("trip")
 
-	if activity == "_" || len(activity) == 0 || trip == "_" || len(trip) == 0{
+	if activity == "_" || len(activity) == 0 || trip == "_" || len(trip) == 0 {
 		return c.Status(400).JSON(fiber.Map{
-			"message":"query with field 'activity' and 'trip' can't empty",
+			"message": "query with field 'activity' and 'trip' can't empty",
 		})
 	}
 
-	data, _ := cn.usecase.GenerateItinerary(activity,trip)
+	data, _ := cn.usecase.GenerateItinerary(activity, trip)
 
 	return c.Status(200).JSON(data)
 }
@@ -343,13 +342,13 @@ func (cn *Controller) generateItineraryWithDestination(c *fiber.Ctx) error {
 	destination := c.Query("destination")
 	trip := c.Query("trip")
 
-	if destination == "_" || len(destination) == 0 || trip == "_" || len(trip) == 0{
+	if destination == "_" || len(destination) == 0 || trip == "_" || len(trip) == 0 {
 		return c.Status(400).JSON(fiber.Map{
-			"message":"query with field 'destination' and 'trip' can't empty",
+			"message": "query with field 'destination' and 'trip' can't empty",
 		})
 	}
 
-	data, _ := cn.usecase.GenerateItineraryWithDestination(destination,trip)
+	data, _ := cn.usecase.GenerateItineraryWithDestination(destination, trip)
 
 	return c.Status(200).JSON(data)
 }
