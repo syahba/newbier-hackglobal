@@ -19,21 +19,38 @@ func (User) TableName() string {
 
 type Destination struct {
 	gorm.Model
-	Name    string `json:"name"`
-	Type    string `json:"type"`
-	Star    string `json:"star"`
-	Address string `json:"address"`
-	GmapUrl string `json:"gmap_url"`
-	Image   string `json:"image"`
+	Name        string   `json:"name"`
+	Type        string   `json:"type"`
+	Star        string   `json:"star"`
+	Address     string   `json:"address"`
+	GmapUrl     string   `json:"gmap_url"`
+	Image       string   `json:"image"`
+	Description string   `json:"description"`
+	BestProduct []string `gorm:"serializer:json" json:"best_product"`
 }
 
 func (Destination) TableName() string {
 	return "destinations"
 }
 
+func (Destination) ColumnName(column string) string {
+	return "destinations." + column
+}
+
+type DestinationParameter struct {
+	gorm.Model
+	DestinationID int    `json:"destination_id"`
+	Type          string `json:"type"`
+	Name          string `json:"name"`
+}
+
+func (DestinationParameter) TableName() string {
+	return "destination_parameters"
+}
+
 type DestinationProduct struct {
 	gorm.Model
-	DestinationID string  `json:"destination_id"` // string ??
+	DestinationID int     `json:"destination_id"`
 	Name          string  `json:"name"`
 	Price         float64 `json:"price"`
 	Unit          string  `json:"unit"`
@@ -61,10 +78,10 @@ func (Itinerary) TableName() string {
 
 type ItineraryDestination struct {
 	gorm.Model
-	ItineraryID   string      `json:"itinerary"`
-	DestinationID string      `json:"destination_id"`
+	ItineraryID   int         `json:"itinerary"`
+	DestinationID int         `json:"destination_id"`
 	Time          string      `json:"time"`
-	Destination   Destination `gorm:"-:migration;references:DestinationID" json:"destination"`
+	Destination   Destination `gorm:"foreignKey:DestinationID;references:ID" json:"destination"`
 }
 
 func (ItineraryDestination) TableName() string {
@@ -73,10 +90,10 @@ func (ItineraryDestination) TableName() string {
 
 type ItineraryMarket struct {
 	gorm.Model
-	ItineraryID          string             `json:"itinerary"`
-	DestinationProductID string             `json:"destination_product_id"`
+	ItineraryID          int                `json:"itinerary_id"`
+	DestinationProductID int                `json:"destination_product_id"`
 	Amount               int                `json:"amount"`
-	DestinationProduct   DestinationProduct `gorm:"-:migration;references:DestinationProductID" json:"destination_product"`
+	DestinationProduct   DestinationProduct `gorm:"foreignKey:DestinationProductID;references:ID" json:"destination_product"`
 }
 
 func (ItineraryMarket) TableName() string {
@@ -85,14 +102,14 @@ func (ItineraryMarket) TableName() string {
 
 type ItineraryBuddy struct {
 	gorm.Model
-	ItineraryID string `json:"itinerary_id"`
-	UserID      string `json:"user_id"`
-	ChatRoomID  string `json:"chat_room_id"`
+	ItineraryID int    `json:"itinerary_id"`
+	UserID      int    `json:"user_id"`
+	ChatRoomID  int    `json:"chat_room_id"`
 	Description string `json:"description"`
 	CreatedBy   string `json:"created_by"`
 	IsAccept    bool   `json:"is_accept"`
-	User        User   `gorm:"-:migration;references:UserID" json:"user"`
-	CreateBy    User   `gorm:"-:migration;CreatedBy" json:"create_by"`
+	User        User   `gorm:"foreignKey:UserID;references:ID" json:"user"`
+	CreateBy    User   `gorm:"foreignKey:CreatedBy;references:ID" json:"create_by"`
 }
 
 func (ItineraryBuddy) TableName() string {
