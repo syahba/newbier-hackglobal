@@ -1,4 +1,13 @@
-function FieldDescription() {
+import { useEffect, useState } from "react";
+
+function FieldDescription({setState}) {
+  const [description, setDescription] = useState()
+
+  useEffect(()=> {
+    setState(description)
+  }, [description])
+  
+
   return (
     <div>
       <h5 className="mb-1 text-sm font-bold">Tell us a bit about yourself!</h5>
@@ -10,7 +19,9 @@ function FieldDescription() {
         name="desc"
         id="desc"
         placeholder="Write your interests"
-        className="h-32 w-full rounded-lg p-3 text-sm shadow-lg outline-blue"
+        value={description}
+        onChange={e => setDescription(e.target.value)}
+        className="w-full h-32 p-3 text-sm rounded-lg shadow-lg outline-blue"
       ></textarea>
     </div>
   );

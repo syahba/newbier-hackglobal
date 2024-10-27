@@ -1,4 +1,8 @@
-function FieldActivity() {
+function FieldActivity({parentStateSetter}) {
+  const handleActivityChange = (event) => {
+    parentStateSetter(event.target.value);
+  };
+  
   return (
     <div>
       <h5 className="mb-4 text-sm font-bold">
@@ -10,12 +14,14 @@ function FieldActivity() {
           <input
             type="radio"
             name="activity"
+            value="sightseeing"
             id="activity-sightseeing"
-            className="peer hidden"
+            className="hidden peer"
+            onChange={handleActivityChange}
           />
           <label
             htmlFor="activity-sightseeing"
-            className="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white"
+            className="inline-flex px-4 py-3 border rounded-lg border-blue peer-checked:bg-blue peer-checked:text-white"
           >
             Sightseeing
           </label>
@@ -24,12 +30,14 @@ function FieldActivity() {
           <input
             type="radio"
             name="activity"
+            value="culinary_experiences"
             id="activity-culinary-experiences"
-            className="peer hidden"
+            className="hidden peer"
+            onChange={handleActivityChange}
           />
           <label
             htmlFor="activity-culinary-experiences"
-            className="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white"
+            className="inline-flex px-4 py-3 border rounded-lg border-blue peer-checked:bg-blue peer-checked:text-white"
           >
             Culinary Experiences
           </label>
@@ -38,12 +46,14 @@ function FieldActivity() {
           <input
             type="radio"
             name="activity"
+            value="outdoor_activities"
             id="activity-outdoor-activities"
-            className="peer hidden"
+            className="hidden peer"
+            onChange={handleActivityChange}
           />
           <label
             htmlFor="activity-outdoor-activities"
-            className="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white"
+            className="inline-flex px-4 py-3 border rounded-lg border-blue peer-checked:bg-blue peer-checked:text-white"
           >
             Outdoor Activities
           </label>
@@ -52,12 +62,14 @@ function FieldActivity() {
           <input
             type="radio"
             name="activity"
+            value="adventure"
             id="activity-adventure"
-            className="peer hidden"
+            className="hidden peer"
+            onChange={handleActivityChange}
           />
           <label
             htmlFor="activity-adventure"
-            className="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white"
+            className="inline-flex px-4 py-3 border rounded-lg border-blue peer-checked:bg-blue peer-checked:text-white"
           >
             Adventure
           </label>
@@ -66,12 +78,14 @@ function FieldActivity() {
           <input
             type="radio"
             name="activity"
+            value="cultural_experiences"
             id="activity-cultural-experiences"
-            className="peer hidden"
+            className="hidden peer"
+            onChange={handleActivityChange}
           />
           <label
             htmlFor="activity-cultural-experiences"
-            className="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white"
+            className="inline-flex px-4 py-3 border rounded-lg border-blue peer-checked:bg-blue peer-checked:text-white"
           >
             Cultural Experiences
           </label>
@@ -80,12 +94,14 @@ function FieldActivity() {
           <input
             type="radio"
             name="activity"
+            value="shopping"
             id="activity-shopping"
-            className="peer hidden"
+            className="hidden peer"
+            onChange={handleActivityChange}
           />
           <label
             htmlFor="activity-shopping"
-            className="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white"
+            className="inline-flex px-4 py-3 border rounded-lg border-blue peer-checked:bg-blue peer-checked:text-white"
           >
             Shopping
           </label>

@@ -1,7 +1,7 @@
-function ButtonAction({text}) {
+function ButtonAction({text, onClick}) {
   return (
     <div>
-      <button className="rounded-lg w-fit self-center bg-yellow px-5 py-3 shadow-lg text-sm hover:bg-blue">{text}</button>
+      <button className="self-center px-5 py-3 text-sm rounded-lg shadow-lg w-fit bg-yellow hover:bg-blue" onClick={() => onClick && onClick()}>{text}</button>
     </div>
   );
 }

@@ -1,0 +1,71 @@
+import ButtonAction from "../components/buttons/ButtonAction"
+import HeaderDefault from "../components/headers/HeaderDeafult"
+import Itinerary from "../components/itineraries/Itinerary"
+import Scroll from "../layouts/Scroll"
+
+function HomeItinerary () {
+
+  return (
+    <Scroll>
+      <HeaderDefault />
+
+      <div class="mb-4 mt-2 flex flex-col gap-4 px-6">
+        <div>
+          <h1 class="mb-2 text-2xl font-bold">Travel Buddy</h1>
+          <p class="">Waiting for a match...</p>
+          <div class="hidden relative rounded bg-blue shadow-xl">
+            <div class="flex flex-col gap-2 px-3 pb-6 pt-4 text-sm text-white">
+              <h5 class="font-bold">User2 would like to join your travel!</h5>
+              <div class="flex gap-8">
+                <p>Thailand</p>
+                <p>23</p>
+              </div>
+              <p>I love thrilling roller coasters and spooky attractions! I’m excited to conquer every ride at the USS and experience the chills at the haunted maze!</p>
+            </div>
+            <div class="absolute -bottom-5 right-4">
+              <div class="flex gap-3">
+                <button class="h-11 w-11 rounded-full bg-yellow"></button>
+                <button class="h-11 w-11 rounded-full border-2 border-yellow bg-white"></button>
+              </div>
+            </div>
+          </div>
+          <div class="hidden relative rounded bg-blue shadow-xl">
+            <div class="flex flex-col gap-2 px-3 pb-6 pt-4 text-sm text-white">
+              <div class="flex gap-8">
+                <p>User2</p>
+                <p>Thailand</p>
+                <p>23</p>
+              </div>
+              <p>I love thrilling roller coasters and spooky attractions! I’m excited to conquer every ride at the USS and experience the chills at the haunted maze!</p>
+            </div>
+            <div class="absolute -bottom-5 right-4">
+              <div class="flex gap-3">
+                <button class="h-11 w-11 rounded-full bg-yellow"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h1 class="mb-2 text-2xl font-bold">Product</h1>
+          <a href="">
+            <div class="w-fit rounded border border-blue px-4 py-2">
+              <p>See in market</p>
+            </div>
+          </a>
+        </div>
+        
+        <div>
+          <h1 class="mb-2 text-2xl font-bold">Itinerary</h1>
+
+          <Itinerary data={[]} />
+        </div>
+
+        <div class="flex h-full w-full items-center justify-center py-4">
+          <ButtonAction text="completed" />
+        </div>
+      </div>
+    </Scroll>
+  )
+}
+
+export default HomeItinerary

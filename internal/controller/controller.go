@@ -48,7 +48,7 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 
 	// ROUTE: API
 	api := app.Group("/api")
-	api.Get("/chat", c.getChat)
+	api.Get("/chat", c.getChats)
 	api.Post("/chat", c.postChat)
 	api.Get("/itinerary", c.getItineraries)
 	api.Get("/generate-itinerary/destination", c.generateItineraryWithDestination)
@@ -369,13 +369,7 @@ func (cn *Controller) getItineraryDestination(c *fiber.Ctx) error {
 
 func (cn *Controller) getChats(c *fiber.Ctx) error {
 
-	chatList, err := cn.usecase.GetChat()
-
-	if err != nil || len(chatList) == 0 {
-		return c.Status(404).JSON(fiber.Map{
-			"message": "No chat list Records",
-		})
-	}
+	chatList, _ := cn.usecase.GetChat()
 
 	return c.Status(200).JSON(chatList)
 }
