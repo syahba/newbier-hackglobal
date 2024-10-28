@@ -143,7 +143,7 @@ type ItineraryRequest struct {
 }
 
 func (ItineraryRequest) TableName() string {
-	return "Itinerary_requests"
+	return "itinerary_requests"
 }
 
 type ChatRoom struct {

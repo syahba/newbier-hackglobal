@@ -52,18 +52,26 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Post("/chat", c.postChat)
 	api.Get("/itinerary", c.getItineraries)
 	api.Get("/itinerary/:id", c.getItineraryById)
-	api.Post("/general-matter",c.generalMatter)
+	api.Post("/general-matter", c.generalMatter)
 	api.Get("/generate-itinerary/destination", c.generateItineraryWithDestination)
 	api.Get("/generate-itinerary", c.generateItinerary)
 	api.Get("/destinations", c.getDestinations)
 	api.Get("/destinations/:id", c.getDestinationById)
-	api.Get("/destinations/itinerary/:id",c.GetDestinationByItineraryId)
+	api.Get("/destinations/itinerary/:id", c.GetDestinationByItineraryId)
 	api.Get("/itinerary/destinations", c.getItineraryDestination)
 	api.Post("/itinerary/buddy", c.postItineraryBuddy)
 	api.Put("/itinerary/buddy", c.putItineraryBuddy)
 	api.Post("/itinerary/market", c.postItternaryMarket)
 	api.Get("/itinerary/market/:id", c.getItternaryMarketByItternaryId)
+
+	api.Get("/itinerary/buddy/destination", c.getItineraryDestinations)
+	api.Get("/itinerary/buddy/finder", c.itineraryFinder)
 	api.Get("/itinerary/:id", c.getItineraryById)
+
+	api.Post("/itinerary/buddy/finder", c.itineraryFinder)
+	api.Post("/itinerary/buddy/join", c.itineraryJoin)
+	api.Get("/itinerary/buddy/join/:id", c.getItineraryJoin)
+
 	// 404 not found
 	app.Use(func(c *fiber.Ctx) error {
 		return c.Status(404).JSON(fiber.Map{
@@ -234,26 +242,26 @@ func (cn *Controller) getBuddyProfile(c *fiber.Ctx) error {
 
 // API
 
-func (cn *Controller) generalMatter(c *fiber.Ctx) error{
+func (cn *Controller) generalMatter(c *fiber.Ctx) error {
 	var body internal_model.Combo
 
-	if err := c.BodyParser(&body); err != nil{
+	if err := c.BodyParser(&body); err != nil {
 		return c.Status(400).JSON(fiber.Map{
-			"message":"Can't parse body",
+			"message": "Can't parse body",
 		})
 	}
-	
+
 	//fmt.Println(body)
 
-	if len(body.Trip) == 0 || body.Trip == " " || body.User_id <= 0|| len(body.Itinerary) == 0{
+	if len(body.Trip) == 0 || body.Trip == " " || body.User_id <= 0 || len(body.Itinerary) == 0 {
 		//fmt.Println(len(body.Trip) == 0, body.Trip == " " , body.User_id <= 0 , len(body.Itinerary) == 0)
 		return c.Status(400).JSON(fiber.Map{
-			"message":"field trip, userId or itinerary can't empty, zero or negative",
+			"message": "field trip, userId or itinerary can't empty, zero or negative",
 		})
 	}
 
 	body.IsBuddy = true
-	if len(body.Destination) == 0{
+	if len(body.Destination) == 0 {
 		body.Destination = "empty"
 	}
 
@@ -265,14 +273,14 @@ func (cn *Controller) generalMatter(c *fiber.Ctx) error{
 		body.Description = "empty"
 	}
 
-	if err := cn.usecase.CreateItineraryAndItineraryDestinationAndBuddy(body); err != nil{
+	if err := cn.usecase.CreateItineraryAndItineraryDestinationAndBuddy(body); err != nil {
 		return c.Status(500).JSON(fiber.Map{
-			"message":"something went wrong, cant create itinerary, itineraryDestination and itineraryBuddy",
+			"message": "something went wrong, cant create itinerary, itineraryDestination and itineraryBuddy",
 		})
 	}
 
 	return c.Status(201).JSON(fiber.Map{
-		"message":"successfully create new itinerary, itineraryDestination and itineraryBuddy",
+		"message": "successfully create new itinerary, itineraryDestination and itineraryBuddy",
 	})
 }
 
@@ -299,13 +307,13 @@ func (cn *Controller) getItineraries(c *fiber.Ctx) error {
 
 func (cn *Controller) getItineraryById(c *fiber.Ctx) error {
 	id, err := strconv.Atoi(c.Params("id"))
-	if err != nil{
+	if err != nil {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "id must be number",
 		})
 	}
 
-	if id <= 0{
+	if id <= 0 {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "id can't zero or negative",
 		})
@@ -321,7 +329,7 @@ func (cn *Controller) getItineraryById(c *fiber.Ctx) error {
 	var itinerary internal_model.ItineraryResponse
 
 	for _, element := range itineraryList {
-		if element.ID == uint(id){
+		if element.ID == uint(id) {
 			itinerary.ItineraryID = int(element.ID)
 			itinerary.ItineraryTime = groupDestinationsByTime(element.ItineraryDestinations)
 			break
@@ -403,8 +411,8 @@ func (cn *Controller) getDestinationById(c *fiber.Ctx) error {
 }
 
 func (cn *Controller) GetDestinationByItineraryId(c *fiber.Ctx) error {
-	id,err := strconv.Atoi(c.Params("id"))
-	if err != nil{
+	id, err := strconv.Atoi(c.Params("id"))
+	if err != nil {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "params id must number",
 		})
@@ -416,8 +424,8 @@ func (cn *Controller) GetDestinationByItineraryId(c *fiber.Ctx) error {
 		})
 	}
 
-	data,err := cn.usecase.GetDestinationByItineraryId(id)
-	if err != nil{
+	data, err := cn.usecase.GetDestinationByItineraryId(id)
+	if err != nil {
 		return c.Status(500).JSON(fiber.Map{
 			"message": "can't find",
 		})
@@ -649,4 +657,37 @@ func (cn *Controller) getItternaryMarketByItternaryId(c *fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON(ItternaryMarketList)
+}
+
+func (cn *Controller) getItineraryDestinations(c *fiber.Ctx) error {
+	var data = new(internal_model.ItineraryFinderRequest)
+	data.Activity = c.Query("activity")
+	data.Date = c.Query("date")
+	data.Trip = c.Query("trip")
+
+	res := cn.usecase.GetItineraryDestinations(data)
+
+	return c.Status(200).JSON(res)
+}
+
+func (cn *Controller) itineraryJoin(c *fiber.Ctx) error {
+	var data = new(model.ItineraryRequest)
+	c.BodyParser(data)
+	cn.usecase.ItineraryJoin(data)
+
+	return c.Status(200).JSON(data)
+}
+
+func (cn *Controller) itineraryFinder(c *fiber.Ctx) error {
+	var data = new(model.ItineraryFinder)
+	c.BodyParser(data)
+	res := cn.usecase.ItineraryFinder(data)
+
+	return c.Status(200).JSON(res)
+}
+
+func (cn *Controller) getItineraryJoin(c *fiber.Ctx) error {
+	ID, _ := strconv.Atoi(c.Params("id"))
+	data := cn.usecase.GetItineraryJoin(ID)
+	return c.Status(200).JSON(data)
 }
