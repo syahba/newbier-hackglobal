@@ -6,7 +6,7 @@ function Itinerary({ data, setId }) {
       {data.map((elm) => (
         <div className="mt-3" key={elm.time}>
           <h5 className="text-base font-bold mb-2">
-            {elm.time.charAt(0).toUpperCase() + elm.time.slice(1)}
+            {String(elm.time).charAt(0).toUpperCase() + (elm.time).slice(1)}
           </h5>
           <Destination data={elm} setId={setId} />
         </div>

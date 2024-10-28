@@ -27,13 +27,12 @@ function ItineraryPage() {
         const dest = itinerary[i].Destinations.find(v => v.ID === id);
         if (dest) {
           item = dest;
-          itinerary[i].Destinations = itinerary[i].Destinations.filter(v => v.ID !== dest.ID);
-          console.log(itinerary);
-          // const newDest = itinerary[i].Destinations.filter(v => v.ID !== dest.ID);
-          // console.log(newDest);
-          // delete itinerary[i];
-          setItinerary(itinerary);
-          // itinerary[i].Destinations.splice(item, 1);
+          // set new data
+          const temp = itinerary.map(v => {
+            v.Destinations = v.Destinations.filter(val => val.ID !== dest.ID);
+            return v;
+          })
+          setItinerary(temp); 
         } else {
           i++;
         };
@@ -86,6 +85,7 @@ function ItineraryPage() {
     }})
   }
 
+  console.log(itinerary);
   return (
     <Scroll>
       <HeaderLogo />
