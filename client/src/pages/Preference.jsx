@@ -94,17 +94,6 @@ function Preference() {
           </div>
         </div>
 
-        <div>
-          <div className="absolute bottom-0 flex h-1/2 w-96 flex-col gap-8 rounded-t-3xl bg-white px-6 pt-5 text-sm shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
-            <FieldDate />
-
-            <FieldStyle />
-
-            <div className="self-center">
-              <ButtonAction text="Confirm" />
-            </div>
-          </div>
-        </div>
       </div>
     </Main>
   );
