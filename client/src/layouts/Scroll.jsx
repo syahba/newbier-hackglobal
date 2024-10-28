@@ -2,8 +2,8 @@
 function Scroll(props) {
 
   return (
-    <section className="w-full h-auto flex justify-center bg-cyan-700 text-text">
-      <section className="w-96 h-auto bg-white text-xs">
+    <section className="flex justify-center w-full h-auto min-h-screen bg-cyan-700 text-text">
+      <section className="h-auto text-xs bg-white w-96">
       {props.children}
       </section>
     </section>

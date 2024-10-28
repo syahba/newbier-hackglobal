@@ -37,7 +37,7 @@ func (Destination) ColumnName(column string) string {
 	return "destinations." + column
 }
 
- type DestinationParameter struct {
+type DestinationParameter struct {
 	gorm.Model
 	DestinationID int    `json:"destination_id"`
 	Type          string `json:"type"`
@@ -104,22 +104,45 @@ type ItineraryBuddy struct {
 	gorm.Model
 	ItineraryID int    `json:"itinerary_id"`
 	UserID      int    `json:"user_id"`
-	ChatRoomID  int    `json:"chat_room_id"`
 	Description string `json:"description"`
-	CreatedBy   string `json:"created_by"`
-	IsAccept    bool   `json:"is_accept"`
-	User        User   `gorm:"foreignKey:UserID;references:ID" json:"user"`
-	CreateBy    User   `gorm:"foreignKey:CreatedBy;references:ID" json:"create_by"`
 }
 
 func (ItineraryBuddy) TableName() string {
 	return "itinerary_buddies"
 }
 
+type ItineraryFinder struct {
+	gorm.Model
+	Description string    `json:"description"`
+	Activity    string    `json:"activity"`
+	Date        time.Time `json:"date"`
+	Trip        string    `json:"trip"`
+	CreatedBy   int       `json:"created_by"`
+	User        *User     `json:"user"`
+}
+
+func (ItineraryFinder) TableName() string {
+	return "itinerary_finders"
+}
+
+type ItineraryRequest struct {
+	gorm.Model
+	Description       string `json:"description"`
+	ItineraryBuddyID  int    `json:"itinerary_buddy_id"`
+	ItineraryFinderID int    `json:"itinerary_finder_id"`
+	CreatedBy         int    `json:"created_by"`
+	Accepted          *bool  `json:"accepted"`
+}
+
+func (ItineraryRequest) TableName() string {
+	return "Itinerary_requests"
+}
+
 type ChatRoom struct {
 	gorm.Model
-	CreatedBy string `json:"created_by"`
-	Message   string `json:"message"`
+	ItineraryID int    `json:"itinerary_id"`
+	CreatedBy   string `json:"created_by"`
+	Message     string `json:"message"`
 }
 
 func (ChatRoom) TableName() string {

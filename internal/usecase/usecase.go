@@ -48,9 +48,9 @@ func (u *Usecase) GenerateItinerary(activity,trip string) (data []internal_model
 	json.Unmarshal([]byte(cleanedInput), &data)
 
 	// using index looping to modify the actual value
-	for index1:=0;index1<len(data);index1++{
-		for index2:=0;index2<len(data[index1].DestinationIDs);index2++{
-			destination,_ := u.GetDestinationById(data[index1].DestinationIDs[index2])
+	for index1 := 0; index1 < len(data); index1++ {
+		for index2 := 0; index2 < len(data[index1].DestinationIDs); index2++ {
+			destination, _ := u.GetDestinationById(data[index1].DestinationIDs[index2])
 			data[index1].Destinations = append(data[index1].Destinations, destination)
 		}
 	}
@@ -77,9 +77,9 @@ func (u *Usecase) GenerateItineraryWithDestination(destination,trip string) (dat
 	json.Unmarshal([]byte(cleanedInput), &data)
 
 	// using index looping to modify the actual value
-	for index1:=0;index1<len(data);index1++{
-		for index2:=0;index2<len(data[index1].DestinationIDs);index2++{
-			destination1,_ := u.GetDestinationById(data[index1].DestinationIDs[index2])
+	for index1 := 0; index1 < len(data); index1++ {
+		for index2 := 0; index2 < len(data[index1].DestinationIDs); index2++ {
+			destination1, _ := u.GetDestinationById(data[index1].DestinationIDs[index2])
 			data[index1].Destinations = append(data[index1].Destinations, destination1)
 		}
 	}
@@ -116,10 +116,10 @@ func (u *Usecase) GetDestinations(name string) (data []model.Destination, err er
 	return
 }
 
-func (u *Usecase) GetDestinationById(id int) (data model.Destination,err error){
-	err = u.db.Where("id = ?",id).Find(&data).Error
-	if err != nil{
-		return 
+func (u *Usecase) GetDestinationById(id int) (data model.Destination, err error) {
+	err = u.db.Where("id = ?", id).Find(&data).Error
+	if err != nil {
+		return
 	}
 	return
 }
@@ -293,7 +293,7 @@ func (u *Usecase) JoinItineraryBuddy(userId, itineraryId int) (err error) {
 		return err
 	}
 
-	ItineraryBuddy.IsAccept = true
+	// ItineraryBuddy.IsAccept = true
 
 	err = u.db.Save(&ItineraryBuddy).Error
 	if err != nil {

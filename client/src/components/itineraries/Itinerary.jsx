@@ -1,17 +1,16 @@
 import Destination from "./Destination";
 
-function Itinerary() {
+function Itinerary({ data, setId }) {
   return (
     <div>
-      <div>
-        <h5 className="text-sm font-bold">Morning</h5>
-        <Destination></Destination>
-      </div>
-
-      <div>
-        <h5 className="text-sm font-bold">Afternoon</h5>
-        <Destination></Destination>
-      </div>
+      {data.map((elm) => (
+        <div className="mt-3" key={elm.time}>
+          <h5 className="text-base font-bold mb-2">
+            {elm.time.charAt(0).toUpperCase() + elm.time.slice(1)}
+          </h5>
+          <Destination data={elm} setId={setId} />
+        </div>
+      ))}
     </div>
   );
 }

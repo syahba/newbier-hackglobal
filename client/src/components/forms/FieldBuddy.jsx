@@ -1,4 +1,13 @@
-function FieldBuddy() {
+import { useState } from "react";
+
+function FieldBuddy({setState, disabled, value}) {
+  const [option, setOption] = useState()
+  
+  const action = (event) => {
+    setState(event.target.value === "yes")
+    setOption(event.target.value)
+  }
+
   return (
     <div>
       <h5 className="mb-1 text-sm font-bold">
@@ -13,42 +22,48 @@ function FieldBuddy() {
       <div className="flex justify-around">
         <div className="inline-flex items-center">
           <label
-            className="relative flex cursor-pointer items-center"
+            className="relative flex items-center cursor-pointer"
             htmlFor="yes"
           >
             <input
               name="option"
               type="radio"
-              className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-gray transition-all checked:border-blue"
+              className="w-5 h-5 transition-all border rounded-full appearance-none cursor-pointer peer border-gray checked:border-blue"
               id="yes"
               value="yes"
+              onChange={action}
+              checked={"yes" === value || option === "yes"}
+              disabled={disabled}
             />
-            <span className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-blue opacity-0 transition-opacity duration-200 peer-checked:opacity-100">
+            <span className="absolute w-3 h-3 transition-opacity duration-200 transform -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0 left-1/2 top-1/2 bg-blue peer-checked:opacity-100">
               {" "}
             </span>
           </label>
-          <label className="ml-2 cursor-pointer text-sm" htmlFor="yes">
+          <label className="ml-2 text-sm cursor-pointer" htmlFor="yes">
             Yes
           </label>
         </div>
 
         <div className="inline-flex items-center">
           <label
-            className="relative flex cursor-pointer items-center"
+            className="relative flex items-center cursor-pointer"
             htmlFor="no"
           >
             <input
               name="option"
               type="radio"
-              className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-gray transition-all checked:border-blue"
+              className="w-5 h-5 transition-all border rounded-full appearance-none cursor-pointer peer border-gray checked:border-blue"
               id="no"
               value="no"
+              onChange={action}
+              checked={"no" === value || option === "no"}
+              disabled={disabled}
             />
-            <span className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 transhtmlForm rounded-full bg-blue opacity-0 transition-opacity duration-200 peer-checked:opacity-100">
+            <span className="absolute w-3 h-3 transition-opacity duration-200 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0 left-1/2 top-1/2 transhtmlForm bg-blue peer-checked:opacity-100">
               {" "}
             </span>
           </label>
-          <label className="ml-2 cursor-pointer text-sm" htmlFor="no">
+          <label className="ml-2 text-sm cursor-pointer" htmlFor="no">
             No
           </label>
         </div>

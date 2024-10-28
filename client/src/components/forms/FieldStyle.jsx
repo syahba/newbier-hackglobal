@@ -1,20 +1,26 @@
-function FieldStyle() {
+function FieldStyle({parentStateSetter}) {
+  const handleActivityChange = (event) => {
+    parentStateSetter(event.target.value);
+  };
+  
   return (
     <div>
       <h5 className="mb-4 text-sm font-bold">
         Finally, what kind of trip would you like?
       </h5>
-      <div className="mb-4 flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 mb-4">
         <div>
           <input
             type="radio"
             name="trip"
+            value="relaxation"
             id="trip-relaxation"
-            className="peer hidden"
+            className="hidden peer"
+            onChange={handleActivityChange}
           />
           <label
             htmlFor="trip-relaxation"
-            className="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white"
+            className="inline-flex px-4 py-3 border rounded-lg border-blue peer-checked:bg-blue peer-checked:text-white"
           >
             Relaxation
           </label>
@@ -23,12 +29,14 @@ function FieldStyle() {
           <input
             type="radio"
             name="trip"
+            value="budget"
             id="trip-budget"
-            className="peer hidden"
+            className="hidden peer"
+            onChange={handleActivityChange}
           />
           <label
             htmlFor="trip-budget"
-            className="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white"
+            className="inline-flex px-4 py-3 border rounded-lg border-blue peer-checked:bg-blue peer-checked:text-white"
           >
             Budget
           </label>
@@ -37,12 +45,14 @@ function FieldStyle() {
           <input
             type="radio"
             name="trip"
+            value="luxury"
             id="trip-luxury"
-            className="peer hidden"
+            className="hidden peer"
+            onChange={handleActivityChange}
           />
           <label
             htmlFor="trip-luxury"
-            className="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white"
+            className="inline-flex px-4 py-3 border rounded-lg border-blue peer-checked:bg-blue peer-checked:text-white"
           >
             Luxury
           </label>
@@ -51,12 +61,14 @@ function FieldStyle() {
           <input
             type="radio"
             name="trip"
+            value="family_friendly"
             id="trip-family-friendly"
-            className="peer hidden"
+            className="hidden peer"
+            onChange={handleActivityChange}
           />
           <label
             htmlFor="trip-family-friendly"
-            className="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white"
+            className="inline-flex px-4 py-3 border rounded-lg border-blue peer-checked:bg-blue peer-checked:text-white"
           >
             Family Friendly
           </label>
@@ -65,12 +77,14 @@ function FieldStyle() {
           <input
             type="radio"
             name="trip"
+            value="adventure"
             id="trip-adventure"
-            className="peer hidden"
+            className="hidden peer"
+            onChange={handleActivityChange}
           />
           <label
             htmlFor="trip-adventure"
-            className="border-blue peer-checked:bg-blue inline-flex rounded-lg border px-4 py-3 peer-checked:text-white"
+            className="inline-flex px-4 py-3 border rounded-lg border-blue peer-checked:bg-blue peer-checked:text-white"
           >
             Adventure
           </label>
