@@ -26,7 +26,7 @@ function Preference() {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            `http://localhost:8000/api/destinations/${id}`
+            `${process.env.HOST}/api/destinations/${id}`
           );
           const data = await response.json();
           setResult(data);
@@ -46,7 +46,7 @@ function Preference() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/generate-itinerary/destination?destination=${name}&trip=${trip}`
+          `${process.env.HOST}/api/generate-itinerary/destination?destination=${name}&trip=${trip}`
         );
         const data = await response.json();
         console.log(data);

@@ -23,7 +23,7 @@ export const getItineraries = () => {
   return async (dispatch) => {
     const { data } = await axios({
       method: 'post',
-      url: `http://localhost:8000/api/itinerary`,
+      url: `${process.env.HOST}/api/itinerary`,
       data: payload
     });
 
@@ -35,7 +35,7 @@ export const sendChat = (payload) => {
   return async (dispatch) => {
     const { message } = await axios({
       method: 'post',
-      url: `http://localhost:8000/api/chat`,
+      url: `${process.env.HOST}/api/chat`,
       data: payload
     });
 

@@ -10,7 +10,7 @@ function ChatRoom(){
     try {
       const fetchData = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/chat`);
+            const response = await fetch(`${process.env.HOST}/api/chat`);
             const data = await response.json();
             setResult(data)
         } catch (error) {
@@ -26,7 +26,7 @@ function ChatRoom(){
 
   const sendMessage = async () => {
     try {
-      await fetch({method: "POST", url: "http://localhost:8000/api/chat", body: {
+      await fetch({method: "POST", url: `${process.env.HOST}/api/chat`, body: {
         created_by: userId,
         message: message
       }});

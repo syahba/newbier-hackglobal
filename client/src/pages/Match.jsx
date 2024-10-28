@@ -20,7 +20,7 @@ function Match() {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            `http://localhost:8000/api/itinerary/buddy/destination?activity=${activity}&trip=${trip}`
+            `${process.env.HOST}/api/itinerary/buddy/destination?activity=${activity}&trip=${trip}`
           );
           const data = await response.json();
           setData(data);
@@ -42,7 +42,7 @@ function Match() {
     const userId = localStorage.getItem("user")
     let join;
     try {
-      join = await fetch("http://localhost:8000/api/itinerary/buddy/join", {method: "POST", body: JSON.stringify({
+      join = await fetch(`${process.env.HOST}/api/itinerary/buddy/join`, {method: "POST", body: JSON.stringify({
         itinerary_id: data.itinerary_id,
         itinerary_finder_id: finderId,
         created_by: parseInt(userId),
