@@ -1,9 +1,27 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import ButtonAction from "../components/buttons/ButtonAction"
 import HeaderDefault from "../components/headers/HeaderDeafult"
 import Itinerary from "../components/itineraries/Itinerary"
 import Scroll from "../layouts/Scroll"
 
 function HomeItinerary () {
+  const navigate = useNavigate();
+  // const {
+  //   state: { itinerary, isBuddy, description, destination, activity, trip },
+  // } = useLocation();
+
+  // const changePage = (uri) => {
+  //   navigate(uri, {
+  //     state: {
+  //       itinerary: itinerary,
+  //       isBuddy: isBuddy,
+  //       description: description,
+  //       destination,
+  //       activity,
+  //       trip,
+  //     },
+  //   });
+  // };
 
   return (
     <Scroll>
@@ -47,21 +65,16 @@ function HomeItinerary () {
         </div>
         <div>
           <h1 className="mb-2 text-2xl font-bold">Product</h1>
-          <a href="">
-            <div className="px-4 py-2 border rounded w-fit border-blue">
-              <p>See in market</p>
-            </div>
-          </a>
+            <button className="px-4 py-2 border rounded-lg w-fit border-blue shadow-md" onClick={() => navigate('/market')}>See in market</button>
         </div>
         
         <div>
           <h1 className="mb-2 text-2xl font-bold">Itinerary</h1>
-
           <Itinerary data={[]} />
         </div>
 
         <div className="flex items-center justify-center w-full h-full py-4">
-          <ButtonAction text="Completed" />
+          <ButtonAction text="Completed" onClick={() => navigate('/home')} />
         </div>
       </div>
     </Scroll>

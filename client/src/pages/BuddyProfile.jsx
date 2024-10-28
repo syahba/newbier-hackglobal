@@ -9,13 +9,23 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 function BuddyProfile() {
   const { state } = useLocation();
-  const { itinerary, isBuddy, description, destination, activity, trip } = state
-  const navigate = useNavigate()
+  const { itinerary, isBuddy, description, destination, activity, trip } =
+    state;
+  const navigate = useNavigate();
 
   const buttonConfirm = () => {
-    navigate("/bridging/3");
+    navigate("/bridging/3", {
+      state: {
+        itinerary: itinerary,
+        isBuddy: isBuddy,
+        description: description,
+        destination,
+        activity,
+        trip,
+      },
+    });
   };
-  
+
   return (
     <Scroll>
       <div className="relative w-full h-screen">

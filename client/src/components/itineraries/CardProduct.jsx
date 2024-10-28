@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
 function CardProduct({ data }) {
+  const [hidden, setHidden] = useState(true);
+
   function formatTitle(title) {
     const len = 20;
     if (title.length > len) {
@@ -9,6 +12,14 @@ function CardProduct({ data }) {
     }
     return title;
   }
+
+  const dropdown = () => {
+    if (hidden) {
+      setHidden(false);
+    } else {
+      setHidden(true);
+    }
+  };
 
   return (
     <div className="rounded shadow-md">
@@ -27,42 +38,39 @@ function CardProduct({ data }) {
         </div>
         <div className="self-center">
           <svg
-            className="ms-3 h-2.5 w-2.5"
+            className={`ms-3 h-2.5 w-2.5 ${!hidden ? "rotate-180" : ""}`}
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 10 6"
+            onClick={dropdown}
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="m1 1 4 4 4-4"
             />
           </svg>
         </div>
       </div>
-      
-      <div id="dropdown" className="flex flex-col gap-2 p-3">
-        <div className="flex items-center gap-2 text-sm">
-          <p className="flex-grow">Premium Ticket</p>
-          <p>10$/item</p>
-          <input
-            type="text"
-            className="px-1 py-0 text-center border rounded w-7 border-blue"
-            placeholder="0"
-          />
-        </div>
-        <div className="flex items-center gap-2 text-sm">
-          <p className="flex-grow">Premium Ticket</p>
-          <p>10$/item</p>
-          <input
-            type="text"
-            className="px-1 py-0 text-center border rounded w-7 border-blue"
-            placeholder="0"
-          />
-        </div>
+
+      <div
+        id="dropdown"
+        className={`${hidden ? "hidden" : ""} flex flex-col gap-2 p-3`}
+      >
+        {data.products.map((v) => (
+          <div className="flex items-center gap-2 text-sm">
+            <p className="flex-grow">{v.name}</p>
+            <p>{v.price}</p>
+            <input
+              type="text"
+              className="px-1 py-0 text-center border rounded w-7 border-blue"
+              placeholder="0"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
