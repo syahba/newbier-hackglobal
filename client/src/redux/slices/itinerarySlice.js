@@ -23,7 +23,7 @@ export const getItineraries = () => {
   return async (dispatch) => {
     const { data } = await axios({
       method: 'post',
-      url: `${process.env.HOST}/api/itinerary`,
+      url: `${import.meta.env.VITE_REACT_API_URL}/api/itinerary`,
       data: payload
     });
 
@@ -35,7 +35,7 @@ export const sendChat = (payload) => {
   return async (dispatch) => {
     const { message } = await axios({
       method: 'post',
-      url: `${process.env.HOST}/api/chat`,
+      url: `${import.meta.env.VITE_REACT_API_URL}/api/chat`,
       data: payload
     });
 

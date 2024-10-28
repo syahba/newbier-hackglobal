@@ -23,7 +23,7 @@ function Home() {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            `${process.env.HOST}/api/itinerary/buddy/join/${joinId}`
+            `${import.meta.env.VITE_REACT_API_URL}/api/itinerary/buddy/join/${joinId}`
           );
           const data = await response.json();
           itinerary = data
@@ -47,7 +47,8 @@ function Home() {
 
     if (searchTerm.length > 2) {
       try {
-        const response = await fetch(`${process.env.HOST}/api/destinations?search=${searchTerm}`);
+        console.log(JSON.stringify(import.meta.env))
+        const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/api/destinations?search=${searchTerm}`);
         const data = await response.json();        
         setResults(data.slice(0, 4));
       } catch (error) {

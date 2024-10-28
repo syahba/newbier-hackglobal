@@ -24,7 +24,7 @@ function Preference2() {
     const fetchData = async () => {
       try {
         console.log(activity, trip)
-        const response = await fetch(`${process.env.HOST}/api/generate-itinerary?activity=${activity}&trip=${trip}`);
+        const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/api/generate-itinerary?activity=${activity}&trip=${trip}`);
         const data = await response.json();
 
         navigate("/itinerary",{state: {

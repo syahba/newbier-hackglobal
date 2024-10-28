@@ -26,7 +26,7 @@ function Preference() {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            `${process.env.HOST}/api/destinations/${id}`
+            `${import.meta.env.VITE_REACT_API_URL}/api/destinations/${id}`
           );
           const data = await response.json();
           setResult(data);
@@ -46,7 +46,7 @@ function Preference() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${process.env.HOST}/api/generate-itinerary/destination?destination=${name}&trip=${trip}`
+          `${import.meta.env.VITE_REACT_API_URL}/api/generate-itinerary/destination?destination=${name}&trip=${trip}`
         );
         const data = await response.json();
         console.log(data);
