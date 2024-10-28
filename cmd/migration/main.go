@@ -216,4 +216,17 @@ CREATE TABLE itinerary_requests (
 			return nil
 		},
 	},
+	{
+		ID: "5",
+		Migrate: func(tx *gorm.DB) error {
+			return tx.Exec(`
+ALTER TABLE itinerary_requests
+RENAME COLUMN itinerary_buddy_id TO itinerary_id;
+
+            `).Error
+		},
+		Rollback: func(tx *gorm.DB) error {
+			return nil
+		},
+	},
 }

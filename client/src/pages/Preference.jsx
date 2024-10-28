@@ -26,7 +26,7 @@ function Preference() {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            `${process.env.HOST}/api/destinations/${id}`
+            `${import.meta.env.VITE_REACT_API_URL}/api/destinations/${id}`
           );
           const data = await response.json();
           setResult(data);
@@ -46,7 +46,7 @@ function Preference() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${process.env.HOST}/api/generate-itinerary/destination?destination=${name}&trip=${trip}`
+          `${import.meta.env.VITE_REACT_API_URL}/api/generate-itinerary/destination?destination=${name}&trip=${trip}`
         );
         const data = await response.json();
         console.log(data);
@@ -94,17 +94,6 @@ function Preference() {
           </div>
         </div>
 
-        <div>
-          <div className="absolute bottom-0 flex h-1/2 w-96 flex-col gap-8 rounded-t-3xl bg-white px-6 pt-5 text-sm shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
-            <FieldDate />
-
-            <FieldStyle />
-
-            <div className="self-center">
-              <ButtonAction text="Confirm" />
-            </div>
-          </div>
-        </div>
       </div>
     </Main>
   );

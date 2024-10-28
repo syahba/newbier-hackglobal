@@ -48,7 +48,7 @@ function ItineraryPage() {
     if (searchTerm.length > 2) {
       try {
         const response = await fetch(
-          `${process.env.HOST}/api/destinations?search=${searchTerm}`
+          `${import.meta.env.VITE_REACT_API_URL}/api/destinations?search=${searchTerm}`
         );
         const data = await response.json();
         console.log(data);

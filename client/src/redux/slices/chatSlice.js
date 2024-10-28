@@ -23,7 +23,7 @@ export const getChats = () => {
   return async (dispatch) => {
     const { data } = await axios({
       method: 'get',
-      url: `${process.env.HOST}/api/chat`,
+      url: `${import.meta.env.VITE_REACT_API_URL}/api/chat`,
       data: payload
     });
 
@@ -35,7 +35,7 @@ export const sendChat = (payload) => {
   return async (dispatch) => {
     const { message } = await axios({
       method: 'post',
-      url: `${process.env.HOST}/api/chat`,
+      url: `${import.meta.env.VITE_REACT_API_URL}/api/chat`,
       data: payload
     });
 

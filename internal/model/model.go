@@ -49,6 +49,7 @@ type Combo struct {
 	Description string                    `json:"description"` // itinerary_buddy
 }
 type GetItineraryDestinationsResponse struct {
+	ItineraryID int                       `json:"itinerary_id"`
 	Description string                    `json:"description"`
 	User        model.User                `json:"user"`
 	Itinerary   []GenerateItinerarySchema `json:"itinerary"`
