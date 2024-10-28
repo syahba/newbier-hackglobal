@@ -84,6 +84,14 @@ type ItineraryDestination struct {
 	Destination   Destination `gorm:"foreignKey:DestinationID;references:ID" json:"destination"`
 }
 
+type ItineraryDestinations struct {
+	gorm.Model
+	ItineraryID   int         `json:"itinerary"`
+	DestinationID int         `json:"destination_id"`
+	Time          string      `json:"time"`
+	Destination   []Destination `gorm:"foreignKey:DestinationID;references:ID" json:"destination"`
+}
+
 func (ItineraryDestination) TableName() string {
 	return "itinerary_destinations"
 }

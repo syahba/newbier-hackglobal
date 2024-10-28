@@ -124,6 +124,51 @@ func (u *Usecase) GetDestinationById(id int) (data model.Destination, err error)
 	return
 }
 
+func (u *Usecase) GetDestinationByItineraryId(id int) (respondData []internal_model.Destination, err error) {
+
+	data := make([]model.ItineraryDestination, 0)
+
+	err = u.db.Where("itinerary_id = ?",id).Find(&data).Error
+	var destinationIdArr []int
+	for _,element := range data{
+		destinationIdArr = append(destinationIdArr, element.DestinationID)
+	}
+
+	respondData = make([]internal_model.Destination,0)
+	
+	for _,id := range destinationIdArr{
+		newDestination,_ := u.GetDestinationById(id)
+
+		newData := internal_model.Destination{
+			Id:	int(newDestination.Model.ID),
+			Name: newDestination.Name,
+			Type: newDestination.Type,
+			Star: newDestination.Star,
+			Address: newDestination.Address,
+			GmapUrl: newDestination.GmapUrl,
+			Image: newDestination.Image,
+			Description: newDestination.Description,
+			BestProduct: newDestination.BestProduct,
+		}
+		respondData = append(respondData, newData)
+	}
+
+	for index:=0;index<len(respondData);index++{
+		var listProduct []model.DestinationProduct
+		err = u.db.Where("destination_id = ?",respondData[index].Id).Find(&listProduct).Error
+		if err != nil{
+			return
+		}
+		respondData[index].Product = listProduct
+	}
+
+	if err != nil {
+		return
+	}
+
+	return
+}
+
 func (u *Usecase) GetItineraryDestination() (data []model.ItineraryDestination, err error) {
 
 	data = make([]model.ItineraryDestination, 0)

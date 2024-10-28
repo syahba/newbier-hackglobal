@@ -20,6 +20,19 @@ type GenerateItinerarySchema struct {
 	Destinations   []model.Destination
 }
 
+type Destination struct {
+	Id 			int		 `json:"id"`
+	Name        string   `json:"name"`
+	Type        string   `json:"type"`
+	Star        string   `json:"star"`
+	Address     string   `json:"address"`
+	GmapUrl     string   `json:"gmap_url"`
+	Image       string   `json:"image"`
+	Description string   `json:"description"`
+	BestProduct []string `gorm:"serializer:json" json:"best_product"`
+	Product		[]model.DestinationProduct `json:"product"`
+}
+
 type Combo struct{
 	Destination string 							`json:"destination"`// itinerary_destination
 	Activity 	string 							`json:"activity"`	// itinerary

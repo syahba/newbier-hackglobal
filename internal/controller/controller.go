@@ -51,17 +51,18 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Get("/chat", c.getChats)
 	api.Post("/chat", c.postChat)
 	api.Get("/itinerary", c.getItineraries)
-	api.Get("/itinerary/:id", c.getItineraryById)
 	api.Post("/general-matter",c.generalMatter)
 	api.Get("/generate-itinerary/destination", c.generateItineraryWithDestination)
 	api.Get("/generate-itinerary", c.generateItinerary)
 	api.Get("/destinations", c.getDestinations)
 	api.Get("/destinations/:id", c.getDestinationById)
+	api.Get("/destinations/itinerary/:id",c.GetDestinationByItineraryId)
 	api.Get("/itinerary/destinations", c.getItineraryDestination)
 	api.Post("/itinerary/buddy", c.postItineraryBuddy)
 	api.Put("/itinerary/buddy", c.putItineraryBuddy)
 	api.Post("/itinerary/market", c.postItternaryMarket)
 	api.Get("/itinerary/market/:id", c.getItternaryMarketByItternaryId)
+	api.Get("/itinerary/:id", c.getItineraryById)
 	// 404 not found
 	app.Use(func(c *fiber.Ctx) error {
 		return c.Status(404).JSON(fiber.Map{
@@ -400,6 +401,30 @@ func (cn *Controller) getDestinationById(c *fiber.Ctx) error {
 	return c.Status(200).JSON(data)
 }
 
+func (cn *Controller) GetDestinationByItineraryId(c *fiber.Ctx) error {
+	id,err := strconv.Atoi(c.Params("id"))
+	if err != nil{
+		return c.Status(400).JSON(fiber.Map{
+			"message": "params id must number",
+		})
+	}
+
+	if id <= 0 {
+		return c.Status(400).JSON(fiber.Map{
+			"message": "id can't negative or zero",
+		})
+	}
+
+	data,err := cn.usecase.GetDestinationByItineraryId(id)
+	if err != nil{
+		return c.Status(500).JSON(fiber.Map{
+			"message": "can't find",
+		})
+	}
+
+	return c.Status(200).JSON(data)
+}
+
 func (cn *Controller) generateItinerary(c *fiber.Ctx) error {
 	activity := c.Query("activity")
 	trip := c.Query("trip")
@@ -431,7 +456,6 @@ func (cn *Controller) generateItineraryWithDestination(c *fiber.Ctx) error {
 }
 
 func (cn *Controller) getItineraryDestination(c *fiber.Ctx) error {
-
 	itineraryDestinationList, err := cn.usecase.GetItineraryDestination()
 
 	if err != nil || len(itineraryDestinationList) == 0 {
