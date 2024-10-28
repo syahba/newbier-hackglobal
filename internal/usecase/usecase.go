@@ -13,6 +13,7 @@ import (
 	"math/rand"
 
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type Usecase struct {
@@ -29,7 +30,7 @@ func (u *Usecase) GetUsecase() string {
 	return "Hello World"
 }
 
-func (u *Usecase) GenerateItinerary(activity,trip string) (data []internal_model.GenerateItinerarySchema, err error) {
+func (u *Usecase) GenerateItinerary(activity, trip string) (data []internal_model.GenerateItinerarySchema, err error) {
 	table := model.Destination{}
 	destinations := []map[string]any{}
 	u.db.Select(table.ColumnName("id"), table.ColumnName("name"), table.ColumnName("type")).
@@ -45,7 +46,7 @@ func (u *Usecase) GenerateItinerary(activity,trip string) (data []internal_model
 	cleanedInput := strings.Trim(result, "```json")
 	cleanedInput = strings.Trim(cleanedInput, "```")
 
-	data = make([]internal_model.GenerateItinerarySchema,0)
+	data = make([]internal_model.GenerateItinerarySchema, 0)
 	json.Unmarshal([]byte(cleanedInput), &data)
 
 	// using index looping to modify the actual value
@@ -58,7 +59,7 @@ func (u *Usecase) GenerateItinerary(activity,trip string) (data []internal_model
 	return
 }
 
-func (u *Usecase) GenerateItineraryWithDestination(destination,trip string) (data []internal_model.GenerateItinerarySchema, err error) {
+func (u *Usecase) GenerateItineraryWithDestination(destination, trip string) (data []internal_model.GenerateItinerarySchema, err error) {
 	table := model.Destination{}
 	destinations := []map[string]any{}
 	u.db.Select(table.ColumnName("id"), table.ColumnName("name"), table.ColumnName("type")).
@@ -74,7 +75,7 @@ func (u *Usecase) GenerateItineraryWithDestination(destination,trip string) (dat
 	cleanedInput := strings.Trim(result, "```json")
 	cleanedInput = strings.Trim(cleanedInput, "```")
 
-	data = make([]internal_model.GenerateItinerarySchema,0)
+	data = make([]internal_model.GenerateItinerarySchema, 0)
 	json.Unmarshal([]byte(cleanedInput), &data)
 
 	// using index looping to modify the actual value
@@ -129,35 +130,35 @@ func (u *Usecase) GetDestinationByItineraryId(id int) (respondData []internal_mo
 
 	data := make([]model.ItineraryDestination, 0)
 
-	err = u.db.Where("itinerary_id = ?",id).Find(&data).Error
+	err = u.db.Where("itinerary_id = ?", id).Find(&data).Error
 	var destinationIdArr []int
-	for _,element := range data{
+	for _, element := range data {
 		destinationIdArr = append(destinationIdArr, element.DestinationID)
 	}
 
-	respondData = make([]internal_model.Destination,0)
-	
-	for _,id := range destinationIdArr{
-		newDestination,_ := u.GetDestinationById(id)
+	respondData = make([]internal_model.Destination, 0)
+
+	for _, id := range destinationIdArr {
+		newDestination, _ := u.GetDestinationById(id)
 
 		newData := internal_model.Destination{
-			Id:	int(newDestination.Model.ID),
-			Name: newDestination.Name,
-			Type: newDestination.Type,
-			Star: newDestination.Star,
-			Address: newDestination.Address,
-			GmapUrl: newDestination.GmapUrl,
-			Image: newDestination.Image,
+			Id:          int(newDestination.Model.ID),
+			Name:        newDestination.Name,
+			Type:        newDestination.Type,
+			Star:        newDestination.Star,
+			Address:     newDestination.Address,
+			GmapUrl:     newDestination.GmapUrl,
+			Image:       newDestination.Image,
 			Description: newDestination.Description,
 			BestProduct: newDestination.BestProduct,
 		}
 		respondData = append(respondData, newData)
 	}
 
-	for index:=0;index<len(respondData);index++{
+	for index := 0; index < len(respondData); index++ {
 		var listProduct []model.DestinationProduct
-		err = u.db.Where("destination_id = ?",respondData[index].Id).Find(&listProduct).Error
-		if err != nil{
+		err = u.db.Where("destination_id = ?", respondData[index].Id).Find(&listProduct).Error
+		if err != nil {
 			return
 		}
 
@@ -230,44 +231,44 @@ func (u *Usecase) GetItineraryById(id int) (data model.Itinerary, err error) {
 	return
 }
 
-func (u *Usecase) CreateItineraryAndItineraryDestinationAndBuddy(data internal_model.Combo) (error){
+func (u *Usecase) CreateItineraryAndItineraryDestinationAndBuddy(data internal_model.Combo) error {
 	newItinerary := model.Itinerary{
 		Destination: &data.Description,
-		Activity: data.Activity,
-		Vehicle: "empty",
-		Trip: data.Trip,
-		CreatedBy: fmt.Sprintf("%v",data.User_id),
+		Activity:    data.Activity,
+		Vehicle:     "empty",
+		Trip:        data.Trip,
+		CreatedBy:   fmt.Sprintf("%v", data.User_id),
 	}
 
-	err := u.db.Create(&newItinerary).Error; 
-	if err != nil{
+	err := u.db.Create(&newItinerary).Error
+	if err != nil {
 		return err
 	}
 
 	var user model.User
-	err = u.db.Where("id = ?",data.User_id).Find(&user).Error
-	if err != nil{
+	err = u.db.Where("id = ?", data.User_id).Find(&user).Error
+	if err != nil {
 		return err
 	}
 
 	newBuddy := model.ItineraryBuddy{
 		ItineraryID: int(newItinerary.Model.ID),
-		UserID: data.User_id,
+		UserID:      data.User_id,
 		Description: data.Description,
 	}
 
 	err = u.db.Create(&newBuddy).Error
-	if err != nil{
+	if err != nil {
 		return err
 	}
 
 	var itineraryDestination []model.ItineraryDestination
-	for _,element := range data.Itinerary{
-		for _,destination1 := range element.Destinations{
+	for _, element := range data.Itinerary {
+		for _, destination1 := range element.Destinations {
 
 			newItineraryDestination := model.ItineraryDestination{
-				ItineraryID: int(newItinerary.Model.ID),
-				Time: element.Time,
+				ItineraryID:   int(newItinerary.Model.ID),
+				Time:          element.Time,
 				DestinationID: int(destination1.ID),
 			}
 			itineraryDestination = append(itineraryDestination, newItineraryDestination)
@@ -275,7 +276,7 @@ func (u *Usecase) CreateItineraryAndItineraryDestinationAndBuddy(data internal_m
 	}
 
 	err = u.db.Create(&itineraryDestination).Error
-	if err!=nil{
+	if err != nil {
 		return err
 	}
 
@@ -349,25 +350,25 @@ func (u *Usecase) JoinItineraryBuddy(userId, itineraryId int) (err error) {
 	return nil
 }
 
-func (u *Usecase) GetFinderByItineraryId(itineraryId int) (data model.ItineraryFinder,err error){
+func (u *Usecase) GetFinderByItineraryId(itineraryId int) (data model.ItineraryFinder, err error) {
 
 	var buddy model.ItineraryBuddy
-	err = u.db.Where("itinerary_id = ?",itineraryId).Find(&buddy).Error
-	if err != nil{
+	err = u.db.Where("itinerary_id = ?", itineraryId).Find(&buddy).Error
+	if err != nil {
 		return
 	}
 
 	var itineraryRequest model.ItineraryRequest
-	err = u.db.Where("itinerary_buddy_id = ?",buddy.ID).Find(&itineraryRequest).Error
-	if err != nil{
+	err = u.db.Where("itinerary_buddy_id = ?", buddy.ID).Find(&itineraryRequest).Error
+	if err != nil {
 		return
 	}
 
-	err = u.db.Where("id = ?",itineraryRequest.ItineraryFinderID).Find(&data).Error
-	if err != nil{
+	err = u.db.Where("id = ?", itineraryRequest.ItineraryFinderID).Find(&data).Error
+	if err != nil {
 		return
 	}
-	
+
 	return
 }
 func (u *Usecase) ItineraryFinder(payload *model.ItineraryFinder) (err error) {
@@ -404,4 +405,14 @@ func (u *Usecase) GetItineraryDestinations(payload *internal_model.ItineraryFind
 		User:        user,
 		Itinerary:   itinerary,
 	}
+}
+
+func (u *Usecase) ItineraryJoin(payload *model.ItineraryRequest) (err error) {
+	return u.db.Omit(clause.Associations).Create(payload).Error
+}
+
+func (u *Usecase) GetItineraryJoin(ID int) (err model.ItineraryRequest) {
+	data := model.ItineraryRequest{}
+	u.db.Where("id = ?", ID).Find(&data)
+	return data
 }

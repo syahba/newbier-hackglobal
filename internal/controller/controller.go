@@ -68,6 +68,10 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Get("/itinerary/buddy/finder", c.itineraryFinder)
 	api.Get("/itinerary/:id", c.getItineraryById)
 	
+	api.Post("/itinerary/buddy/finder", c.itineraryFinder)
+	api.Post("/itinerary/buddy/join", c.itineraryJoin)
+	api.Get("/itinerary/buddy/join/:id", c.getItineraryJoin)
+
 	// 404 not found
 	app.Use(func(c *fiber.Ctx) error {
 		return c.Status(404).JSON(fiber.Map{
@@ -672,4 +676,10 @@ func (cn *Controller) itineraryFinder(c *fiber.Ctx) error {
 	res := cn.usecase.ItineraryFinder(data)
 
 	return c.Status(200).JSON(res)
+}
+
+func (cn *Controller) getItineraryJoin(c *fiber.Ctx) error {
+	ID, _ := strconv.Atoi(c.Params("id"))
+	data := cn.usecase.GetItineraryJoin(ID)
+	return c.Status(200).JSON(data)
 }
