@@ -13,17 +13,36 @@ function BuddyProfile() {
     state;
   const navigate = useNavigate();
 
-  const buttonConfirm = () => {
-    navigate("/bridging/3", {
-      state: {
+  const buttonConfirm = async () => {
+    const userId = localStorage.getItem("user")
+    try {
+      await fetch(`http://localhost:8000/api/general-matter`, {method: "POST", body: JSON.stringify({
+        destination: destination,
+        activity: activity,
+        trip: trip,
+        user_id: parseInt(userId),
         itinerary: itinerary,
         isBuddy: isBuddy,
         description: description,
-        destination,
-        activity,
-        trip,
+      }),
+      headers: {
+        'Content-Type': 'application/json' // Tipe konten JSON
       },
     });
+    } catch (error) {
+      console.log(error)
+    } finally {
+      navigate("/bridging/3", {
+        state: {
+          itinerary: itinerary,
+          isBuddy: isBuddy,
+          description: description,
+          destination,
+          activity,
+          trip,
+        },
+      });
+    }
   };
 
   return (
