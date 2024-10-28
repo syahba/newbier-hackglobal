@@ -82,8 +82,10 @@ function ItineraryPage() {
       destination: destination || "",
       activity: activity || "",
       trip,
-    }})
-  }
+    }});
+
+    localStorage.setItem('data', JSON.stringify(itinerary));
+  };
 
   console.log(itinerary);
   return (

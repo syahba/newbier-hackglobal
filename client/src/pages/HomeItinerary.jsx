@@ -6,22 +6,8 @@ import Scroll from "../layouts/Scroll"
 
 function HomeItinerary () {
   const navigate = useNavigate();
-  // const {
-  //   state: { itinerary, isBuddy, description, destination, activity, trip },
-  // } = useLocation();
 
-  // const changePage = (uri) => {
-  //   navigate(uri, {
-  //     state: {
-  //       itinerary: itinerary,
-  //       isBuddy: isBuddy,
-  //       description: description,
-  //       destination,
-  //       activity,
-  //       trip,
-  //     },
-  //   });
-  // };
+  const data = JSON.parse(localStorage.getItem('data'));
 
   return (
     <Scroll>
@@ -70,7 +56,7 @@ function HomeItinerary () {
         
         <div>
           <h1 className="mb-2 text-2xl font-bold">Itinerary</h1>
-          <Itinerary data={[]} />
+          <Itinerary data={data} />
         </div>
 
         <div className="flex items-center justify-center w-full h-full py-4">
