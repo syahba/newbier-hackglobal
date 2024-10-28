@@ -1,6 +1,14 @@
 # HackGlobal Project: Lyf Guide
 
-Simple overview of use/purpose.
+This repository is a project for hackglobal 2024 where we create an app for lyf Funan and focus on enhancing the customer satisfaction through their experience.
+
+## Table Of Contents
+
+- [Description](#description)
+- [Prerequisites](#prerequisite)
+- [Installing](#installing)
+- [Executing the Program](#executing-the-program)
+- [Authors](#authors)
 
 ## Description
 
@@ -8,7 +16,7 @@ Our project is called Lyf Guide, where is designed to transform the travel exper
 
 ## Getting Started
 
-### Dependencies
+### Prerequisites
 
 These are the prerequisites that you need to prepare to run the program:
 * Go (with the minimum version 1.2.3)
@@ -39,7 +47,7 @@ And on the server side, you need to prepare the database:
   go run /cmd/seeder/main.go
   ```
 
-### Executing program
+### Executing the Program
 
 * How to run the program
 * Step-by-step bullets
