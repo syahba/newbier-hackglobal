@@ -26,7 +26,7 @@ function Preference2() {
         console.log(activity, trip)
         const response = await fetch(`${process.env.HOST}/api/generate-itinerary?activity=${activity}&trip=${trip}`);
         const data = await response.json();
-        console.log(data)
+
         navigate("/itinerary",{state: {
           data: data,
           activity: activity,

@@ -681,9 +681,17 @@ func (cn *Controller) itineraryJoin(c *fiber.Ctx) error {
 func (cn *Controller) itineraryFinder(c *fiber.Ctx) error {
 	var data = new(model.ItineraryFinder)
 	c.BodyParser(data)
-	res := cn.usecase.ItineraryFinder(data)
+	cn.usecase.ItineraryFinder(data)
 
-	return c.Status(200).JSON(res)
+	return c.Status(200).JSON(data)
+}
+
+func (cn *Controller) itineraryJoin(c *fiber.Ctx) error {
+	var data = new(model.ItineraryRequest)
+	c.BodyParser(data)
+	cn.usecase.ItineraryJoin(data)
+
+	return c.Status(200).JSON(data)
 }
 
 func (cn *Controller) getItineraryJoin(c *fiber.Ctx) error {

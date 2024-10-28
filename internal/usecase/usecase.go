@@ -233,7 +233,7 @@ func (u *Usecase) GetItineraryById(id int) (data model.Itinerary, err error) {
 
 func (u *Usecase) CreateItineraryAndItineraryDestinationAndBuddy(data internal_model.Combo) error {
 	newItinerary := model.Itinerary{
-		Destination: &data.Description,
+		Destination: &data.Destination,
 		Activity:    data.Activity,
 		Vehicle:     "empty",
 		Trip:        data.Trip,
@@ -372,13 +372,13 @@ func (u *Usecase) GetFinderByItineraryId(itineraryId int) (data model.ItineraryF
 	return
 }
 func (u *Usecase) ItineraryFinder(payload *model.ItineraryFinder) (err error) {
-	return u.db.Create(payload).Error
+	return u.db.Omit(clause.Associations).Create(payload).Error
 }
 
 func (u *Usecase) GetItineraryDestinations(payload *internal_model.ItineraryFinderRequest) (result internal_model.GetItineraryDestinationsResponse) {
 	var data = model.Itinerary{}
-	u.db.Where("(activity = ? OR  trip = ?) AND  date = ?", payload.Activity, payload.Trip, payload.Date).
-		Where("id in (SELECT * FROM itinerary_buddies WHERE deleted_at is NULL)").
+	u.db.Where("(activity = ? OR  trip = ?)", payload.Activity, payload.Trip).
+		Where("id in (SELECT itinerary_id FROM itinerary_buddies WHERE deleted_at is NULL)").
 		Find(&data)
 
 	var itineararyDestinations = []model.ItineraryDestination{}
@@ -401,6 +401,7 @@ func (u *Usecase) GetItineraryDestinations(payload *internal_model.ItineraryFind
 	u.db.Where("itinerary_id = ?", data.ID).Find(&buddy)
 
 	return internal_model.GetItineraryDestinationsResponse{
+		ItineraryID: int(data.ID),
 		Description: buddy.Description,
 		User:        user,
 		Itinerary:   itinerary,

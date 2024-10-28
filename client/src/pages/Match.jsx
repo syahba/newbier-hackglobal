@@ -1,9 +1,11 @@
+import { useLocation, useNavigate } from "react-router-dom"
 import ButtonLine from "../components/buttons/ButtonLine"
 import ButtonRound from "../components/buttons/ButtonRound"
 import CardProfile from "../components/forms/CardProfile"
 import HeaderWhite from "../components/headers/HeaderWhite"
 import Itinerary from "../components/itineraries/Itinerary"
 import Scroll from "../layouts/Scroll"
+import { useEffect, useState } from "react"
 
 function Match() {
   const [data, setData] = useState({})
@@ -20,7 +22,11 @@ function Match() {
       const fetchData = async () => {
         try {
           const response = await fetch(
+<<<<<<< HEAD
             `${process.env.HOST}/api/itinerary/buddy/destination?activity=${activity}&trip=${trip}`
+=======
+            `http://localhost:8000/api/itinerary/buddy/destination?activity=${activity}&trip=${trip}`
+>>>>>>> 42a41d5 (conflict)
           );
           const data = await response.json();
           setData(data);
@@ -51,7 +57,6 @@ function Match() {
         'Content-Type': 'application/json' // Tipe konten JSON
       }});
       join = await join.json()
-      console.log("INI", join)
     } catch (error) {
       console.log(error)
     } finally {
@@ -61,14 +66,14 @@ function Match() {
   
   return (
     <Scroll>
-      <div className="flex flex-col items-center w-full h-96 bg-blue">
+      <div className="flex flex-col items-center w-full bg-blue">
         <HeaderWhite />
 
-        <CardProfile />
+        <CardProfile description={data.description} country={country} gender={gender} name={name} />
 
         <div className="relative flex h-fit w-96 flex-col gap-8 rounded-t-3xl bg-white px-6 pt-5 text-sm shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
           <div className="absolute flex gap-4 -top-6 right-8">
-            <ButtonRound />
+            <ButtonRound onClick={buttonConfirm} />
             
             <ButtonLine />
           </div>
@@ -76,7 +81,7 @@ function Match() {
           <div className="my-4">
             <h1 className="mb-2 text-2xl font-bold">Itinerary</h1>
 
-            <Itinerary  data={[]} />
+            <Itinerary  data={data.itinerary || []} withoutdelete={true} />
           </div>
         </div>
       </div>

@@ -126,7 +126,7 @@ type ItineraryFinder struct {
 	Date        time.Time `json:"date"`
 	Trip        string    `json:"trip"`
 	CreatedBy   int       `json:"created_by"`
-	User        *User     `json:"user"`
+	User        *User     `gorm:"foreignKey:CreatedBy;references:ID" json:"user"`
 }
 
 func (ItineraryFinder) TableName() string {
@@ -136,7 +136,7 @@ func (ItineraryFinder) TableName() string {
 type ItineraryRequest struct {
 	gorm.Model
 	Description       string `json:"description"`
-	ItineraryBuddyID  int    `json:"itinerary_buddy_id"`
+	ItineraryID       int    `json:"itinerary_id"`
 	ItineraryFinderID int    `json:"itinerary_finder_id"`
 	CreatedBy         int    `json:"created_by"`
 	Accepted          *bool  `json:"accepted"`
