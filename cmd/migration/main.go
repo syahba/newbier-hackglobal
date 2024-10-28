@@ -164,4 +164,56 @@ ADD COLUMN best_product JSON DEFAULT '[]';
 			return nil
 		},
 	},
+	{
+		ID: "4",
+		Migrate: func(tx *gorm.DB) error {
+			return tx.Exec(`
+ALTER TABLE itinerary_buddies 
+DROP CONSTRAINT itinerary_buddies_chat_room_id_fkey;
+
+ALTER TABLE itinerary_buddies 
+DROP CONSTRAINT itinerary_buddies_itinerary_id_fkey;
+
+ALTER TABLE itinerary_buddies 
+DROP CONSTRAINT itinerary_buddies_user_id_fkey;
+
+ALTER TABLE itinerary_buddies 
+DROP COLUMN chat_room_id;
+
+ALTER TABLE itinerary_buddies 
+DROP COLUMN created_by;
+
+ALTER TABLE itinerary_buddies 
+DROP COLUMN is_accept;
+
+CREATE TABLE itinerary_finders (
+    id SERIAL PRIMARY KEY,
+    created_at TIMESTAMP NULL DEFAULT NULL,
+    updated_at TIMESTAMP NULL DEFAULT NULL,
+    deleted_at TIMESTAMP NULL DEFAULT NULL,
+    description VARCHAR(255) NOT NULL,
+    activity VARCHAR(100) NOT NULL,
+    date TIMESTAMP NOT NULL,
+    trip VARCHAR(100) NOT NULL,
+    created_by INT NOT NULL
+);
+
+CREATE TABLE itinerary_requests (
+    id SERIAL PRIMARY KEY,
+    created_at TIMESTAMP NULL DEFAULT NULL,
+    updated_at TIMESTAMP NULL DEFAULT NULL,
+    deleted_at TIMESTAMP NULL DEFAULT NULL,
+    description VARCHAR(255) NOT NULL,
+    itinerary_buddy_id INT NOT NULL,
+    itinerary_finder_id int NOT NULL,
+    created_by INT NOT NULL,
+    accepted BOOLEAN
+);
+
+            `).Error
+		},
+		Rollback: func(tx *gorm.DB) error {
+			return nil
+		},
+	},
 }

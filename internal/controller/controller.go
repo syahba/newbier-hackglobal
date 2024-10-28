@@ -51,16 +51,19 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Get("/chat", c.getChats)
 	api.Post("/chat", c.postChat)
 	api.Get("/itinerary", c.getItineraries)
+	api.Get("/itinerary/:id", c.getItineraryById)
+	api.Post("/general-matter",c.generalMatter)
 	api.Get("/generate-itinerary/destination", c.generateItineraryWithDestination)
 	api.Get("/generate-itinerary", c.generateItinerary)
 	api.Get("/destinations", c.getDestinations)
 	api.Get("/destinations/:id", c.getDestinationById)
+	api.Get("/destinations/itinerary/:id",c.GetDestinationByItineraryId)
 	api.Get("/itinerary/destinations", c.getItineraryDestination)
 	api.Post("/itinerary/buddy", c.postItineraryBuddy)
 	api.Put("/itinerary/buddy", c.putItineraryBuddy)
 	api.Post("/itinerary/market", c.postItternaryMarket)
 	api.Get("/itinerary/market/:id", c.getItternaryMarketByItternaryId)
-
+	api.Get("/itinerary/:id", c.getItineraryById)
 	// 404 not found
 	app.Use(func(c *fiber.Ctx) error {
 		return c.Status(404).JSON(fiber.Map{
@@ -231,6 +234,48 @@ func (cn *Controller) getBuddyProfile(c *fiber.Ctx) error {
 
 // API
 
+func (cn *Controller) generalMatter(c *fiber.Ctx) error{
+	var body internal_model.Combo
+
+	if err := c.BodyParser(&body); err != nil{
+		return c.Status(400).JSON(fiber.Map{
+			"message":"Can't parse body",
+		})
+	}
+	
+	//fmt.Println(body)
+
+	if len(body.Trip) == 0 || body.Trip == " " || body.User_id <= 0|| len(body.Itinerary) == 0{
+		//fmt.Println(len(body.Trip) == 0, body.Trip == " " , body.User_id <= 0 , len(body.Itinerary) == 0)
+		return c.Status(400).JSON(fiber.Map{
+			"message":"field trip, userId or itinerary can't empty, zero or negative",
+		})
+	}
+
+	body.IsBuddy = true
+	if len(body.Destination) == 0{
+		body.Destination = "empty"
+	}
+
+	if len(body.Activity) == 0 {
+		body.Activity = "empty"
+	}
+
+	if len(body.Description) == 0 {
+		body.Description = "empty"
+	}
+
+	if err := cn.usecase.CreateItineraryAndItineraryDestinationAndBuddy(body); err != nil{
+		return c.Status(500).JSON(fiber.Map{
+			"message":"something went wrong, cant create itinerary, itineraryDestination and itineraryBuddy",
+		})
+	}
+
+	return c.Status(201).JSON(fiber.Map{
+		"message":"successfully create new itinerary, itineraryDestination and itineraryBuddy",
+	})
+}
+
 func (cn *Controller) getItineraries(c *fiber.Ctx) error {
 
 	itineraryList, err := cn.usecase.GetItinerary()
@@ -250,6 +295,40 @@ func (cn *Controller) getItineraries(c *fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON(itineraryResponseList)
+}
+
+func (cn *Controller) getItineraryById(c *fiber.Ctx) error {
+	id, err := strconv.Atoi(c.Params("id"))
+	if err != nil{
+		return c.Status(400).JSON(fiber.Map{
+			"message": "id must be number",
+		})
+	}
+
+	if id <= 0{
+		return c.Status(400).JSON(fiber.Map{
+			"message": "id can't zero or negative",
+		})
+	}
+
+	itineraryList, err := cn.usecase.GetItinerary()
+	if err != nil || len(itineraryList) == 0 {
+		return c.Status(404).JSON(fiber.Map{
+			"message": "No Itinerary Records",
+		})
+	}
+
+	var itinerary internal_model.ItineraryResponse
+
+	for _, element := range itineraryList {
+		if element.ID == uint(id){
+			itinerary.ItineraryID = int(element.ID)
+			itinerary.ItineraryTime = groupDestinationsByTime(element.ItineraryDestinations)
+			break
+		}
+	}
+
+	return c.Status(200).JSON(itinerary)
 }
 
 func groupDestinationsByTime(destinations []model.ItineraryDestination) []internal_model.ItineraryTime {
@@ -323,6 +402,30 @@ func (cn *Controller) getDestinationById(c *fiber.Ctx) error {
 	return c.Status(200).JSON(data)
 }
 
+func (cn *Controller) GetDestinationByItineraryId(c *fiber.Ctx) error {
+	id,err := strconv.Atoi(c.Params("id"))
+	if err != nil{
+		return c.Status(400).JSON(fiber.Map{
+			"message": "params id must number",
+		})
+	}
+
+	if id <= 0 {
+		return c.Status(400).JSON(fiber.Map{
+			"message": "id can't negative or zero",
+		})
+	}
+
+	data,err := cn.usecase.GetDestinationByItineraryId(id)
+	if err != nil{
+		return c.Status(500).JSON(fiber.Map{
+			"message": "can't find",
+		})
+	}
+
+	return c.Status(200).JSON(data)
+}
+
 func (cn *Controller) generateItinerary(c *fiber.Ctx) error {
 	activity := c.Query("activity")
 	trip := c.Query("trip")
@@ -354,7 +457,6 @@ func (cn *Controller) generateItineraryWithDestination(c *fiber.Ctx) error {
 }
 
 func (cn *Controller) getItineraryDestination(c *fiber.Ctx) error {
-
 	itineraryDestinationList, err := cn.usecase.GetItineraryDestination()
 
 	if err != nil || len(itineraryDestinationList) == 0 {
@@ -413,11 +515,11 @@ func (cn *Controller) postItineraryBuddy(c *fiber.Ctx) error {
 
 	isItineraryIdZeroOrNegative := newItineraryBuddy.ItineraryID <= 0
 	isUserIdZeroOrNegative := newItineraryBuddy.UserID <= 0
-	isChatRoomIdZeroOrNegative := newItineraryBuddy.ChatRoomID <= 0
+	// isChatRoomIdZeroOrNegative := newItineraryBuddy.ChatRoomID <= 0
 	isCreatedByEmpty := newItineraryBuddy.Description == "" || len(newItineraryBuddy.Description) == 0
 	isDescriptionEmpty := newItineraryBuddy.Description == "" || len(newItineraryBuddy.Description) == 0
 
-	if isItineraryIdZeroOrNegative || isUserIdZeroOrNegative || isCreatedByEmpty || isChatRoomIdZeroOrNegative || isDescriptionEmpty {
+	if isItineraryIdZeroOrNegative || isUserIdZeroOrNegative || isCreatedByEmpty || isDescriptionEmpty {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "field itinerary_id, user_id, chat_room_id, created_by, or description can't Zero, negative or Empty",
 		})
@@ -429,11 +531,11 @@ func (cn *Controller) postItineraryBuddy(c *fiber.Ctx) error {
 		})
 	}
 
-	if result, err := cn.usecase.GetChatById(newItineraryBuddy.ChatRoomID); err != nil || result.ID == 0 {
-		return c.Status(404).JSON(fiber.Map{
-			"message": fmt.Sprintf("Chat Room with id %v was not found", newItineraryBuddy.ChatRoomID),
-		})
-	}
+	// if result, err := cn.usecase.GetChatById(""); err != nil || result.ID == 0 {
+	// 	return c.Status(404).JSON(fiber.Map{
+	// 		"message": fmt.Sprintf("Chat Room with id %v was not found", newItineraryBuddy.ChatRoomID),
+	// 	})
+	// }
 
 	if result, err := cn.usecase.GetUserById(newItineraryBuddy.UserID); err != nil || result.ID == 0 {
 		return c.Status(404).JSON(fiber.Map{
