@@ -6,6 +6,7 @@ import (
 	internal_model "newbier-hackglobal/internal/model"
 	chatgpt "newbier-hackglobal/pkg/chatGPT"
 	"newbier-hackglobal/pkg/database/model"
+	"slices"
 	"strings"
 	"time"
 
@@ -368,4 +369,39 @@ func (u *Usecase) GetFinderByItineraryId(itineraryId int) (data model.ItineraryF
 	}
 	
 	return
+}
+func (u *Usecase) ItineraryFinder(payload *model.ItineraryFinder) (err error) {
+	return u.db.Create(payload).Error
+}
+
+func (u *Usecase) GetItineraryDestinations(payload *internal_model.ItineraryFinderRequest) (result internal_model.GetItineraryDestinationsResponse) {
+	var data = model.Itinerary{}
+	u.db.Where("(activity = ? OR  trip = ?) AND  date = ?", payload.Activity, payload.Trip, payload.Date).
+		Where("id in (SELECT * FROM itinerary_buddies WHERE deleted_at is NULL)").
+		Find(&data)
+
+	var itineararyDestinations = []model.ItineraryDestination{}
+	u.db.Where("itinerary_id = ?", data.ID).Preload("Destination").Find(&itineararyDestinations)
+
+	var timeFormat = []string{"morning", "afternoon", "evening", "night"}
+	var itinerary = []internal_model.GenerateItinerarySchema{
+		{Time: "morning"}, {Time: "afternoon"}, {Time: "evening"}, {Time: "night"},
+	}
+	for _, elm := range itineararyDestinations {
+		idx := slices.Index(timeFormat, elm.Time)
+		itinerary[idx].DestinationIDs = append(itinerary[idx].DestinationIDs, elm.DestinationID)
+		itinerary[idx].Destinations = append(itinerary[idx].Destinations, elm.Destination)
+	}
+
+	var user = model.User{}
+	u.db.Where("id = ?", data.CreatedBy).Find(&user)
+
+	var buddy = model.ItineraryBuddy{}
+	u.db.Where("itinerary_id = ?", data.ID).Find(&buddy)
+
+	return internal_model.GetItineraryDestinationsResponse{
+		Description: buddy.Description,
+		User:        user,
+		Itinerary:   itinerary,
+	}
 }

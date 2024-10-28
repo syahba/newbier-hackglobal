@@ -63,7 +63,11 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Put("/itinerary/buddy", c.putItineraryBuddy)
 	api.Post("/itinerary/market", c.postItternaryMarket)
 	api.Get("/itinerary/market/:id", c.getItternaryMarketByItternaryId)
+	
+	api.Get("/itinerary/buddy/destination", c.getItineraryDestinations)
+	api.Get("/itinerary/buddy/finder", c.itineraryFinder)
 	api.Get("/itinerary/:id", c.getItineraryById)
+	
 	// 404 not found
 	app.Use(func(c *fiber.Ctx) error {
 		return c.Status(404).JSON(fiber.Map{
@@ -649,4 +653,23 @@ func (cn *Controller) getItternaryMarketByItternaryId(c *fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON(ItternaryMarketList)
+}
+
+func (cn *Controller) getItineraryDestinations(c *fiber.Ctx) error {
+	var data = new(internal_model.ItineraryFinderRequest)
+	data.Activity = c.Query("activity")
+	data.Date = c.Query("date")
+	data.Trip = c.Query("trip")
+
+	res := cn.usecase.GetItineraryDestinations(data)
+
+	return c.Status(200).JSON(res)
+}
+
+func (cn *Controller) itineraryFinder(c *fiber.Ctx) error {
+	var data = new(model.ItineraryFinder)
+	c.BodyParser(data)
+	res := cn.usecase.ItineraryFinder(data)
+
+	return c.Status(200).JSON(res)
 }
