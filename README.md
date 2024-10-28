@@ -62,6 +62,6 @@ To run the program, you need to follow these steps:
 ## Authors
 
 Below are the people who contributed to this project:
-[@syahba](https://github.com/syahba)
-[@W-ptra](https://github.com/w-ptra)
-[@mad-af](https://github.com/mad-af)
+* [@syahba](https://github.com/syahba)
+* [@W-ptra](https://github.com/w-ptra)
+* [@mad-af](https://github.com/mad-af)
