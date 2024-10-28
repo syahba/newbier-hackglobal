@@ -17,11 +17,11 @@ function CardProfile({description}) {
       <h5 className="font-bold">Come join my trip to Universal Studio!</h5>
       <div className="flex gap-12">
         <div className="flex items-center gap-2">
-          <FaUser />
+          <FaUser className="w-5 h-5 text-black" />
           <p>{user.name}</p>
         </div>
         <div className="flex items-center gap-2">
-          <BiWorld />
+          <BiWorld className="w-5 h-5 text-black" />
           <p>{user.country}</p>
         </div>
         <div className="flex items-center gap-2">

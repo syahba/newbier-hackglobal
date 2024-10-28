@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom"
 import HeaderWhite from "../components/headers/HeaderWhite"
 import Main from "../layouts/Main"
 
 function Bridging3() {
+  const navigate = useNavigate();
+
   return (
     <Main>
       <div className="relative w-full h-screen bg-blue">
@@ -16,7 +19,7 @@ function Bridging3() {
         <div className="absolute bottom-0 w-96 h-[480px]">
           <div className="h-full bg-center bg-no-repeat bg-contain bg-bridging3 w-96"></div>
         </div>
-        <div className="absolute bottom-5 right-5">Tap to continue</div>
+        <div className="absolute bottom-5 right-5 cursor-pointer" onClick={() => navigate("/home-itinerary")}>Tap to continue</div>
       </div>
     </Main>
   )

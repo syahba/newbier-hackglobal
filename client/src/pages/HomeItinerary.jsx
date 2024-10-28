@@ -61,7 +61,7 @@ function HomeItinerary () {
         </div>
 
         <div class="flex h-full w-full items-center justify-center py-4">
-          <ButtonAction text="completed" />
+          <ButtonAction text="Completed" />
         </div>
       </div>
     </Scroll>

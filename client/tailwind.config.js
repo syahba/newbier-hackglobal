@@ -12,6 +12,7 @@ export default {
         blue: '#2A94F4',
         yellow: '#FFBE55',
         gray: '#F2F2F2',
+        black: '#181818'
       },
       backgroundImage: {
         'home': "url('/public/image/home.png')",
@@ -24,7 +25,7 @@ export default {
         'buddy2': "url('/public/image/buddy-2.png')",
       },
       fontFamily: {
-        'sans': ['"Poppins"']
+        'serif': ['"Poppins"']
       }
     },
   },

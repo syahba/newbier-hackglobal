@@ -25,7 +25,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Index />} />
-        <Route path="/test" element={<CardProfile />} />
         <Route path="/home" element={<Home />} />
         <Route path="/home-itinerary" element={<HomeItinerary />} />
         <Route path="/preference/:id" element={<Preference />} />

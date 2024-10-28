@@ -33,28 +33,36 @@ function Preference() {
   
   return (
     <Main>
-      
-    <div className="w-full bg-center bg-no-repeat bg-contain bg-preference1 h-3/4">
-      <HeaderLogo />
-      <div className="px-6 mt-12 mb-4">
-        <h5 className="mb-4 text-sm font-bold">Hi, <span className="text-blue">User</span>! Where do you want to go today?</h5>
-        <input type="text" className="w-full h-8 px-3 mb-4 rounded-lg shadow-md" value={name} onChange={e => setName(e.target.value)} placeholder="Enter a destination" />
-      </div>
-    </div>
-
-    <div>
-      <div className="absolute bottom-0 flex h-1/2 w-96 flex-col gap-8 rounded-t-3xl bg-white px-6 pt-5 text-sm shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
-        <FieldDate />
-      
-        <FieldStyle />
-      
-        <div className="self-center">
-          <ButtonAction text="Confirm" />
+      <div className="w-full bg-center bg-no-repeat bg-contain bg-preference1 h-3/4">
+        <HeaderLogo />
+        <div className="px-6 mt-12 mb-4">
+          <h5 className="mb-4 text-sm font-bold">
+            Hi, <span className="text-blue">User</span>! Where do you want to go
+            today?
+          </h5>
+          <input
+            type="text"
+            className="w-full h-8 px-3 mb-4 rounded-lg shadow-md"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter a destination"
+          />
         </div>
       </div>
-    </div>
-  </Main>
-  )
+
+      <div>
+        <div className="absolute bottom-0 flex h-1/2 w-96 flex-col gap-8 rounded-t-3xl bg-white px-6 pt-5 text-sm shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
+          <FieldDate />
+
+          <FieldStyle />
+
+          <div className="self-center">
+            <ButtonAction text="Confirm" />
+          </div>
+        </div>
+      </div>
+    </Main>
+  );
 }
 
 export default Preference
