@@ -51,6 +51,7 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Get("/chat", c.getChats)
 	api.Post("/chat", c.postChat)
 	api.Get("/itinerary", c.getItineraries)
+	api.Get("/itinerary/:id", c.getItineraryById)
 	api.Post("/general-matter",c.generalMatter)
 	api.Get("/generate-itinerary/destination", c.generateItineraryWithDestination)
 	api.Get("/generate-itinerary", c.generateItinerary)
@@ -292,6 +293,40 @@ func (cn *Controller) getItineraries(c *fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON(itineraryResponseList)
+}
+
+func (cn *Controller) getItineraryById(c *fiber.Ctx) error {
+	id, err := strconv.Atoi(c.Params("id"))
+	if err != nil{
+		return c.Status(400).JSON(fiber.Map{
+			"message": "id must be number",
+		})
+	}
+
+	if id <= 0{
+		return c.Status(400).JSON(fiber.Map{
+			"message": "id can't zero or negative",
+		})
+	}
+
+	itineraryList, err := cn.usecase.GetItinerary()
+	if err != nil || len(itineraryList) == 0 {
+		return c.Status(404).JSON(fiber.Map{
+			"message": "No Itinerary Records",
+		})
+	}
+
+	var itinerary internal_model.ItineraryResponse
+
+	for _, element := range itineraryList {
+		if element.ID == uint(id){
+			itinerary.ItineraryID = int(element.ID)
+			itinerary.ItineraryTime = groupDestinationsByTime(element.ItineraryDestinations)
+			break
+		}
+	}
+
+	return c.Status(200).JSON(itinerary)
 }
 
 func groupDestinationsByTime(destinations []model.ItineraryDestination) []internal_model.ItineraryTime {
