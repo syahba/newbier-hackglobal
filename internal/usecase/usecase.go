@@ -186,7 +186,6 @@ func (u *Usecase) CreateItineraryAndItineraryDestinationAndBuddy(data internal_m
 		CreatedBy: fmt.Sprintf("%v",data.User_id),
 	}
 
-	fmt.Println("debug 1")
 	err := u.db.Create(&newItinerary).Error; 
 	if err != nil{
 		return err
@@ -201,19 +200,14 @@ func (u *Usecase) CreateItineraryAndItineraryDestinationAndBuddy(data internal_m
 	newBuddy := model.ItineraryBuddy{
 		ItineraryID: int(newItinerary.Model.ID),
 		UserID: data.User_id,
-		ChatRoomID: 0,
 		Description: data.Description,
-		CreateBy: user,
-		IsAccept: data.IsBuddy,
 	}
 
-	fmt.Println("debug 2")
 	err = u.db.Create(&newBuddy).Error
 	if err != nil{
 		return err
 	}
 
-	fmt.Println("debug 3")
 	var itineraryDestination []model.ItineraryDestination
 	for _,element := range data.Itinerary{
 		for _,destination1 := range element.Destinations{
@@ -227,7 +221,6 @@ func (u *Usecase) CreateItineraryAndItineraryDestinationAndBuddy(data internal_m
 		}
 	}
 
-	fmt.Println("debug 4")
 	err = u.db.Create(&itineraryDestination).Error
 	if err!=nil{
 		return err
