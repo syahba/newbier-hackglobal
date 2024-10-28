@@ -4,21 +4,9 @@ import Main from "../layouts/Main";
 
 function Bridging3() {
   const navigate = useNavigate();
-  const {
-    state: { itinerary, isBuddy, description, destination, activity, trip },
-  } = useLocation();
 
   const changePage = () => {
-    navigate("/home-itinerary", {
-      state: {
-        itinerary: itinerary,
-        isBuddy: isBuddy,
-        description: description,
-        destination,
-        activity,
-        trip,
-      },
-    });
+    navigate("/home-itinerary");
   };
 
   return (

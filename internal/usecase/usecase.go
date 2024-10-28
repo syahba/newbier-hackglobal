@@ -377,9 +377,11 @@ func (u *Usecase) ItineraryFinder(payload *model.ItineraryFinder) (err error) {
 
 func (u *Usecase) GetItineraryDestinations(payload *internal_model.ItineraryFinderRequest) (result internal_model.GetItineraryDestinationsResponse) {
 	var data = model.Itinerary{}
-	u.db.Where("(activity = ? OR  trip = ?)", payload.Activity, payload.Trip).
-		Where("id in (SELECT itinerary_id FROM itinerary_buddies WHERE deleted_at is NULL)").
-		Find(&data)
+	// u.db.Where("(activity = ? OR  trip = ?)", payload.Activity, payload.Trip).
+	// 	Where("id in (SELECT itinerary_id FROM itinerary_buddies WHERE deleted_at is NULL)").
+	// 	Find(&data)
+
+	u.db.Order("id desc").Find(&data)
 
 	var itineararyDestinations = []model.ItineraryDestination{}
 	u.db.Where("itinerary_id = ?", data.ID).Preload("Destination").Find(&itineararyDestinations)

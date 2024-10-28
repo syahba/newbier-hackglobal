@@ -16,8 +16,8 @@ services:
     networks:
       - main_network
 
-  # Main Service
-  main_service:
+  # Main Service backend
+  main_service_be:
     image: wisnup001binus/hackglobal-newbier:2.0
     container_name: main_service_container
     environment:
@@ -31,3 +31,13 @@ services:
       - "8000:8000"
     depends_on:
       - main_db
+
+  main_service_fe:
+    image: wisnup001binus/hackglobal-newbier-fe:2.0
+    container_name: main_service_container_fe
+    environment:
+      VITE_REACT_API_URL: http://13.75.124.106:8000
+    networks:
+      - main_network
+    ports:
+      - "80:4000"
