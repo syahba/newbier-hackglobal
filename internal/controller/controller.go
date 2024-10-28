@@ -413,11 +413,11 @@ func (cn *Controller) postItineraryBuddy(c *fiber.Ctx) error {
 
 	isItineraryIdZeroOrNegative := newItineraryBuddy.ItineraryID <= 0
 	isUserIdZeroOrNegative := newItineraryBuddy.UserID <= 0
-	isChatRoomIdZeroOrNegative := newItineraryBuddy.ChatRoomID <= 0
+	// isChatRoomIdZeroOrNegative := newItineraryBuddy.ChatRoomID <= 0
 	isCreatedByEmpty := newItineraryBuddy.Description == "" || len(newItineraryBuddy.Description) == 0
 	isDescriptionEmpty := newItineraryBuddy.Description == "" || len(newItineraryBuddy.Description) == 0
 
-	if isItineraryIdZeroOrNegative || isUserIdZeroOrNegative || isCreatedByEmpty || isChatRoomIdZeroOrNegative || isDescriptionEmpty {
+	if isItineraryIdZeroOrNegative || isUserIdZeroOrNegative || isCreatedByEmpty || isDescriptionEmpty {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "field itinerary_id, user_id, chat_room_id, created_by, or description can't Zero, negative or Empty",
 		})
@@ -429,11 +429,11 @@ func (cn *Controller) postItineraryBuddy(c *fiber.Ctx) error {
 		})
 	}
 
-	if result, err := cn.usecase.GetChatById(newItineraryBuddy.ChatRoomID); err != nil || result.ID == 0 {
-		return c.Status(404).JSON(fiber.Map{
-			"message": fmt.Sprintf("Chat Room with id %v was not found", newItineraryBuddy.ChatRoomID),
-		})
-	}
+	// if result, err := cn.usecase.GetChatById(""); err != nil || result.ID == 0 {
+	// 	return c.Status(404).JSON(fiber.Map{
+	// 		"message": fmt.Sprintf("Chat Room with id %v was not found", newItineraryBuddy.ChatRoomID),
+	// 	})
+	// }
 
 	if result, err := cn.usecase.GetUserById(newItineraryBuddy.UserID); err != nil || result.ID == 0 {
 		return c.Status(404).JSON(fiber.Map{
