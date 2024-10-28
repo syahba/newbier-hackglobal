@@ -18,28 +18,28 @@ function ItineraryPage() {
   const { state: {data, activity, trip, destination} } = useLocation();
   const [itinerary, setItinerary] = useState(data);
 
-  useEffect(() => {
-    if (id) {
-      // find selected id
-      let item = null;
-      let i = 0;
-      while (item === null) {
-        const dest = itinerary[i].Destinations.find(v => v.ID === id);
-        if (dest) {
-          item = dest;
-          itinerary[i].Destinations = itinerary[i].Destinations.filter(v => v.ID !== dest.ID);
-          console.log(itinerary);
-          // const newDest = itinerary[i].Destinations.filter(v => v.ID !== dest.ID);
-          // console.log(newDest);
-          // delete itinerary[i];
-          setItinerary(itinerary);
-          // itinerary[i].Destinations.splice(item, 1);
-        } else {
-          i++;
-        };
-      };
-    }
-  }, [id]);
+  // useEffect(() => {
+  //   if (id) {
+  //     // find selected id
+  //     let item = null;
+  //     let i = 0;
+  //     while (item === null) {
+  //       const dest = itinerary[i].Destinations.find(v => v.ID === id);
+  //       if (dest) {
+  //         item = dest;
+  //         itinerary[i].Destinations = itinerary[i].Destinations.filter(v => v.ID !== dest.ID);
+  //         console.log(itinerary);
+  //         // const newDest = itinerary[i].Destinations.filter(v => v.ID !== dest.ID);
+  //         // console.log(newDest);
+  //         // delete itinerary[i];
+  //         setItinerary(itinerary);
+  //         // itinerary[i].Destinations.splice(item, 1);
+  //       } else {
+  //         i++;
+  //       };
+  //     };
+  //   }
+  // }, [id]);
 
   const handleSearch = async (e) => {
     const searchTerm = e.target.value;
