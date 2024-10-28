@@ -347,3 +347,25 @@ func (u *Usecase) JoinItineraryBuddy(userId, itineraryId int) (err error) {
 
 	return nil
 }
+
+func (u *Usecase) GetFinderByItineraryId(itineraryId int) (data model.ItineraryFinder,err error){
+
+	var buddy model.ItineraryBuddy
+	err = u.db.Where("itinerary_id = ?",itineraryId).Find(&buddy).Error
+	if err != nil{
+		return
+	}
+
+	var itineraryRequest model.ItineraryRequest
+	err = u.db.Where("itinerary_buddy_id = ?",buddy.ID).Find(&itineraryRequest).Error
+	if err != nil{
+		return
+	}
+
+	err = u.db.Where("id = ?",itineraryRequest.ItineraryFinderID).Find(&data).Error
+	if err != nil{
+		return
+	}
+	
+	return
+}

@@ -51,6 +51,7 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Get("/chat", c.getChats)
 	api.Post("/chat", c.postChat)
 	api.Get("/itinerary", c.getItineraries)
+	api.Get("/itinerary/:id", c.getItineraryById)
 	api.Post("/general-matter",c.generalMatter)
 	api.Get("/generate-itinerary/destination", c.generateItineraryWithDestination)
 	api.Get("/generate-itinerary", c.generateItinerary)
