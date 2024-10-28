@@ -11,8 +11,7 @@ function Buddy() {
   const [description, setDescription] = useState(null);
   const navigate = useNavigate();
 
-  const { state } = useLocation();
-  const { itinerary } = state;
+  const { state: {itinerary, destination, activity, trip} } = useLocation();
 
   const wrapperSetActivity = useCallback(
     (val) => {
@@ -28,14 +27,15 @@ function Buddy() {
   );
 
   const nextCreate = () => {
-    navigate("/buddy/profile", {
-      state: {
-        itinerary: itinerary,
-        isBuddy: isBuddy,
-        description: description,
-      },
-    });
-  };
+    navigate("/buddy/profile", {state: {
+      itinerary: itinerary,
+      isBuddy: isBuddy,
+      description: description,
+      destination,
+      activity,
+      trip
+    }})
+  }
 
   return (
     <Scroll>

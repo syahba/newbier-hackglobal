@@ -16,12 +16,9 @@ function Home() {
 
     if (searchTerm.length > 2) {
       try {
-        const response = await fetch(
-          `http://localhost:8000/api/destinations?search=${searchTerm}`
-        );
-        const data = await response.json();
-        console.log(data);
-        setResults(data);
+        const response = await fetch(`http://localhost:8000/api/destinations?search=${searchTerm}`);
+        const data = await response.json();        
+        setResults(data.slice(0, 4));
       } catch (error) {
         console.error("Error fetching data:", error);
       }

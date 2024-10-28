@@ -28,7 +28,9 @@ function Preference2() {
         const data = await response.json();
         console.log(data)
         navigate("/itinerary",{state: {
-          data: data
+          data: data,
+          activity: activity,
+          trip: trip,
         }})
       } catch(err) {
         console.log(err)

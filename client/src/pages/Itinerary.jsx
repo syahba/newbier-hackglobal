@@ -14,9 +14,8 @@ function ItineraryPage() {
   const [id, setId] = useState(null);
   const navigate = useNavigate();
   
-  const {
-    state: { data }
-  } = useLocation();
+  
+  const { state: {data, activity, trip, destination} } = useLocation();
   const [itinerary, setItinerary] = useState(data);
 
   useEffect(() => {
@@ -79,12 +78,13 @@ function ItineraryPage() {
   };
 
   const nextButton = () => {
-    navigate("/buddy", {
-      state: {
-        itinerary: itinerary,
-      },
-    });
-  };
+    navigate("/buddy", {state: {
+      itinerary: data,
+      destination: destination || "",
+      activity: activity || "",
+      trip,
+    }})
+  }
 
   return (
     <Scroll>
