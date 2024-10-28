@@ -686,14 +686,6 @@ func (cn *Controller) itineraryFinder(c *fiber.Ctx) error {
 	return c.Status(200).JSON(data)
 }
 
-func (cn *Controller) itineraryJoin(c *fiber.Ctx) error {
-	var data = new(model.ItineraryRequest)
-	c.BodyParser(data)
-	cn.usecase.ItineraryJoin(data)
-
-	return c.Status(200).JSON(data)
-}
-
 func (cn *Controller) getItineraryJoin(c *fiber.Ctx) error {
 	ID, _ := strconv.Atoi(c.Params("id"))
 	data := cn.usecase.GetItineraryJoin(ID)

@@ -22,11 +22,7 @@ function Match() {
       const fetchData = async () => {
         try {
           const response = await fetch(
-<<<<<<< HEAD
             `${process.env.HOST}/api/itinerary/buddy/destination?activity=${activity}&trip=${trip}`
-=======
-            `http://localhost:8000/api/itinerary/buddy/destination?activity=${activity}&trip=${trip}`
->>>>>>> 42a41d5 (conflict)
           );
           const data = await response.json();
           setData(data);
