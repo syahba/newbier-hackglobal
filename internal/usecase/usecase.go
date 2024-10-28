@@ -3,6 +3,7 @@ package usecase
 import (
 	"encoding/json"
 	"fmt"
+	internal_model "newbier-hackglobal/internal/model"
 	chatgpt "newbier-hackglobal/pkg/chatGPT"
 	"newbier-hackglobal/pkg/database/model"
 	"strings"
@@ -27,7 +28,7 @@ func (u *Usecase) GetUsecase() string {
 	return "Hello World"
 }
 
-func (u *Usecase) GenerateItinerary(activity,trip string) (data []GenerateItinerarySchema, err error) {
+func (u *Usecase) GenerateItinerary(activity,trip string) (data []internal_model.GenerateItinerarySchema, err error) {
 	table := model.Destination{}
 	destinations := []map[string]any{}
 	u.db.Select(table.ColumnName("id"), table.ColumnName("name"), table.ColumnName("type")).
@@ -43,7 +44,7 @@ func (u *Usecase) GenerateItinerary(activity,trip string) (data []GenerateItiner
 	cleanedInput := strings.Trim(result, "```json")
 	cleanedInput = strings.Trim(cleanedInput, "```")
 
-	data = make([]GenerateItinerarySchema,0)
+	data = make([]internal_model.GenerateItinerarySchema,0)
 	json.Unmarshal([]byte(cleanedInput), &data)
 
 	// using index looping to modify the actual value
@@ -56,7 +57,7 @@ func (u *Usecase) GenerateItinerary(activity,trip string) (data []GenerateItiner
 	return
 }
 
-func (u *Usecase) GenerateItineraryWithDestination(destination,trip string) (data []GenerateItinerarySchema, err error) {
+func (u *Usecase) GenerateItineraryWithDestination(destination,trip string) (data []internal_model.GenerateItinerarySchema, err error) {
 	table := model.Destination{}
 	destinations := []map[string]any{}
 	u.db.Select(table.ColumnName("id"), table.ColumnName("name"), table.ColumnName("type")).
@@ -72,7 +73,7 @@ func (u *Usecase) GenerateItineraryWithDestination(destination,trip string) (dat
 	cleanedInput := strings.Trim(result, "```json")
 	cleanedInput = strings.Trim(cleanedInput, "```")
 
-	data = make([]GenerateItinerarySchema,0)
+	data = make([]internal_model.GenerateItinerarySchema,0)
 	json.Unmarshal([]byte(cleanedInput), &data)
 
 	// using index looping to modify the actual value
@@ -174,6 +175,65 @@ func (u *Usecase) GetItineraryById(id int) (data model.Itinerary, err error) {
 	}
 
 	return
+}
+
+func (u *Usecase) CreateItineraryAndItineraryDestinationAndBuddy(data internal_model.Combo) (error){
+	newItinerary := model.Itinerary{
+		Destination: &data.Description,
+		Activity: data.Activity,
+		Vehicle: "empty",
+		Trip: data.Trip,
+		CreatedBy: fmt.Sprintf("%v",data.User_id),
+	}
+
+	fmt.Println("debug 1")
+	err := u.db.Create(&newItinerary).Error; 
+	if err != nil{
+		return err
+	}
+
+	var user model.User
+	err = u.db.Where("id = ?",data.User_id).Find(&user).Error
+	if err != nil{
+		return err
+	}
+
+	newBuddy := model.ItineraryBuddy{
+		ItineraryID: int(newItinerary.Model.ID),
+		UserID: data.User_id,
+		ChatRoomID: 0,
+		Description: data.Description,
+		CreateBy: user,
+		IsAccept: data.IsBuddy,
+	}
+
+	fmt.Println("debug 2")
+	err = u.db.Create(&newBuddy).Error
+	if err != nil{
+		return err
+	}
+
+	fmt.Println("debug 3")
+	var itineraryDestination []model.ItineraryDestination
+	for _,element := range data.Itinerary{
+		for _,destination1 := range element.Destinations{
+
+			newItineraryDestination := model.ItineraryDestination{
+				ItineraryID: int(newItinerary.Model.ID),
+				Time: element.Time,
+				DestinationID: int(destination1.ID),
+			}
+			itineraryDestination = append(itineraryDestination, newItineraryDestination)
+		}
+	}
+
+	fmt.Println("debug 4")
+	err = u.db.Create(&itineraryDestination).Error
+	if err!=nil{
+		return err
+	}
+
+	return nil
 }
 
 func (u *Usecase) GetUserById(id int) (data model.User, err error) {

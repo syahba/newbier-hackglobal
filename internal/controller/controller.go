@@ -51,6 +51,7 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Get("/chat", c.getChat)
 	api.Post("/chat", c.postChat)
 	api.Get("/itinerary", c.getItineraries)
+	api.Post("/general-matter",c.generalMatter)
 	api.Get("/generate-itinerary/destination", c.generateItineraryWithDestination)
 	api.Get("/generate-itinerary", c.generateItinerary)
 	api.Get("/destinations", c.getDestinations)
@@ -60,7 +61,6 @@ func NewController(app *fiber.App, db *gorm.DB, ai *chatgpt.Model) {
 	api.Put("/itinerary/buddy", c.putItineraryBuddy)
 	api.Post("/itinerary/market", c.postItternaryMarket)
 	api.Get("/itinerary/market/:id", c.getItternaryMarketByItternaryId)
-
 	// 404 not found
 	app.Use(func(c *fiber.Ctx) error {
 		return c.Status(404).JSON(fiber.Map{
@@ -230,6 +230,48 @@ func (cn *Controller) getBuddyProfile(c *fiber.Ctx) error {
 }
 
 // API
+
+func (cn *Controller) generalMatter(c *fiber.Ctx) error{
+	var body internal_model.Combo
+
+	if err := c.BodyParser(&body); err != nil{
+		return c.Status(400).JSON(fiber.Map{
+			"message":"Can't parse body",
+		})
+	}
+	
+	//fmt.Println(body)
+
+	if len(body.Trip) == 0 || body.Trip == " " || body.User_id <= 0|| len(body.Itinerary) == 0{
+		//fmt.Println(len(body.Trip) == 0, body.Trip == " " , body.User_id <= 0 , len(body.Itinerary) == 0)
+		return c.Status(400).JSON(fiber.Map{
+			"message":"field trip, userId or itinerary can't empty, zero or negative",
+		})
+	}
+
+	body.IsBuddy = true
+	if len(body.Destination) == 0{
+		body.Destination = "empty"
+	}
+
+	if len(body.Activity) == 0 {
+		body.Activity = "empty"
+	}
+
+	if len(body.Description) == 0 {
+		body.Description = "empty"
+	}
+
+	if err := cn.usecase.CreateItineraryAndItineraryDestinationAndBuddy(body); err != nil{
+		return c.Status(500).JSON(fiber.Map{
+			"message":"something went wrong, cant create itinerary, itineraryDestination and itineraryBuddy",
+		})
+	}
+
+	return c.Status(201).JSON(fiber.Map{
+		"message":"successfully create new itinerary, itineraryDestination and itineraryBuddy",
+	})
+}
 
 func (cn *Controller) getItineraries(c *fiber.Ctx) error {
 

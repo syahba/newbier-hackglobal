@@ -3,8 +3,6 @@ package usecase
 import (
 	"fmt"
 	"newbier-hackglobal/cmd/generate/schema"
-	"newbier-hackglobal/pkg/database/model"
-
 	"github.com/sashabaranov/go-openai"
 )
 
@@ -110,12 +108,6 @@ func GenerateItineraryWithDestination(destinations []map[string]any, destination
 			Content: schema.ParseSchema(schemaGenerateItinerary),
 		},
 	}
-}
-
-type GenerateItinerarySchema struct {
-	Time           string `json:"time"`
-	DestinationIDs []int  `json:"destination_ids"`
-	Destinations   []model.Destination
 }
 
 var schemaGenerateItinerary = schema.Schema{
