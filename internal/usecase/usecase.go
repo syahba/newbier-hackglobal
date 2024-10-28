@@ -159,6 +159,13 @@ func (u *Usecase) GetDestinationByItineraryId(id int) (respondData []internal_mo
 		if err != nil{
 			return
 		}
+
+		if len(listProduct) == 0 {
+			respondData = append(respondData[:index], respondData[index+1:]...)
+			index--
+			continue
+		}
+
 		respondData[index].Product = listProduct
 	}
 
